@@ -1,4 +1,4 @@
-export interface FicheProps {
+export type FicheProps = {
     machine: {
         marque: string,
         model: string,

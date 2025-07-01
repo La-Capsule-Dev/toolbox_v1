@@ -1,1 +1,1 @@
-echo "t'es nul"
+gnome-terminal

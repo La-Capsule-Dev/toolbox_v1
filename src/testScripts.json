@@ -1,0 +1,70 @@
+[
+    {
+        "category": "tests",
+        "color": "darkorchid",
+        "scripts" : [
+            {
+                "name": "stress",
+                "scriptPath": "stress.sh"
+            },
+             {
+                "name": "ports",
+                "scriptPath": "ports.sh"
+            },
+             {
+                "name": "audio",
+                "scriptPath": "audio.sh"
+            },
+             {
+                "name": "video",
+                "scriptPath": "video.sh"
+            },
+             {
+                "name": "clavier",
+                "scriptPath": "clavier.sh"
+            }
+        ]
+    },
+    {
+        "category": "network",
+        "color": "orange",
+        "scripts": [
+            {
+                "name": "réseau",
+                "scriptPath": "reseau.sh"
+            }
+        ]
+    },
+    {
+        "category": "disks",
+        "color": "cornflowerblue",
+        "scripts": [
+            {
+                "name": "Shred | SSD",
+                "scriptPath": "WIPESSD.sh"
+            },
+            {
+                "name": "Shred | HDD",
+                "scriptPath": "SHREDHDD.sh"
+            },
+            {
+                "name": "Shred | NVME",
+                "scriptPath": "SHREDHDD.sh"
+            }
+        ]
+    },
+    {
+        "category": "clone & cie",
+        "color": "seagreen",
+        "scripts": [
+            {
+                "name": "Clone",
+                "scriptPath": "WIPESSD.sh"
+            },
+            {
+                "name": "Déploiement",
+                "scriptPath": "SHREDHDD.sh"
+            }
+        ]
+    }
+]

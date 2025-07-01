@@ -7,24 +7,28 @@ const FicheReco = () => {
   const path = "/home/mtpy/Bureau/toolbox/src/scripts"
 
   const printFiche = async () => {
+
     try {
-      const command = Command.create("bash", [`${path}/fiche/PRINT.sh`]);
+      console.log("Lance la commande");
+
+      const command = Command.create(`${path}/fiche/PRINT.sh`);
+
       const output = await command.execute();
+      console.log("Stock le résultat");
       setResult(output.stdout);
       setError("");
       console.log("stdout:", output.stdout);
       console.log("stderr:", output.stderr);
     } catch (e: any) {
       setError(e.message || "Erreur lors de l'exécution du script");
-      setResult("");
     }
   };
 
   return (
-    <div>
-      <button onClick={printFiche}>PRINT</button>
+    <div className="fiche">
       {error && <p style={{ color: "red" }}>{error}</p>}
       <p>{result}</p>
+      <button onClick={printFiche}>PRINT</button>
     </div>
   );
 };

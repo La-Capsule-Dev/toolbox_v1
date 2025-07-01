@@ -136,7 +136,7 @@ sed "s/HDMI-1 /Port HDMI       : /" |
 sed "s/disconnected/${LRED}déconnecté${R}/" |
 sed "s/connected/${LGREEN}connecté${R}/" |
 sed "s/primary/${YB}principal${R}/")
-taille=$(sudo python3 /usr/share/LACAPSULE/MULTITOOL/Gathering/dimension.py)
+taille=$(sudo python3 /home/mtpy/Bureau/toolbox/src/scripts/dimension.py)
 telecrante=$(sudo xrandr | 
 awk '/connected/' | 
 sed "s/(.*$//" | 
@@ -189,9 +189,9 @@ echo "$mem"
 echo "----------------------------------------------------------------------| Stockage de masse |"
 echo "$disque"
 echo "--------------------------------------------------------------------| État de la batterie |"
-echo "$batterie"
-echo "$batmod"
-echo "$power"
+#echo "$batterie"
+#echo "$batmod"
+#echo "$power"
 echo "-------------------------------------------------------------------------| Cartes réseaux |"
 echo "$reseau"
 echo "----------------------------------------------------------------------| Cartes graphiques |"
