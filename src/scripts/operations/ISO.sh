@@ -15,12 +15,13 @@ echo_status_sleep "        Installation du paquet Penguin's EGG "
 PKG_OK=$(dpkg -s eggs | grep "Eggs est bien présent")
 if [ "" = "$PKG_OK" ]; then
   echo "Penguin's EGG n'est pas installé, installation en cours..."
-  sudo dpkg -i "/usr/share/LACAPSULE/MULTITOOL/Operations/eggs_9.6.8_amd64.deb"
+  curl -fsSL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+  sudo -E bash nodesource_setup.sh
+  sudo dpkg -i penguins-eggs-10.0.5-1_amd64.deb
 fi 
 
-echo_status_ok
 
-sudo apt install -f
+sudo apt install -f && echo_status_ok
 echo_status_sleep "            Début de production de l'ISO " 
 
 $EDITOR bash -c 'sudo eggs produce --clone'
