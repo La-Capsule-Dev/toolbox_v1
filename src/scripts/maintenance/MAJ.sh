@@ -24,18 +24,16 @@ sudo apt update && echo_status_ok
 echo_status_sleep " Téléchargement et installation des nouveaux paquets "
 
 
+# Utilisation de la Loop pour remove PKGS 
 install_or_remove_pkgs "install"
 
 echo_status_ok
 echo_status_sleep "              Mise à niveau du système "
 
 sudo apt upgrade -y && sudo apt full-upgrade -y && echo_status_ok
-
 echo_status_sleep " Appuyer sur les touches ctrl+c pour annuler la purge" 10.5
-
 echo "             $(tput setaf 1)    !!! ATTENTION !!!  "
 echo_status_sleep "              LA PURGE VA COMMENCER ! "
-
 echo "" 
 echo "                        $(tput setaf 1) ➎" &&
 echo "                         ➍" &&
