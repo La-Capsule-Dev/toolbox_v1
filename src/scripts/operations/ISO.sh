@@ -12,6 +12,7 @@ sudo apt update && echo_status_ok
 
 echo_status_sleep "        Installation du paquet Penguin's EGG " 
 
+# TODO: Modifier le curl pour ne pas défendre de node ou le laisser ainsi
 PKG_OK=$(dpkg -s eggs | grep "Eggs est bien présent")
 if [ "" = "$PKG_OK" ]; then
   echo "Penguin's EGG n'est pas installé, installation en cours..."
