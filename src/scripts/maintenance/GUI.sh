@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 HARDINFO_PKGS=("hardinfo")
 
+#TODO: To refactor in loop-pkgs
 for HARDINFO in "${HARDINFO_PKGS[@]}"; do
  PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $HARDINFO)
  echo "Checking for $HARDINFO: $PKG_OK"

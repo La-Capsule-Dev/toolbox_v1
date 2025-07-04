@@ -4,6 +4,7 @@ printf "\e[8;92;90t"
 
 source "./../UI/color.sh"
 
+# TODO: To Refactor
 echo ""
 echo -e "${cc_red_back}${cc_yellow} Liste des disques connectés :${cc_yellow_back}${cc_red}"
 sleep 1

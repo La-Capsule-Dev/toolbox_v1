@@ -5,6 +5,7 @@ set -euo pipefail
 source "../utils/echo_status.sh"
 printf "\e[8;22;50t" 
 
+# TODO: Add function disque dry avoid
 disque=$(sudo inxi -D |
 tr -d " " | 
 sed '1,2d' |
@@ -19,11 +20,11 @@ sed "s/used:/Utilisé         : /" |
 sed "s/GiB/ GiB\nétat            : $cible/" |
 sed "/^[[:space:]]*$/d")
 
-echo_status_sleep "            Listing des disques présents "
+echo_status "            Listing des disques présents "
 echo "$disque" && echo_status_ok
-echo_status_sleep " Veuillez choisir le disque ou la partition MASTER "
+echo_status " Veuillez choisir le disque ou la partition MASTER "
 echo -n "/dev/" && read -r premierChoix
-echo_status_sleep "  Veuillez choisir le disque ou la partition SLAVE "
+echo_status "  Veuillez choisir le disque ou la partition SLAVE "
 
 echo -n "/dev/" && read -r secondChoix
 

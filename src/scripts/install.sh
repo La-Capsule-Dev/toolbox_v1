@@ -3,6 +3,7 @@
 echo "Voulez-vous installer les dépendances nécessaires ? (Oui/Non)"
 read reponse
 
+#HACK: Refactoring la loop maybe
 if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]
 then
 sudo apt update &&

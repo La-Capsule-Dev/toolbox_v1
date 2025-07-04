@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-echo_status_sleep(){
+echo_status(){
   local text="$1"
 
   echo "" 
