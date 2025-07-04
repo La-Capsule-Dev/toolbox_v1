@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
 RUN useradd -ms /bin/bash devuser && \
     echo "devuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-COPY MULTITOOL/ /home/devuser/MULTITOOL/
-RUN chown -R devuser:devuser /home/devuser/MULTITOOL
+COPY . /home/devuser/scripts/
+RUN chown -R devuser:devuser /home/devuser/scripts
 
 USER devuser
 WORKDIR /home/devuser
