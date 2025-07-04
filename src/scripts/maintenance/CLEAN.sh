@@ -4,6 +4,9 @@ set -euo pipefail
 #HACK: Improve later
 source "../utils/echo_status.sh"
 source "../utils/loop-pkgs.sh"
+
+clean_up(){
+
 REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscrypt" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "ffplay" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress")
 
 printf "\e[8;22;50t" 
@@ -35,3 +38,6 @@ sudo rm -r /home/$USER/.local/share/Trash/files/* && echo_status_ok
 echo_status "    Vidage des informations de fichiers supprimés "
 sudo rm -r /home/$USER/.local/share/Trash/info/* && echo_status_ok
 echo_status "         Nettoyage effectué avec succès "
+}
+
+clean_up

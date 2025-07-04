@@ -4,6 +4,9 @@ set -euo pipefail
 #HACK: Improve later
 source "../utils/echo_status.sh"
 source "../utils/loop-pkgs.sh"
+
+launch_maj(){
+
 REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscrypt" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "ffplay" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress")
 
 printf "\e[8;22;50t" 
@@ -62,3 +65,5 @@ echo_status "    $(tput setaf 1)$(tput setab 7) La maintenance a été effectué
 echo_status "                       👍👍👍" 
 echo ""
 echo ""
+}
+launch_maj

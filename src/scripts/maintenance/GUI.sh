@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-HARDINFO_PKGS=("hardinfo")
 
+set -euo pipefail
+
+gui_install(){
+HARDINFO_PKGS=("hardinfo")
 #TODO: To refactor in loop-pkgs
 for HARDINFO in "${HARDINFO_PKGS[@]}"; do
  PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $HARDINFO)
@@ -12,3 +15,5 @@ for HARDINFO in "${HARDINFO_PKGS[@]}"; do
 done
 printf '\e[8;1;1t'
 hardinfo
+}
+gui_install
