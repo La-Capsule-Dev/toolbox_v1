@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../scripts" && pwd)"
 
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 ecran_parser(){
   sudo xrandr | 
@@ -21,7 +20,7 @@ ecran_parser(){
 }
 
 taille_parser(){
-  sudo python3 $PROJECT_ROOT/utils/dimension.py
+  sudo python3 "$PROJECT_ROOT/utils/dimension.py"
 }
 
 telecrante_parser(){
