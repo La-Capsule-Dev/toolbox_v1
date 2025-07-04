@@ -1,14 +1,14 @@
 # For Dev and Testing purpose
-.PHONY: dock-run dock-build cat-log
+.PHONY: run build log
 
-dock-run:
+run:
 	@echo "Launch docker run"
 	docker run --rm -it devbox:ubuntu-22.04
 
-dock-build:
+build:
 	@echo "Build docker image"
 	docker build -t devbox:ubuntu-22.04 .
 
-cat-log:
+log:
 	@echo "Logging cat tmp"
 	cat /tmp/toolbox.log
