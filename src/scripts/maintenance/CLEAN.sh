@@ -8,17 +8,17 @@ REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "ac
 
 printf "\e[8;22;50t" 
 
-echo_status_sleep "           Début du nettoyage intégral... " 
-echo_status_sleep " Obtention des droits sur les fichiers vérouillés " 
-echo_status_sleep "Veuillez entrer votre mot de passe administrateur " 
+echo_status "           Début du nettoyage intégral... " 
+echo_status " Obtention des droits sur les fichiers vérouillés " 
+echo_status "Veuillez entrer votre mot de passe administrateur " 
 
 sudo chown $USER -R /var/lib/dpkg/* && sudo chown $USER -R /var/cache/apt/* && echo_status_ok
 
-echo_status_sleep "          Réparation des paquets cassés "
+echo_status "          Réparation des paquets cassés "
 
 sudo apt update && sudo apt --fix-broken install && sudo apt --fix-missing && sudo apt autoclean && sudo apt autoremove &&
 echo_status_ok
-echo_status_sleep "                     NETTOYAGE  "
+echo_status "                     NETTOYAGE  "
 
 sync && sudo sysctl vm.drop_caches=3 && swapon -s && free -m
 
@@ -26,12 +26,12 @@ sync && sudo sysctl vm.drop_caches=3 && swapon -s && free -m
 remove_pkgs REQUIRED_PKGS
 
 sudo dpkg -r "MULTITOOL/eggs_9.6.8_amd64.deb" && sudo apt remove boot-repair && echo_status_ok
-echo_status_sleep "              Vidage du répertoire /tmp "
+echo_status "              Vidage du répertoire /tmp "
 sudo rm -r ~/tmp/* && echo_status_ok
-echo_status_sleep "               Purge du cache système "
+echo_status "               Purge du cache système "
 sudo rm -r /home/$USER/.cache/* && echo_status_ok
-echo_status_sleep "   Vidage des fichiers contenus dans la corbeille "
+echo_status "   Vidage des fichiers contenus dans la corbeille "
 sudo rm -r /home/$USER/.local/share/Trash/files/* && echo_status_ok
-echo_status_sleep "    Vidage des informations de fichiers supprimés "
+echo_status "    Vidage des informations de fichiers supprimés "
 sudo rm -r /home/$USER/.local/share/Trash/info/* && echo_status_ok
-echo_status_sleep "         Nettoyage effectué avec succès "
+echo_status "         Nettoyage effectué avec succès "
