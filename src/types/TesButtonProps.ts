@@ -1,5 +1,5 @@
 export type TestButtonProps = {
     title: string,
-    script: string,
+    script: () => void,
     color: string
 }
