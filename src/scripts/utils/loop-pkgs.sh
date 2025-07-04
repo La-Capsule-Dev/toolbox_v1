@@ -3,8 +3,8 @@ set -euo pipefail
 
 
 install_pkgs(){
-  local pkgs=("$@")
-  local options="$2"
+  local options="${@: -1}"      
+  local pkgs=("${@:1:$(($#-1))}") 
 
   for REQUIRED_PKG in "${pkgs[@]}"; do
    PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG)
