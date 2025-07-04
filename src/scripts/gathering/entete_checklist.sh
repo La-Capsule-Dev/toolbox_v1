@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
 
 afficher_entete_checklist() {
   cat <<'EOF'
