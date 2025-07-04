@@ -35,10 +35,11 @@ type_parser(){
     -e "s/nvme*/SSD/"
 }
 
-type=$(type_parser)
-cible=$(cible_parser)
 
 disque_parser(){
+
+  type=$(type_parser)
+  cible=$(cible_parser)
   sudo inxi -D | tr -d " " | sed \
     -e '1,2d' \
     -e "s/ID-1:/Disque interne  :/" \
