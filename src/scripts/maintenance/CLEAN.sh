@@ -4,6 +4,7 @@ set -euo pipefail
 #HACK: Improve later
 source "../utils/echo_status.sh"
 source "../utils/loop-pkgs.sh"
+REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscrypt" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "ffplay" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress")
 
 printf "\e[8;22;50t" 
 
@@ -22,7 +23,7 @@ echo_status_sleep "                     NETTOYAGE  "
 sync && sudo sysctl vm.drop_caches=3 && swapon -s && free -m
 
 # Utilisation de la Loop pour remove PKGS 
-install_or_remove_pkgs "remove"
+remove_pkgs REQUIRED_PKGS
 
 sudo dpkg -r "MULTITOOL/eggs_9.6.8_amd64.deb" && sudo apt remove boot-repair && echo_status_ok
 echo_status_sleep "              Vidage du répertoire /tmp "

@@ -1,29 +1,43 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# TODO: To Refactor
-REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscrypt" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "ffplay" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress")
 
+install_pkgs(){
+  local pkgs=("$@")
+  local options="$2"
 
-install_or_remove_pkgs(){
-  local actions="$1"
-
-  for REQUIRED_PKG in "${REQUIRED_PKGS[@]}"; do
+  for REQUIRED_PKG in "${pkgs[@]}"; do
    PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG)
    echo "Vérification pour $REQUIRED_PKG: $PKG_OK"
 
-   if ! dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG | grep -q "Le paquet est bien installé"; then
-      if [[ "$actions" == "install" ]]; then
+   if ! dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG 2>/dev/null | grep -q "Le paquet est bien installé"; then
        echo "Pas de $REQUIRED_PKG. Installation de $REQUIRED_PKG."
        sudo apt-get --yes install $REQUIRED_PKG
-     fi
-
-      if [[ "$actions" == "remove" ]]; then
-       echo "$REQUIRED_PKG est installé, désintallation de $REQUIRED_PKG."
-       sudo apt-get --yes remove $REQUIRED_PKG
-     fi
+       if [[ "$options" == "gnome-terminal" ]]; then
+          gnome-terminal -- '/usr/share/LACAPSULE/MULTITOOL/bootstrap.sh'
+       fi
    fi 
   done
 }
 
+remove_pkgs(){
+  local pkgs=("$@")
+
+  for REQUIRED_PKG in "${pkgs[@]}"; do
+   PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG)
+   echo "Vérification pour $REQUIRED_PKG: $PKG_OK"
+
+   if ! dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG 2>/dev/null | grep -q "Le paquet est bien installé"; then
+       echo "$REQUIRED_PKG est installé, désintallation de $REQUIRED_PKG."
+       sudo apt-get --yes remove $REQUIRED_PKG
+    else
+      echo "$REQUIRED_PKG non installé."
+    fi
+  done
+}
+
+#TODO: Later
+# missing_pkgs(){
+#
+# }
 
