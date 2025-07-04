@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#TODO: TO REFACTOR
 printf "\e[8;22;50t"
 
       	E='echo -e';e='echo -en';trap "R;exit" 2

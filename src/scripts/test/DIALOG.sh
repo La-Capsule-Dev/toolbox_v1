@@ -5,6 +5,7 @@
 # Le 02/06/2022
 # Version 1
 
+# TODO: To Refactor
 function sudo_activate {
 
 	# password storage

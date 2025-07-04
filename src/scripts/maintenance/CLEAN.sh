@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#HACK: Improve later
 source "../utils/echo_status.sh"
 source "../utils/loop-pkgs.sh"
 

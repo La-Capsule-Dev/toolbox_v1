@@ -5,6 +5,7 @@ set -euo pipefail
 source "../utils/echo_status.sh"
 printf "\e[8;22;50t" 
 
+# TODO: Add function disque dry avoid
 disque=$(sudo inxi -D |
 tr -d " " | 
 sed '1,2d' |
