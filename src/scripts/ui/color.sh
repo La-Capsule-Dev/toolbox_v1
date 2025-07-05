@@ -1,6 +1,8 @@
 # Escape code
 esc=`echo -en "\033"`
 
+#HACK: Supprimer ?
+
 # Set colors
 cc_red="${esc}[01;31m"
 cc_red_back="${esc}[041;1m"
