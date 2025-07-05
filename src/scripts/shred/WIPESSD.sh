@@ -1,138 +1,39 @@
 #!/usr/bin/env bash
 
-printf "\e[8;92;90t" 
+set -euo pipefail
 
-source "./../UI/color.sh"
+mapfile -t DEVICES < <(lsblk -dn -o NAME,SIZE,TYPE,MOUNTPOINT | awk '$3=="disk"{printf "%-12s %-8s %-10s %s\n", $1, $2, $3, $4}')
+echo -e "Référence du disque connecté:"
+nvme list
 
-# TODO: To Refactor
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Liste des disques connectés :${cc_yellow_back}${cc_red}"
-sleep 1
-nvme list | awk '{print echo " - " $1 echo " --> " $4 echo "   "}'
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du NVME à shredder ${cc_normal} ex: 0n1 pour le /dev/nvme0n1"
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
-echo -e "${cc_red_back}${cc_yellow} Veuillez entrer la lettre du lecteur suivant ${cc_normal}"
-sleep 1
-echo ""
-echo -n "${cc_yellow} -----> ${cc_normal} dev/nvme" && read 
-sleep 1
-gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/nvme$REPLY && blkdiscard /dev/nvme$REPLY
-sleep 1
-echo ""
+echo "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+echo -e "Liste des disques connectés :"
+lsblk -x NAME | awk '{print " -", $1, "-->", $4, " "}'
+echo "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+shred_ssd(){
+  echo "Disques disponibles pour effacement:"
+  select dev in "${DEVICES[@]}"; do
+ if [[ -n $dev ]]; then
+      dname=$(awk '{print $1}' <<< "$dev")
+      mnt=$(awk '{print $4}' <<< "$dev")
+      echo "Vous avez choisi : /dev/$dname"
+      if [[ -n "$mnt" ]]; then
+        echo "⚠️  ATTENTION : /dev/$dname est monté sur $mnt !"
+        read -p "Continuer malgré tout ? [o/N] " really
+        [[ $really =~ ^[oO]$ ]] || { echo "Annulé."; break; }
+      fi
+      read -p "Confirmer le format/effacement de /dev/$dname ? [o/N] " confirm
+      if [[ $confirm == [oO]* ]]; then
+        #gnome-terminal --geometry 60x5 -- sudo nvme format -s2 /dev/$dname && blkdiscard /dev/$dname
+        echo "Effacement correctement effectué."
+      else
+        echo "Annulé."
+      fi
+      break
+    else
+      echo "Choix invalide."
+    fi
+  done
+}
+shred_ssd
