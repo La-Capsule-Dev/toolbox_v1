@@ -16,6 +16,7 @@ set -euo pipefail
 #   - Ne jamais exécuter sur un disque monté/système sans confirmation.
 #   - Toujours vérifier la commande générée avant exécution réelle.
 #
+# Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
 shred_disk() {
   # Liste des disques physiques

@@ -13,7 +13,8 @@ set -euo pipefail
 # Sécurité :
 #   - Affiche les disques connectés, aucune destruction sans confirmation.
 #   - Simulation par défaut (décommentez dans shred_disk.sh pour activer l’effacement réel)
-
+#
+# Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
 # -- Vérification des dépendances --
 for cmd in lsblk awk sudo; do
