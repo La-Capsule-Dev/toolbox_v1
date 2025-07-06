@@ -13,7 +13,7 @@ set -euo pipefail
 # Sécurité :
 #   - Affiche les disques détectés avant toute opération.
 #   - Aucune destruction réelle sans modification explicite (simulation par défaut).
-#   
+#
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
 # -- Vérification des dépendances --

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 afficher_entete_checklist() {
-  cat <<'EOF'
+    cat <<'EOF'
 Nettoyage intérieur [ ]  Nettoyage extérieur [ ]  Aspect  neuf [ ] occasion [ ] nul [ ]
 _______________________________________________________________________________________
 Sorties vidéo  HDMI [ ] ok [ ] nul [ ]           -->  Webcam   ok [ ] moyen [ ] nul [ ]

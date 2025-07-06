@@ -20,7 +20,7 @@ model=$(model_get)
 serial=$(serial_get)
 
 afficher_bloc_info_machine() {
-  cat <<EOF
+    cat <<EOF
 ---------------------------------------------------------------------------| Machine |
 Marque          : $marque
 Modèle          : $model

@@ -2,18 +2,18 @@
 set -euo pipefail
 
 echo_status(){
-  local text="$1"
+    local text="$1"
 
-  echo "" 
-  echo "$text"
-  echo ""
+    echo ""
+    echo "$text"
+    echo ""
 }
 
 echo_status_ok(){
-  local text="                      ✅ OK ✅"
+    local text="                      ✅ OK ✅"
 
-  echo "" 
-  echo "$text"
-  echo ""
+    echo ""
+    echo "$text"
+    echo ""
 }
 

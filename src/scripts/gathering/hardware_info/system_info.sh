@@ -3,21 +3,21 @@
 set -euo pipefail
 
 arch_get(){
-  uname -m
+    uname -m
 }
 
 marque_get(){
-  sudo dmidecode -s system-manufacturer
+    sudo dmidecode -s system-manufacturer
 }
 
 model_get(){
-  sudo dmidecode -s system-product-name
+    sudo dmidecode -s system-product-name
 }
 
 serial_get(){
-  sudo dmidecode -s system-serial-number
+    sudo dmidecode -s system-serial-number
 }
 
 cpu_parser(){
-  cat /proc/cpuinfo | sed "s/model name/Modèle   /" | sed -n 5p
+    cat /proc/cpuinfo | sed "s/model name/Modèle   /" | sed -n 5p
 }
