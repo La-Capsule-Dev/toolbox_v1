@@ -43,7 +43,7 @@ shred_disk() {
                 local cmd_to_run
                 # Substitution du device (%s)
                 cmd_to_run=$(printf "$1" "$dname" "$dname")
-                # Pour sécurité, **désactive l’exécution réelle** par défaut :
+                # /!\ Pour sécurité, **désactive l’exécution réelle** par défaut :
                 # gnome-terminal --geometry 60x5 -- $cmd_to_run
                 echo "Commande exécutée : $cmd_to_run"
                 echo "Effacement correctement effectué."
