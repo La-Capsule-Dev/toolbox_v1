@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+source "$DIR_ROOT/utils/project_root.sh"
+PROJECT_ROOT=$(find_project_root)
+TARGET_ROOT="$PROJECT_ROOT/target/release/dimension"
+
 ecran_parser(){
     sudo xrandr |
     awk '/connected/' |
@@ -18,7 +22,7 @@ ecran_parser(){
 }
 
 taille_parser(){
-    sudo $($PROJECT_ROOT"/target/release/dimension")
+    sudo $TARGET_ROOT || echo "$Erreur"
 }
 
 telecrante_parser(){
