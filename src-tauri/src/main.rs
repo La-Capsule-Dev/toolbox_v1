@@ -5,11 +5,11 @@ mod utils;
 use utils::print_shell::call_print_checklist;
 
 fn main() {
-    let script_dir = "src/core/gathering"; // à adapter selon le layout réel
+    let script_dir = "src/core/gathering";
     match call_print_checklist(script_dir) {
         Ok(res) => println!("Checklist sortie:\n{}", res),
         Err(e) => eprintln!("Erreur checklist: {}", e),
     }
     // Ajoute un return explicite si toolbox_lib::run() retourne Result
-    // toolbox_lib::run()
+    toolbox_lib::run()
 }

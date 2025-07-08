@@ -2,6 +2,7 @@
 name = "toolbox"
 version = "0.1.0"
 description = "A Tauri App"
+default-run = "toolbox"
 authors = ["you"]
 edition = "2021"
 
