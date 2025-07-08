@@ -20,7 +20,7 @@ ecran_parser(){
 }
 
 taille_parser(){
-    sudo python3 "$PROJECT_ROOT/utils/dimension.py"
+    sudo "$PROJECT_ROOT/utils/dimension"
 }
 
 telecrante_parser(){
