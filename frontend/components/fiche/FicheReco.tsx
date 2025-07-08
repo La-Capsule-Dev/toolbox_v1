@@ -4,14 +4,14 @@ import { Command } from "@tauri-apps/plugin-shell";
 const FicheReco = () => {
   const [result, setResult] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const path = "/home/mtpy/Bureau/toolbox/src/scripts"
+  const path = "/home/mtpy/Bureau/toolbox/src-tauri/target/release/toolbox"
 
   const printFiche = async () => {
 
     try {
       console.log("Lance la commande");
 
-      const command = Command.create(`${path}/fiche/PRINT.sh`);
+      const command = Command.create(path);
 
       const output = await command.execute();
       console.log("Stock le résultat");
