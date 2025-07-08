@@ -1,7 +1,7 @@
 use regex::Regex;
 use std::process::Command;
 
-fn dimension() {
+fn main() {
     let output = Command::new("xrandr")
         .output()
         .expect("failed to execute xrandr");
