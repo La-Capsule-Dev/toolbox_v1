@@ -34,7 +34,9 @@ read reponse
 if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
     sudo apt update
 
+
     echo "Vérification de la disponibilité des paquets :"
+    > missing_pkgs.txt
     for pkg in "${PKGS_TO_INSTALL[@]}"; do
         if ! apt-cache show "$pkg" >/dev/null 2>&1; then
             echo "$pkg" >> missing_pkgs.txt
@@ -50,9 +52,10 @@ if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
             sudo apt-get --yes install "$pkg"
         fi
     done
-
-    echo "Packet manquant/absent"
-    nano missing_pkgs.txt
+    if [[ -s missing_pkgs.txt ]]; then
+        echo "Paquets manquants/non trouvés :"
+        nano missing_pkgs.txt
+    fi
 else
     echo "L'installation des dépendances a été annulée."
 fi
