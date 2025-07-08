@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-source "../utils/echo_status.sh"
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utils/echo_status.sh"
 
 product_iso(){
 

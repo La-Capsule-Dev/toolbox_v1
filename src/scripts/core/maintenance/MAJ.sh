@@ -2,8 +2,9 @@
 set -euo pipefail
 
 #HACK: Improve later
-source "../utils/echo_status.sh"
-source "../utils/loop-pkgs.sh"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utils/echo_status.sh"
+source "$SCRIPT_DIR/utils/loop-pkgs.sh"
 
 launch_maj(){
 

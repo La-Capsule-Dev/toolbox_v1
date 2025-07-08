@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-source "../utils/echo_status.sh"
-printf "\e[8;22;50t"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utils/echo_status.sh"
 
 cloning_disk(){
 
