@@ -87,10 +87,10 @@ function infoSysteme(){
 
 #
 # test l'écran
-#
-function testMoniteur(){
-    screentest
-}
+# HACK: A tester
+# function testMoniteur(){
+#     screentest
+# }
 
 #
 # Relevé Ram

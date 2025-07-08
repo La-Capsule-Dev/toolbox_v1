@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
 
 PKGS_TO_INSTALL=(
-    # Système et monitoring hardware
-    acpi arecord cheese dmidecode hardinfo htop inxi nmon powerstat smartctl
-    smartmontools upower
-    # Réseau et analyse
-    iptraf-ng
-    # Affichage/graphique
-    glmark2 glxgears screentest xrandr
-    # Audio/vidéo
-    alsa-utils enscript ffmpeg mplayer
-    # CLI utilitaires de base
-    curl dialog iconv ps2pdf sed s-tui stress stress-ng tr
-    # Divers et benchmarks
-    libatasmart-bin
-    # Autres
-    skdump
+    "acpi"
+    "alsa-utils"
+    "cheese"
+    "curl"
+    "dialog"
+    "dmidecode"
+    "enscript"
+    "ffmpeg"
+    "glmark2"
+    "mesa-utils"           # Fournit glxgears/glxinfo
+    "hardinfo"
+    "htop"
+    "inxi"
+    "libatasmart-bin"
+    "nmon"
+    "ghostscript"          # Fournit ps2pdf
+    "python3"
+    "sed"
+    "smartmontools"        # Fournit smartctl
+    "stress"
+    "stress-ng"
+    "s-tui"
+    "upower"
+    "xrandr"
 )
 
 

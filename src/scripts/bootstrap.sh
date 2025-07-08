@@ -66,7 +66,7 @@ fullDevice="hw:${card},${device}" | arecord -f cd -d 10 --device="$fullDevice" /
         4) S=M4;SC;if [[ $cur == "" ]];then R;$e "\n$(ffplay /dev/video0)\n";ES;fi;;
         5) S=M5;SC;if [[ $cur == "" ]];then R;$e "\n$(glxgears)\n";ES;fi;;
         6) S=M6;SC;if [[ $cur == "" ]];then R;$e "\n$(glmark2)\n";ES;fi;;
-        7) S=M7;SC;if [[ $cur == "" ]];then R;$e "\n$(screentest)\n";ES;fi;;
+        7) S=M7;SC;if [[ $cur == "" ]];then R;$e "\n$(echo "screentest")\n";ES;fi;; # screentest #TODO: A ajouter ou voir
         8) S=M8;SC;if [[ $cur == "" ]];then R;$e "\n$(skdump --overall /dev/sda)\n";ES;fi;;
         9) S=M9;SC;if [[ $cur == "" ]];then R;$e "\n$(smartctl -i /dev/sda)\n";ES;fi;;
         10) S=M10;SC;if [[ $cur == "" ]];then R;$e "\n$(inxi -G)\n";ES;fi;;
