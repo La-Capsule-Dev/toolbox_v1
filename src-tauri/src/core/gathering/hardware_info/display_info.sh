@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-
 ecran_parser(){
     sudo xrandr |
     awk '/connected/' |
@@ -20,7 +18,7 @@ ecran_parser(){
 }
 
 taille_parser(){
-    sudo "$PROJECT_ROOT/utils/dimension"
+    sudo "$PROJECT_ROOT/"$PROJECT_ROOT/target/release/dimension"/dimension"
 }
 
 telecrante_parser(){

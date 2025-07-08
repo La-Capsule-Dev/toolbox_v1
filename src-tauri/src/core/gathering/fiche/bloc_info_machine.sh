@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "./hardware_info/init.sh"
+source "$SCRIPT_DIR/hardware_info/init.sh"
 
 batterie=$(battery_parser)
 batmod=$(batmod_parser)
