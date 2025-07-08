@@ -25,6 +25,9 @@ if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
             sudo apt-get --yes install "$pkg"
         fi
     done
+
+    echo "Packet manquant/absent"
+    cat missing_pkgs.txt
 else
     echo "L'installation des dépendances a été annulée."
 fi
