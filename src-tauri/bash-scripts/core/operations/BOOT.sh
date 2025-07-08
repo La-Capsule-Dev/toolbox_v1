@@ -4,7 +4,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utils/echo_status.sh"
+DIR_ROOT="${SCRIPT_DIR%%/bash-scripts*}/bash-scripts"
+source "$DIR_ROOT/utils/echo_status.sh"
 
 booting_repair(){
     echo_status "             Vérification des prérequis "
