@@ -75,7 +75,7 @@ fullDevice="hw:${card},${device}" | arecord -f cd -d 10 --device="$fullDevice" /
         12) S=M12;SC;if [[ $cur == "" ]];then R;$e "\n$(x-www-browser 'https://www.test-clavier.fr/')\n";ES;fi;; 
         13) S=M13;SC;if [[ $cur == "" ]];then R;$e "\n$(gnome-terminal -- "nmon")\n";ES;fi;;
         14) S=M14;SC;if [[ $cur == "" ]];then R;$e "\n$(gnome-terminal -- "iptraf-ng")\n";ES;fi;;   
-        15) S=M15;SC;if [[ $cur == "" ]];then R;$e "\n$(gnome-terminal -- "/usr/share/LACAPSULE/scripts/maintenance/MAJ.sh")\n";ES;fi;;   
+        15) S=M15;SC;if [[ $cur == "" ]];then R;$e "\n$(gnome-terminal -- "$SCRIPT_DIR/core/maintenance/MAJ.sh")\n";ES;fi;;   
         16) S=M16;SC;if [[ $cur == "" ]];then R;exit 0;fi;;
  esac;POS;done
 
