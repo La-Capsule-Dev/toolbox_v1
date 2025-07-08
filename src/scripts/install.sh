@@ -24,7 +24,7 @@ PKGS_TO_INSTALL=(
     "stress-ng"
     "s-tui"
     "upower"
-    "xrandr"
+    "x11-xserver-utils"
 )
 
 
