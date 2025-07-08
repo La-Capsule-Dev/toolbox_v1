@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "./entete_checklist.sh"
-source "./bloc_info_machine.sh"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR//fiche/entete_checklist.sh"
+source "$SCRIPT_DIR/fiche/bloc_info_machine.sh"
 
 [[ "$(type -t afficher_entete_checklist)" == function ]] || { echo "Fonction manquante"; exit 1; }
 [[ "$(type -t afficher_bloc_info_machine)" == function ]] || { echo "Fonction manquante"; exit 1; }
