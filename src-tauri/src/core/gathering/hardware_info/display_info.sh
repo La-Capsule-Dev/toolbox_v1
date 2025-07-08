@@ -18,7 +18,7 @@ ecran_parser(){
 }
 
 taille_parser(){
-    sudo "$PROJECT_ROOT/"$PROJECT_ROOT/target/release/dimension"/dimension"
+    sudo $($PROJECT_ROOT"/target/release/dimension")
 }
 
 telecrante_parser(){

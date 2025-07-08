@@ -3,28 +3,15 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${SCRIPT_DIR%%/bash-scripts*}/bash-scripts"
+DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
+source "$DIR_ROOT/gathering/hardware_info/storage_info.sh"
 source "$DIR_ROOT/utils/echo_status.sh"
 
 cloning_disk(){
 
-    # TODO: Add function disque dry avoid
-    # disque=$(sudo inxi -D |
-    #     tr -d " " |
-    #     sed '1,2d' |
-    #     sed "s/ID-1:/Disque interne  :/" |
-    #     sed "s/ID-2:/Disque interne  :/" |
-    #     sed "s/\/dev/ $type/" |
-    #     sed "s/type/\ntype            : /" |
-    #     sed "s/vendor:/\nMarque          : /" |
-    #     sed "s/model:/\nModèle          : /" |
-    #     sed "s/size:/\nTaille          : /" |
-    #     sed "s/used:/Utilisé         : /" |
-    #     sed "s/GiB/ GiB\nétat            : $cible/" |
-    # sed "/^[[:space:]]*$/d")
-
+    disque=$(disque_parser)
     echo_status "            Listing des disques présents "
-    #echo "$disque" && echo_status_ok
+    echo "$disque" && echo_status_ok
     echo_status " Veuillez choisir le disque ou la partition MASTER "
     echo -n "/dev/" && read -r premierChoix
     echo_status "  Veuillez choisir le disque ou la partition SLAVE "
