@@ -11,8 +11,6 @@ clean_up(){
 
     REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscrypt" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "ffplay" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress")
 
-    printf "\e[8;22;50t"
-
     echo_status "           Début du nettoyage intégral... "
     echo_status " Obtention des droits sur les fichiers vérouillés "
     echo_status "Veuillez entrer votre mot de passe administrateur "
