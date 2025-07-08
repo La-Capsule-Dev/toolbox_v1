@@ -16,6 +16,6 @@ resultat=$(
     afficher_bloc_info_machine
 )
 
-echo "${resultat}" > text.txt |  iconv -f utf-8 -t iso-8859-1 |
+echo "${resultat}" |  iconv -f utf-8 -t iso-8859-1 |
 enscript --header='Fait le $F        Reconditionnement fait par :  ________________________________' --title='Sortie PDF' -X 88591 -o - |
 ps2pdf - $HOME/resultat.pdf && x-www-browser $HOME/resultat.pdf
