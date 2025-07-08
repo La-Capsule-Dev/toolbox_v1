@@ -4,12 +4,14 @@
 mod utils;
 use utils::print_shell::call_print_checklist;
 
+#[tauri::command]
+fn print_checklist() -> Result<String, String> {
+    call_print_checklist("src/core/gathering").map_err(|e| e.to_string())
+}
+
 fn main() {
-    let script_dir = "src/core/gathering";
-    match call_print_checklist(script_dir) {
-        Ok(res) => println!("Checklist sortie:\n{}", res),
-        Err(e) => eprintln!("Erreur checklist: {}", e),
-    }
-    // Ajoute un return explicite si toolbox_lib::run() retourne Result
-    toolbox_lib::run()
+    tauri::Builder::default()
+        .invoke_handler(tauri::generate_handler![print_checklist])
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }
