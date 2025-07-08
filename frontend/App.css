@@ -1,78 +1,90 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
 
-  color: #FFFCF2;
-  background-color: #252422;
+    color: #fffcf2;
+    background-color: #252422;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
 .container {
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-
-  .ficheContainer {
-    flex: 1;
+    margin: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    height: 100%;
 
-    .fiche {
-      aspect-ratio: 3/4;
-      background: whitesmoke;
-      height: 85vh;
-    }
-  }
+    .ficheContainer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
 
-  .buttons {
-    flex: 1;
-
-    h2 {
-      text-transform: uppercase;
-      color: gray;
-      font-size: 18px;
-      font-weight: 300;
-
-      &::before {
-        content: "--| ";
-      }
-      &::after {
-        content: " |--";
-      }
-    }
-
-    .category {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 8px;
-
-      button {
-        padding: 15px 30px;
-        border-radius: 8px;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        text-transform: uppercase;
-
-        &:hover {
-          opacity: 0.75;
+        .fiche {
+            aspect-ratio: 3/4;
+            background: whitesmoke;
+            height: 85vh;
+            font-size: 12px;
+            color: black;
         }
-        &:active {
-          transform: scale(0.95);
+
+        button {
+            padding: 15px 30px;
+            border-radius: 8px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
         }
-      }
     }
-  }
+
+    .buttons {
+        flex: 1;
+
+        h2 {
+            text-transform: uppercase;
+            color: gray;
+            font-size: 18px;
+            font-weight: 300;
+
+            &::before {
+                content: "--| ";
+            }
+            &::after {
+                content: " |--";
+            }
+        }
+
+        .category {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+
+            button {
+                padding: 15px 30px;
+                border-radius: 8px;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                font-weight: 600;
+                text-transform: uppercase;
+
+                &:hover {
+                    opacity: 0.75;
+                }
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+        }
+    }
 }
