@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-printf "\e[8;22;50t"
 
 #HACK: Improve later
 set -euo pipefail

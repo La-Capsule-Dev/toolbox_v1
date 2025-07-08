@@ -7,7 +7,6 @@ source "$SCRIPT_DIR/utils/echo_status.sh"
 
 product_iso(){
 
-    printf "\e[8;22;50t"
     echo_status "             Vérification des prérequis "
     sudo apt update && echo_status_ok
     echo_status "        Installation du paquet Penguin's EGG "
