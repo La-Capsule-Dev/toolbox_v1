@@ -27,7 +27,7 @@ if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
     done
 
     echo "Packet manquant/absent"
-    cat missing_pkgs.txt
+    nano missing_pkgs.txt
 else
     echo "L'installation des dépendances a été annulée."
 fi
