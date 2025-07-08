@@ -1,6 +1,28 @@
 #!/usr/bin/env bash
 
-PKGS_TO_INSTALL=("dmidecode" "dialog" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscript" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "mplayer" "cheese" "arecord" "ffmpeg" "mplayer" "alsautils" "curl" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress-ng" "stress")
+PKGS_TO_INSTALL=(
+    # Système et monitoring hardware
+    acpi arecord cheese dmidecode hardinfo htop inxi nmon powerstat smartctl
+    smartmontools upower
+
+    # Réseau et analyse
+    iptraf-ng
+
+    # Affichage/graphique
+    glmark2 glxgears screentest xrandr
+
+    # Audio/vidéo
+    alsa-utils enscript ffmpeg mplayer
+
+    # CLI utilitaires de base
+    curl dialog iconv ps2pdf sed s-tui stress stress-ng tr
+
+    # Divers et benchmarks
+    libatasmart-bin
+
+    # Autres
+    skdump
+)
 
 
 echo "Voulez-vous installer les dépendances nécessaires ? (Oui/Non)"
