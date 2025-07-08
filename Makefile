@@ -1,9 +1,14 @@
 # For Dev and Testing purpose
 .PHONY: cargo-build docker-run docker-build log
 
+
 cargo-build:
 	@echo "Launch cargo builder release"
-	cargo build --release
+	cd src-tauri && cargo build --release
+
+bootstrap:
+	@echo "Launching bootstrap"
+	npm install && cargo-build
 
 docker-run:
 	@echo "Launch docker run"
