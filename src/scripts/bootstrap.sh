@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 #TODO: TO REFACTOR
 printf "\e[8;22;50t"
 
@@ -59,8 +60,8 @@ REFRESH(){ after=$((i+1)); before=$((i-1))
      ES(){ MARK;$e " Touche Entrée = Retour au menu principal ";$b;read;INIT;};INIT
   while [[ "$O" != " " ]]; do case $i in
         0) S=M0;SC;if [[ $cur == "" ]];then R;$e "\n$(hardinfo)\n";ES;fi;;
-        1) S=M1;SC;if [[ $cur == "" ]];then R;$e "\n$(gnome-terminal -- "/usr/share/LACAPSULE/scripts/gathering/PRINT.sh")\n";ES;fi;;        
-        2) S=M2;SC;if [[ $cur == "" ]];then R;$e "\n$(x-www-browser '/usr/share/LACAPSULE/scripts/maintenance/text_clavier.html')\n";ES;fi;;
+        1) S=M1;SC;if [[ $cur == "" ]];then R;$e "\n$(gnome-terminal -- "$SCRIPT_DIR/core/gathering/PRINT.sh")\n";ES;fi;;        
+        2) S=M2;SC;if [[ $cur == "" ]];then R;$e "\n$(x-www-browser "$SCRIPT_DIR/core/maintenance/text_clavier.html")\n";ES;fi;;
         3) S=M3;SC;if [[ $cur == "" ]];then R;$e "\n$(card=$(echo $CHOICE | grep -E -o "card.{0,2}" | cut -d " " -f2 ) | device=$(echo $CHOICE | grep -E -o "device.{0,2}" | cut -d " " -f2 ) | 
 fullDevice="hw:${card},${device}" | arecord -f cd -d 10 --device="$fullDevice" /tmp/test-mic.wav &&  aplay /tmp/test-mic.wav)\n";ES;fi;;
         4) S=M4;SC;if [[ $cur == "" ]];then R;$e "\n$(ffplay /dev/video0)\n";ES;fi;;
