@@ -17,7 +17,11 @@ function App() {
                         },
                         {
                             label: "Terminal",
-                            content: <Terminal scriptPath="" />,
+                            content: (
+                                <Terminal
+                                    script_output={"Aucun script lancé"}
+                                />
+                            ),
                         },
                     ]}
                 />
