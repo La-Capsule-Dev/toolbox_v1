@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-UTILS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$UTILS_DIR/echo_status.sh"
+source "$MAINTENANCE_DIR/echo_status.sh"
 
 repare_pkgs(){
     echo_status "Mise à jour des index de paquets"
