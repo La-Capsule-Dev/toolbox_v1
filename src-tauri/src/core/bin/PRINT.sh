@@ -3,9 +3,9 @@ set -euo pipefail
 
 GATH_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${GATH_DIR%%/core*}/core"
-source "$DIR_ROOT/utils/logging.sh"
-source "$GATH_DIR//fiche/entete_checklist.sh"
-source "$GATH_DIR/fiche/bloc_info_machine.sh"
+source "$DIR_ROOT/lib/utils/init.sh"
+source "$DIR_ROOT/etc/template/entete_checklist.sh"
+source "$DIR_ROOT/etc/template/bloc_info_machine.sh"
 
 
 [[ "$(type -t afficher_entete_checklist)" == function ]] || { echo "Fonction manquante"; exit 1; }

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-source "./pkgs.sh"
+BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${BIN_DIR%%/core*}/core"
+
+source "$DIR_ROOT/etc/config/pkgs.sh"
 
 echo "Voulez-vous installer les dépendances nécessaires ? (Oui/Non)"
 read reponse
@@ -26,10 +29,6 @@ if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
             sudo apt-get --yes install "$pkg"
         fi
     done
-    if [[ -s missing_pkgs.txt ]]; then
-        echo "Paquets manquants/non trouvés :"
-        nano missing_pkgs.txt
-    fi
 else
     echo "L'installation des dépendances a été annulée."
 fi

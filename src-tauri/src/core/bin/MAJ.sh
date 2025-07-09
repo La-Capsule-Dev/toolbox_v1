@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MAINTENANCE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${BIN_DIR%%/core*}/core"
 
-source "$MAINTENANCE_DIR/../utils/init.sh"
-
-echo "==> Script MAJ.sh lancé"
+source "$DIR_ROOT/etc/config/pkgs.sh"
+source "$DIR_ROOT/lib/utils/init.sh"
 
 launch_maj(){
 

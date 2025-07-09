@@ -3,9 +3,10 @@
 #HACK: Improve later
 set -euo pipefail
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
-source "$DIR_ROOT/utils/echo_status.sh"
+BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${BIN_DIR%%/core*}/core"
+
+source "$DIR_ROOT/lib/utils/echo_status.sh"
 
 booting_repair(){
     echo_status "             Vérification des prérequis "
