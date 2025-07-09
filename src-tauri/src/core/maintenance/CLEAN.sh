@@ -1,43 +1,64 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-#HACK: Improve later
+MAINTENANCE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utils/echo_status.sh"
-source "$SCRIPT_DIR/utils/loop-pkgs.sh"
+source "$MAINTENANCE_DIR/../utils/init.sh"
 
-clean_up(){
+clean_up() {
+    echo_status "Début du nettoyage intégral..."
+    echo_status "Obtention des droits sur les fichiers verrouillés"
+    echo_status "Veuillez entrer votre mot de passe administrateur"
 
-    REQUIRED_PKGS=("dmidecode" "curl" "sed" "tr" "smartmontools" "skdump" "inxi" "acpi" "xrandr" "python3" "iconv" "enscrypt" "ps2pdf" "htop" "upower" "hardinfo" "arecord" "ffplay" "glxgears" "glmark2" "screentest" "libatasmart-bin" "smartctl" "nmon" "iptraf-ng" "s-tui" "stress")
+    # Fixing permissions
+    fix_permissions
 
-    echo_status "           Début du nettoyage intégral... "
-    echo_status " Obtention des droits sur les fichiers vérouillés "
-    echo_status "Veuillez entrer votre mot de passe administrateur "
+    # Repare pkgs
+    repare_pkgs
 
-    sudo chown $USER -R /var/lib/dpkg/* && sudo chown $USER -R /var/cache/apt/* && echo_status_ok
+    # Memory drops
+    drop_memory_cache
 
-    echo_status "          Réparation des paquets cassés "
+    # Removing pkgs
+    echo_status "Suppression de paquets spécifiques via remove_pkgs"
+    remove_pkgs "${PKGS[@]}" || echo_status_error "Échec remove_pkgs"
 
-    sudo apt update && sudo apt --fix-broken install && sudo apt --fix-missing && sudo apt autoclean && sudo apt autoremove &&
-    echo_status_ok
-    echo_status "                     NETTOYAGE  "
+    # Delete package boot-repair
+    echo_status "Suppression du paquet boot-repair"
+    sudo apt remove -y boot-repair && echo_status_ok || echo_status_error "Échec suppression boot-repair"
 
-    sync && sudo sysctl vm.drop_caches=3 && swapon -s && free -m
+    # Delete eggs
+    delete_eggs
 
-    # Utilisation de la Loop pour remove PKGS
-    remove_pkgs REQUIRED_PKGS
+    # Remove files
+    echo_status "Nettoyage des fichiers inutiles"
+    remove_files
 
-    sudo dpkg -r "MULTITOOL/eggs_9.6.8_amd64.deb" && sudo apt remove boot-repair && echo_status_ok
-    echo_status "              Vidage du répertoire /tmp "
-    sudo rm -r ~/tmp/* && echo_status_ok
-    echo_status "               Purge du cache système "
-    sudo rm -r /home/$USER/.cache/* && echo_status_ok
-    echo_status "   Vidage des fichiers contenus dans la corbeille "
-    sudo rm -r /home/$USER/.local/share/Trash/files/* && echo_status_ok
-    echo_status "    Vidage des informations de fichiers supprimés "
-    sudo rm -r /home/$USER/.local/share/Trash/info/* && echo_status_ok
-    echo_status "         Nettoyage effectué avec succès "
+    echo_status "✅ Nettoyage effectué avec succès"
+}
+
+delete_eggs(){
+    # ❌ Correction : dpkg -r ne prend pas un .deb, mais un nom de paquet
+    # Si tu veux supprimer le paquet installé par ce .deb, tu dois en extraire le nom
+    # Exemple : sudo dpkg -r eggs
+    # Tu peux automatiser cela avec dpkg -I :
+    #   pkg_name=$(dpkg-deb -f MULTITOOL/eggs_9.6.8_amd64.deb Package)
+
+    if [[ -f "MULTITOOL/eggs_9.6.8_amd64.deb" ]]; then
+        pkg_name=$(dpkg-deb -f MULTITOOL/eggs_9.6.8_amd64.deb Package)
+        echo_status "Suppression du paquet installé depuis eggs_9.6.8"
+        sudo dpkg -r "$pkg_name" && echo_status_ok || echo_status_error "Échec suppression $pkg_name"
+    else
+        echo_status_error "Fichier MULTITOOL/eggs_9.6.8_amd64.deb introuvable"
+    fi
+}
+
+drop_memory_cache(){
+    echo_status "Vidage du cache mémoire (drop_caches)"
+    sync && sudo sysctl vm.drop_caches=3 && echo_status_ok || echo_status_error "Échec drop_caches"
+    echo_status "État de la mémoire :"
+    swapon -s || echo_status_error "Échec swapon"
+    free -m  || echo_status_error "Échec free"
 }
 
 clean_up
