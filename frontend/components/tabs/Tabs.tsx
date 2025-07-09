@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-function Tabs({ tabs }) {
+type TabsProps = { tabs: { label: string; content: any }[] };
+
+function Tabs({ tabs }: TabsProps) {
     const [active, setActive] = useState(0);
     return (
         <div>
@@ -14,7 +16,7 @@ function Tabs({ tabs }) {
                     </button>
                 ))}
             </div>
-            <div style={{ marginTop: 16 }}>{tabs[active].content}</div>
+            <div style={{ marginTop: 15 }}>{tabs[active].content}</div>
         </div>
     );
 }

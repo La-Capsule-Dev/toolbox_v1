@@ -4,6 +4,7 @@
 mod utils;
 use utils::print_shell::call_print_checklist;
 
+
 #[tauri::command]
 fn print_checklist() -> Result<String, String> {
     call_print_checklist("src/core/gathering").map_err(|e| e.to_string())

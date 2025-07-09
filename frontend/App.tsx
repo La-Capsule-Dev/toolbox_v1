@@ -1,6 +1,7 @@
 import "./App.css";
 import PDFViewer from "./components/tabs/PdfViewer";
 import Tabs from "./components/tabs/Tabs";
+import Terminal from "./components/tabs/Terminal";
 import TestButton from "./components/testButtons/TestButton";
 import testScripts from "./testScripts.json";
 
@@ -14,7 +15,10 @@ function App() {
                             label: "Fiche PDF",
                             content: <PDFViewer file="/exemple.pdf" />,
                         },
-                        { label: "Terminal", content: "coucou" },
+                        {
+                            label: "Terminal",
+                            content: <Terminal scriptPath="" />,
+                        },
                     ]}
                 />
             </section>
