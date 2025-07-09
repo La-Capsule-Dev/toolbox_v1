@@ -1,31 +1,6 @@
 #!/usr/bin/env bash
 
-PKGS_TO_INSTALL=(
-    "acpi"
-    "alsa-utils"
-    "cheese"
-    "curl"
-    "dialog"
-    "dmidecode"
-    "enscript"
-    "ffmpeg"
-    "glmark2"
-    "mesa-utils"           # Fournit glxgears/glxinfo
-    "hardinfo"
-    "htop"
-    "inxi"
-    "libatasmart-bin"
-    "nmon"
-    "ghostscript"          # Fournit ps2pdf
-    "sed"
-    "smartmontools"        # Fournit smartctl
-    "stress"
-    "stress-ng"
-    "s-tui"
-    "upower"
-    "x11-xserver-utils"
-)
-
+source "./pkgs.sh"
 
 echo "Voulez-vous installer les dépendances nécessaires ? (Oui/Non)"
 read reponse
@@ -36,14 +11,14 @@ if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
 
     echo "Vérification de la disponibilité des paquets :"
     > missing_pkgs.txt
-    for pkg in "${PKGS_TO_INSTALL[@]}"; do
+    for pkg in "${PKGS[@]}"; do
         if ! apt-cache show "$pkg" >/dev/null 2>&1; then
             echo "$pkg" >> missing_pkgs.txt
         fi
     done
 
     # 2. Installer uniquement si absent
-    for pkg in "${PKGS_TO_INSTALL[@]}"; do
+    for pkg in "${PKGS[@]}"; do
         if dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"; then
             echo "✔ $pkg est déjà installé."
         else
