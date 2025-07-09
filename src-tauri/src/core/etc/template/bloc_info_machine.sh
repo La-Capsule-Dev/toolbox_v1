@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$SCRIPT_DIR/hardware_info/init.sh"
+TEMPLATE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${TEMPLATE_DIR%%/core*}/core"
+source "$DIR_ROOT/lib/gathering/init.sh"
 
 batterie=$(battery_parser)
 batmod=$(batmod_parser)
