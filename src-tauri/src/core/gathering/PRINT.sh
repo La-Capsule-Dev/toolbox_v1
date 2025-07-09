@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
+GATH_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${GATH_DIR%%/core*}/core"
 source "$DIR_ROOT/utils/logging.sh"
-source "$SCRIPT_DIR//fiche/entete_checklist.sh"
-source "$SCRIPT_DIR/fiche/bloc_info_machine.sh"
+source "$GATH_DIR//fiche/entete_checklist.sh"
+source "$GATH_DIR/fiche/bloc_info_machine.sh"
 
 
 [[ "$(type -t afficher_entete_checklist)" == function ]] || { echo "Fonction manquante"; exit 1; }
