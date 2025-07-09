@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-source "$DIR_ROOT/utils/project_root.sh"
+source "$DIR_ROOT/lib/utils/project_root.sh"
+
 PROJECT_ROOT=$(find_project_root)
 TARGET_ROOT="$PROJECT_ROOT/target/release/dimension"
 

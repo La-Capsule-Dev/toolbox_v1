@@ -2,8 +2,7 @@
 
 set -euo pipefail
 
-DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
-source "$DIR_ROOT/utils/logging.sh"
+source "$DIR_ROOT/lib/utils/logging.sh"
 # Stockage de masse
 
 cible_parser() {
