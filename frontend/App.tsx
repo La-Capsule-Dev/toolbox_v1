@@ -1,5 +1,6 @@
 import "./App.css";
-import FicheReco from "./components/fiche/FicheReco";
+import PDFViewer from "./components/tabs/PdfViewer";
+import Tabs from "./components/tabs/Tabs";
 import TestButton from "./components/testButtons/TestButton";
 import testScripts from "./testScripts.json";
 
@@ -7,7 +8,15 @@ function App() {
     return (
         <main className="container">
             <section className="ficheContainer">
-                <FicheReco />
+                <Tabs
+                    tabs={[
+                        {
+                            label: "Fiche PDF",
+                            content: <PDFViewer file="/exemple.pdf" />,
+                        },
+                        { label: "Terminal", content: "coucou" },
+                    ]}
+                />
             </section>
             <section className="buttons">
                 {testScripts.map((cat, idx) => (

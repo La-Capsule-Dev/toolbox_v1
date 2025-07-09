@@ -1,7 +1,7 @@
 [
     {
         "category": "tests",
-        "color": "darkorchid",
+        "color": "#3B82F6",
         "scripts" : [
             {
                 "name": "stress",
@@ -27,7 +27,7 @@
     },
     {
         "category": "network",
-        "color": "orange",
+        "color": "#10B981",
         "scripts": [
             {
                 "name": "réseau",
@@ -37,7 +37,7 @@
     },
     {
         "category": "disks",
-        "color": "cornflowerblue",
+        "color": "#DC2626",
         "scripts": [
             {
                 "name": "Shred | SSD",
@@ -55,7 +55,7 @@
     },
     {
         "category": "clone & cie",
-        "color": "seagreen",
+        "color": "#F97316",
         "scripts": [
             {
                 "name": "Clone",
