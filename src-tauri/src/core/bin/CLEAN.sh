@@ -5,6 +5,7 @@ BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${BIN_DIR%%/core*}/core"
 
 source "$DIR_ROOT/etc/config/pkgs.sh"
+source "$DIR_ROOT/lib/maintenance/loop-pkgs.sh"
 source "$DIR_ROOT/lib/utils/init.sh"
 
 clean_up() {
