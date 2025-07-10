@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# nvme_erase.sh — Menu d’effacement sécurisé des disques NVMe (CLI Bash)
+# SSD.sh — Menu d’effacement sécurisé des disques NVMe (CLI Bash)
 #
 # Usage :
-#   ./nvme_erase.sh
+#   ./SDD.sh
 #
 # Prérequis :
 #   - nvme-cli, lsblk, awk, sudo
@@ -29,7 +29,7 @@ lsblk -x NAME | awk '{print " -", $1, "-->", $4, " "}'
 echo "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
 
 # -- Menu interactif d’effacement sécurisé --
-source "./shred_disk.sh"
+source "$DIR_ROOT/lib/shred/shred_disk.sh"
 
 # Commande d’effacement adaptée aux NVMe : (simulation, à activer explicitement)
 shred_disk "sudo nvme format -s2 /dev/%s && sudo blkdiscard /dev/%s"
