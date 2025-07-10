@@ -1,3 +1,6 @@
+#TODO: Keep refactor
+#WARNING:
+#display_ouput to ouput
 
 function infoSysteme(){
     hardinfo
