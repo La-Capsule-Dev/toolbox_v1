@@ -4,7 +4,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
-source "$DIR_ROOT/gathering/hardware_info/storage_info.sh"
+source "$DIR_ROOT/lib/hardware/storage.sh"
 source "$DIR_ROOT/utils/echo_status.sh"
 
 cloning_disk(){
