@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DIR_ROOT="${HARDWARE_DIR%%/core*}/core"
+SHRED_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${SHRED_DIR%%/core*}/core"
 source "$DIR_ROOT/lib/utils/echo_status.sh"
 
 # shred_disk.sh — Effacement sécurisé interactif de disque (CLI Bash)
 #
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
+
+# TODO: ADD test profond testdisk add LSCSI
 
 shred_disk() {
     # Liste des disques physiques
@@ -43,4 +46,8 @@ shred_disk() {
             echo_status_warn "Choix invalide."
         fi
     done
+}
+
+test_disk(){
+
 }

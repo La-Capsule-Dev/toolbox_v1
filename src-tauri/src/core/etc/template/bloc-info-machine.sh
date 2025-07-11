@@ -3,7 +3,7 @@ set -euo pipefail
 
 TEMPLATE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${TEMPLATE_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/hardware/init.sh"
+source "$DIR_ROOT/lib/hw/init.sh"
 
 afficher_bloc_info_machine() {
     cat <<EOF

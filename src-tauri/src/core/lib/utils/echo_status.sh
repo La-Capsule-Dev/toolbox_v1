@@ -10,7 +10,7 @@ emj_warn=${NO_EMOJI:+""}
 
 if [[ $NO_EMOJI -eq 0 ]]; then
     emj_ok="✅"
-    emj_info="ℹ️"
+    emj_info="(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄"
     emj_err="❌"
     emj_warn="⚠️"
 fi
@@ -27,7 +27,7 @@ echo_status_ok() {
 
 echo_status_warn() {
     local text="$1"
-    echo -e "\n\033[1;33m[ WARN ]\033[0m $emj_warn $text\n"
+    echo -e "\n\033[1;33m[ WARN ]\033[0m $emj_warn $text\n" >&2
 }
 
 echo_status_error() {
