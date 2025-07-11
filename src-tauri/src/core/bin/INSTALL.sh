@@ -3,38 +3,49 @@
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${BIN_DIR%%/core*}/core"
 
-source "$DIR_ROOT/etc/config/pkgs.sh"
-source "$DIR_ROOT/lib/utils/echo_status.sh"
+source "$DIR_ROOT/etc/config/pkgs-list.sh"
+source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
+source "$DIR_ROOT/lib/pkgmgr/filter_pkgs.sh"
+source "$DIR_ROOT/lib/utils/init.sh"
 
-install(){
-    echo_status "Voulez-vous installer les dépendances nécessaires ? (Oui/Non)"
-    read reponse
+install() {
+    local os_type="$(detect_os)"
+    local pkgs_var="PKGS_${os_type^^}"
+    declare -n pkgs="$pkgs_var"
 
-    if [[ "$reponse" =~ ^([oO][uU][iI]|[oO])$ ]]; then
-        sudo apt update && echo_status_ok "Update réussi" || echo_status_error "Échec de l'update"
+    echo_status "Initialisation de l'installation sur votre linux favori : $os_type ᕦ( ͡° ͜ʖ ͡°)ᕤ"
 
-
-        echo "Vérification de la disponibilité des paquets :"
-        > missing_pkgs.txt
-        for pkg in "${PKGS[@]}"; do
-            if ! apt-cache show "$pkg" >/dev/null 2>&1; then
-                echo "$pkg" >> missing_pkgs.txt
-            fi
-        done
-
-        # 2. Installer uniquement si absent
-        for pkg in "${PKGS[@]}"; do
-            if dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"; then
-                echo_status_ok "$pkg est déjà installé."
-            else
-                echo_status "🔧 Installation de $pkg ..."
-                sudo apt-get --yes install "$pkg"
-            fi
-        done
-        echo_status_ok "Installation des dépendances nécessaires réussie"
-    else
-        echo_status_error "L'installation des dépendances a été annulée."
+    if ! declare -p "$pkgs_var" &>/dev/null; then
+        echo_status_error "Aucune liste de paquets définie pour $os_type ($pkgs_var)"
+        return 1
     fi
+
+    echo_status "Recherche des paquets compatibles avec $os_type..."
+    # 3. Appel à la fonction d'installation
+    install_packages_ui "$os_type" "${pkgs[@]}"
+
+
+    echo_status "Mise à niveau du système"
+    update_pkgs_native "$os_type" && \
+        echo_status_ok "Mise à jour réussie" || \
+        echo_status_error "Échec upgrade"
+
+    # 5. Purge optionnelle
+    prompt_yes_no "Désirez-vous un nettoyage du cache de votre système ?"
+    cancel_purge
+    # uncomment cette line en prod
+    # remove_files
+    echo_status_ok " ヽ( •_)ᕗ Installation & mise à jour complète de votre machine réussie "
+
+}
+
+cancel_purge() {
+    echo_status_warn "LE NETTOYAGE DU CACHE VA COMMENCER !"
+    echo_status_warn "Appuyer sur les touches Ctrl+C pour annuler la purge, sinon votre cache sera perdu (╯°□°）╯︵ ┻━┻"
+    for i in 10 9 8 7 6 5 4 3 2 1; do
+        echo "$i"
+        sleep 1
+    done
 }
 
 install
