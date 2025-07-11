@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import PDFViewer from "./components/tabs/PdfViewer";
 import Tabs from "./components/tabs/Tabs";
@@ -9,6 +9,8 @@ import { invoke } from "@tauri-apps/api/core";
 import CPUTemperature from "./components/CPUTemperature";
 
 function App() {
+    const [PdfUrl, setPdfUrl] = useState<string>("");
+
     const startSudoSession = async () => {
         try {
             await invoke("start_session");
@@ -22,6 +24,11 @@ function App() {
     };
 
     useEffect(() => {
+        invoke<string>("get_pdf_base64")
+            .then((dataUri) => {
+                setPdfUrl(dataUri);
+            })
+            .catch(console.error);
         startSudoSession();
     }, []);
 
@@ -33,7 +40,7 @@ function App() {
                     tabs={[
                         {
                             label: "Fiche PDF",
-                            content: <PDFViewer file="/exemple.pdf" />,
+                            content: <PDFViewer file={PdfUrl} />,
                         },
                         {
                             label: "Terminal",

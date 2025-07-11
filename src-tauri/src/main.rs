@@ -1,11 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::fs;
 mod utils;
+use std::fs;
 use utils::print_shell::call_print_checklist;
 use utils::start_session::start_sudo_session;
 use utils::stress::launch_stress_test;
+use base64::{engine::general_purpose, Engine as _};
 
 #[tauri::command]
 fn get_cpu_temperature() -> Vec<(String, f32)> {
@@ -46,13 +47,26 @@ fn stress_test() -> Result<(), String> {
     launch_stress_test().map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+fn get_pdf_base64() -> Result<String, String> {
+    let home = dirs::home_dir().ok_or("Pas de home")?;
+    let path = home.join("resultat.pdf");
+    let bytes = fs::read(&path).map_err(|e| e.to_string())?;
+    let b64 = general_purpose::STANDARD.encode(&bytes);
+
+    Ok(format!("data:application/pdf;base64,{}", b64))
+}
+
+
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             print_checklist,
             start_session,
             stress_test,
-            get_cpu_temperature
+            get_cpu_temperature,
+            get_pdf_base64
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
