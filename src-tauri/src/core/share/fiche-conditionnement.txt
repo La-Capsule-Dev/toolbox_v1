@@ -1,0 +1,62 @@
+Nettoyage intérieur [ ]  Nettoyage extérieur [ ]  Aspect  neuf [ ] occasion [ ] nul [ ]
+_______________________________________________________________________________________
+Sorties vidéo  HDMI [ ] ok [ ] nul [ ]           -->  Webcam   ok [ ] moyen [ ] nul [ ]
+               DP   [ ] ok [ ] nul [ ]           Port carte SD ok [ ] nul   [ ]
+               VGA  [ ] ok [ ] nul [ ]           Port USB (si défectueux) nombre ______
+               DVI  [ ] ok [ ] nul [ ]  autre type :           ok [ ] nul [ ]
+Clavier        ok [ ] moyen [ ] nul [ ]       Pad/souris       ok [ ] moyen [ ] nul [ ]
+Carte son      ok [ ] nul [ ]                 Haut-parleurs    ok [ ] moyen [ ] nul [ ]
+Sortie audio   ok [ ] nul [ ]                 Entrée micro     ok [ ] nul [ ]
+Micro interne  ok [ ] nul [ ]        Autre :                   ok [ ] moyen [ ] nul [ ]
+_______________________________________________________________________________________
+Température du processeur avant stress test    Moins de 90°c [ ]    Plus de 90°c [ ]
+                          après stress test    Moins de 90°c [ ]    Plus de 90°c [ ]
+Changement de pâte thermique                   oui           [ ]    non          [ ]
+Shred des disques durs                         oui           [ ]    non          [ ]
+_______________________________________________________________________________________
+Le chargeur du pc est-il en bon état ?         oui           [ ]    non          [ ]
+La pile setup a-t'elle été changée ?           oui           [ ]    non          [ ]
+Le lecteur DVD est-il fonctionnel ?            oui  [ ] non  [ ]
+---------------------------------------------------------------------------| Machine |
+Marque          : Micro Computer (HK) Tech Limited
+Modèle          : EliteMini Series
+NumSérie        : MD167LU89PGDMPE00197
+------------------------------------------------------------------------| Processeur |
+Architecture    : x86_64
+Modèle   	: AMD Ryzen 9 PRO 8945HS w/ Radeon 780M Graphics
+-----------------------------------------------------------------------| Mémoire RAM |
+Slot numéro 1   : Channel-A DIMM 0 type: DDR5  32 GiB  Fréquence : 5600 MT/s
+Slot numéro 2   : Channel-B DIMM 0 type: DDR5  32 GiB  Fréquence : 5600 MT/s
+-----------------------------------------------------------------| Stockage de masse |
+Disque interne  : /nvme0n1
+Marque          : Kingston
+Modèle          : OM8PGP41024N-A0
+
+Taille          : 953.87 GiB
+état            : 
+---------------------------------------------------------------| État de la batterie |
+Déchargée à     : 0%
+Temps restant   : rate information unavailable
+Pas de batterie détectée
+
+--------------------------------------------------------------------| Cartes réseaux |
+Carte numéro 1  : Realtek RTL8125 2.5GbE 
+Carte numéro 2  : Realtek RTL8125 2.5GbE 
+Carte numéro 3  : MEDIATEK MT7922 Carte WIFI
+-----------------------------------------------------------------| Cartes graphiques |
+Modèle          : Advanced Micro Devices [AMD/ATI] HawkPoint1 
+  API: EGL v: 1.5 drivers: radeonsi,swrast
+    platforms: gbm,x11,surfaceless,device
+  API: OpenGL v: 4.6 compat-v: 4.5 vendor: amd mesa v: 25.1.4 
+Pilote          : AMD
+    Radeon 780M Graphics (radeonsi phoenix LLVM 20.1.6 DRM 3.63
+    6.15.4-200.fc42.x86_64)
+  API: Vulkan v: 1.4.313 drivers: radv,llvmpipe surfaces: N/A
+  Info: Tools: api: clinfo, eglinfo, glxinfo, vulkaninfo
+    de: kscreen-console,kscreen-doctor wl: wayland-info x11: xdriinfo,
+    xdpyinfo, xprop, xrandr
+-------------------------------------------------------------------------| Affichage |
+HDMI-A-1 connecté principal 1440x900+0+0 
+Taille en pouces: 18.9
+--------------------------------------------------------------------------------------
+Pour tout commentaire supplémentaire, merci d'écrire proprement au dos de cette feuille

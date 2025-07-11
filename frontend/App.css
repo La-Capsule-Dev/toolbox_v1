@@ -1,0 +1,143 @@
+:root {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+
+    color: #fffcf2;
+    background-color: #252422;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+.container {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    gap: 30px;
+
+    .temperatureContainer {
+        max-width: 15%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        h2 {
+            font-weight: 400;
+            font-size: 16px;
+            width: 100%;
+            border-bottom: 1px solid gray;
+        }
+
+        .temp {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        summary {
+            cursor: pointer;
+        }
+    }
+
+    .ficheContainer {
+        flex: 1;
+        min-width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        #terminal {
+            width: 100%;
+            height: 90vh;
+            resize: none;
+            background: #444;
+            color: #fffcf2;
+            font-size: 16px;
+        }
+
+        .pdfWrapper {
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 210 / 297;
+            border: 1px solid #444;
+            background: white;
+            height: 90vh;
+
+            iframe {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        }
+
+        button {
+            padding: 15px 30px;
+            border-radius: 4px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.2s ease-in-out;
+            background: #fffcf225;
+            min-width: fit-content;
+            flex: 1;
+            color: #fffcf250;
+
+            &.active {
+                background: #fffcf2;
+                color: #252422;
+            }
+        }
+    }
+
+    .buttons {
+        flex: 1;
+
+        h2 {
+            text-transform: uppercase;
+            color: gray;
+            font-size: 18px;
+            font-weight: 400;
+
+            &::before {
+                content: "--| ";
+            }
+            &::after {
+                content: " |--";
+            }
+        }
+
+        .category {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+
+            button {
+                padding: 15px 30px;
+                border-radius: 8px;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                font-weight: 600;
+                text-transform: uppercase;
+
+                &:hover {
+                    opacity: 0.75;
+                }
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+        }
+    }
+}

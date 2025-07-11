@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/keyboard-tester/favicon.ico" />
+    <link rel="icon" href="/keyboard-tester/favicon.ico" />
+    <title>Test clavier</title>
+    <style>
+      .key {
+        border: 1px solid #000;
+        border-radius: 4px;
+        margin: 2px;
+        padding: 2px;
+        display: flex;
+      }
+      .key * {
+        font-size: 12px;
+      }
+      .keyboard {
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center;">
+      <h2>Test clavier</h2>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="keyboard">
+        <div style="display: flex;">
+          <div class="key" style="width: 1em; height: 1em;" id="escape"><span>Esc</span></div>
+          <div style="width: 1em; height: 1em; margin: 5px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f1"><span>F1</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f2"><span>F2</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f3"><span>F3</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f4"><span>F4</span></div>
+          <div style="width: .5em; height: 1em; margin: 2.5px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f5"><span>F5</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f6"><span>F6</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f7"><span>F7</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f8"><span>F8</span></div>
+          <div style="width: .5em; height: 1em; margin: 2.5px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f9"><span>F9</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f10"><span>F10</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f11"><span>F11</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f12"><span>F12</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="printscreen"><span>Impr écran<br /></span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="scrolllock"><span>Arrêt<br />défil</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="pause"><span>Pause</span></div>
+        </div>
+        <div style="width: 1em; height: .2em; margin: 5px;"></div>
+        <div style="display: flex;">
+          <div class="key" style="width: 1em; height: 1em;" id="œ"><span>Œ<br />œ</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="&"><span>1<br />&</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="é"><span>2<br />é ~</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id='"'><span>3<br />" #</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="'"><span>4<br />' {</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="("><span>5<br />( [</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="-"><span>6<br />- |</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="è"><span>7<br />è `</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="_"><span>8<br />_ \</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="ç"><span>9<br />ç ^</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="à"><span>0<br />à @</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id=")"><span>°<br />) ]</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="="><span>+<br />= }</span></div>
+          <div class="key" style="width: calc(2em + 10px); height: 1em;" id="backspace"><span> ⟵</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="insert"><span>Inser</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="home"><span>Home</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="pageup"><span>Page<br />Up</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="numlock"><span>Num<br />Lock</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="/"><span>/</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num*"><span>*</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num-"><span>-</span></div>
+        </div>
+        <div style="display: flex; position: relative;">
+          <div class="key" style="width: calc(1.5em + 5px); height: 1em;" id="tab"><span>Tab</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="a"><span>A</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="z"><span>Z</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="e"><span>E</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="r"><span>R</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="t"><span>T</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="y"><span>Y</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="u"><span>U</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="i"><span>I</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="o"><span>O</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="p"><span>P</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="^"><span>"<br />^</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="$"><span>£<br />$</span></div>
+          <div class="key" style="width: calc(1.5em + 5px); height: 1em;" id="\"><span>|<br />\</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="delete"><span>Delete</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="end"><span>End</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="pagedown"><span>Page<br />Down</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num7"><span>7<br />⤣</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num8"><span>8<br />⭡</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num9"><span>9<br />⇞</span></div>
+          <div class="key" style="width: 1em; height: calc(2em + 10px); position: absolute; right: 0;" id="+"><span>+</span></div>
+        </div>
+        <div style="display: flex;">
+          <div class="key" style="width: calc(.7em + 10px); height: 1em;" id="capslock"><span>Caps<br />Lock</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="q"><span>Q</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="s"><span>S</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="d"><span>D</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="f"><span>F</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="g"><span>G</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="h"><span>H</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="j"><span>J</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="k"><span>K</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="l"><span>L</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="m"><span>M</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="ù"><span>%<br />ù</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="*"><span>µ<br />*</span></div>
+          <div class="key" style="width: calc(2.1em + 8px); height: 1em;" id="enter"><span>Enter</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div style="width: 1em; height: 1em; margin: 5px;"></div>
+          <div style="width: 1em; height: 1em; margin: 5px;"></div>
+          <div style="width: 1em; height: 1em; margin: 5px;"></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num4"><span>4<br />⭠</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num5"><span>5</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="numm6"><span>6<br />⭢</span></div>
+        </div>
+        <div style="display: flex; position: relative;">
+          <div class="key" style="width: calc(1.6em + 15px); height: 1em;" id="lshift"><span>Shift</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="<"><span>><br /><</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="w"><span>W</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="x"><span>X</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="c"><span>C</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="v"><span>V</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="b"><span>B</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="n"><span>N</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id=","><span>?<br />,</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id=";"><span>.<br />;</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id=":"><span>/<br />:</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="!"><span>§<br />!</span></div>
+          <div class="key" style="width: calc(2.1em + 17px); height: 1em;" id="rshift"><span>Shift</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div style="width: 1em; height: 1em; margin: 5px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="arrowup"><span>⭡</span></div>
+          <div style="width: 1em; height: 1em; margin: 5px;"></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num1"><span>1<br />Fin</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num2"><span>2<br />⭣</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num3"><span>3<br />⇟</span></div>
+          <div class="key" style="width: 1em; height: calc(2em + 10px); position: absolute; right: 0;" id="numenter"><span>Enter</span></div>
+        </div>
+        <div style="display: flex;">
+          <div class="key" style="width: calc(1.2em + 5px); height: 1em;" id="lcontrol"><span>Control</span></div>
+          <div class="key" style="width: calc(1.2em + 5px); height: 1em;" id="lmeta"><span>Meta</span></div>
+          <div class="key" style="width: calc(1.2em + 5px); height: 1em;" id="lalt"><span>Alt</span></div>
+          <div class="key" style="width: calc(7.3em + 10px); height: 1em;" id=" "><span>Space</span></div>
+          <div class="key" style="width: calc(1.2em + 4px); height: 1em;" id="ralt"><span>Alt</span></div>
+          <div class="key" style="width: calc(1.2em + 4px); height: 1em;" id="rmeta"><span>Meta</span></div>
+          <div class="key" style="width: calc(1.2em + 4px); height: 1em;" id="contextmenu"><span>Menu</span></div>
+          <div class="key" style="width: calc(1.2em + 6px); height: 1em;" id="rcontrol"><span>Control</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: 1em; height: 1em;" id="arrowleft"><span>⭠</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="arrowdown"><span>⭣</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="arrowright"><span>⭢</span></div>
+          <div style="width: .2em; height: 1em; margin: 1px;"></div>
+          <div class="key" style="width: calc(2em + 10px); height: 1em;" id="num0"><span>0<br />Insert</span></div>
+          <div class="key" style="width: 1em; height: 1em;" id="num."><span>.<br />Delete</span></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    const numMap = {
+      home: 'num7',
+      end: 'num1',
+      pageup: 'num9',
+      pagedown: 'num3',
+      arrowup: 'num8',
+      arrowdown: 'num2',
+      arrowleft: 'num4',
+      arrowright: 'num6',
+      clear: 'num5',
+      insert: 'num0',
+      delete: 'num.',
+      multiple: 'num*',
+      enternum: 'numenter',
+      slash: 'numslash',
+    };
+    const lrMap = ['l', 'r'];
+    window.addEventListener('keydown', onKeyDownHandle);
+    window.addEventListener('keyup', onKeyUpHandle);
+    function onKeyDownHandle(e) {
+      e.preventDefault();
+      console.log(e.key);
+      const keyName = e.key.toLowerCase();
+      if (['œ', '&', 'é', '"', "'", '(', '-', 'è', '_', 'ç', 'à', ')', '=', 'backspace'].indexOf(keyName) !== -1) {
+        if (e.location === 3) {
+          const key = document.getElementById("num" + keyName);
+          key.style.background = '#ffd666';
+          return;
+        }
+      }
+      if (['home', 'end', 'pageup', 'pagedown', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'clear', 'insert', 'delete', 'multiple', 'enternum', 'slash'].indexOf(keyName) !== -1) {
+        if (e.location === 3) {
+          const key = document.getElementById(numMap[keyName]);
+          key.style.background = '#ffd666';
+          return;
+        }
+      }
+      if (['shift', 'control', 'alt', 'meta'].indexOf(keyName) !== -1) {
+        const key = document.getElementById(lrMap[e.location - 1] + keyName);
+        key.style.background = '#ffd666';
+        return;
+      }
+      const key = document.getElementById(keyName);
+      key.style.background = '#ffd666';
+    }
+    function onKeyUpHandle(e) {
+      e.preventDefault();
+      console.log(e.key);
+            key.addClass('active');
+      const keyName = e.key.toLowerCase();
+      if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '*', '/', '-', 'enternum'].indexOf(keyName) !== -1) {
+        if (e.location === 3) {
+          const key = document.getElementById("num" + keyName);
+          key.style.background = 'initial';
+          return;
+        }
+      }
+      if (['home', 'end', 'pageup', 'pagedown', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'clear', 'insert', 'delete', 'multiple', 'enternum', 'slash'].indexOf(keyName) !== -1) {
+        if (e.location === 3) {
+          const key = document.getElementById(numMap[keyName]);
+          key.style.background = 'initial';
+          return;
+        }
+      }
+      if (['shift', 'control', 'alt', 'meta'].indexOf(keyName) !== -1) {
+        const key = document.getElementById(lrMap[e.location - 1] + keyName);
+        key.style.background = 'initial';
+        return;
+      }
+      if (keyName === 'printscreen') {
+        const key = document.getElementById(keyName);
+        key.style.background = '#ffd666';
+        const timer = setTimeout(function() {
+          key.style.background = 'initial';
+          clearTimeout(timer);
+        }, 100);
+        return;
+      }
+      const key = document.getElementById(keyName);
+      key.style.background = 'initial';
+    }
+    </script>
+  </body>
+</html>
