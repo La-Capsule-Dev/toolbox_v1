@@ -17,6 +17,10 @@ function App() {
         }
     };
 
+    const rust_script = (script: string) => {
+        invoke(script);
+    };
+
     useEffect(() => {
         startSudoSession();
     }, []);
@@ -52,7 +56,9 @@ function App() {
                                     key={idx}
                                     color={cat.color}
                                     title={script.name}
-                                    script={script.scriptPath}
+                                    launchScript={() =>
+                                        rust_script(script.scriptCmd)
+                                    }
                                 />
                             ))}
                         </div>

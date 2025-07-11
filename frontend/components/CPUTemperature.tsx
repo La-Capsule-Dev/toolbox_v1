@@ -19,7 +19,6 @@ export default function CPUTemperature() {
                 }));
                 setTemps(tempsFormatted);
 
-                // Trouver la température la plus élevée
                 const hottest = tempsFormatted.reduce(
                     (max, t) => (t.temp > max.temp ? t : max),
                     tempsFormatted[0]

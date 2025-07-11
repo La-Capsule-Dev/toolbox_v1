@@ -43,10 +43,8 @@ fn start_session() -> Result<(), String>  {
 
 #[tauri::command]
 fn stress_test() -> Result<(), String> {
-    launch_stress_test()
+    launch_stress_test().map_err(|e| e.to_string())
 }
-
-
 
 fn main() {
     tauri::Builder::default()

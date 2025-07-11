@@ -5,23 +5,23 @@
         "scripts" : [
             {
                 "name": "stress",
-                "scriptPath": "stress.sh"
+                "scriptCmd": "stress_test"
             },
              {
                 "name": "ports",
-                "scriptPath": "ports.sh"
+                "scriptCmd": "ports.sh"
             },
              {
                 "name": "audio",
-                "scriptPath": "audio.sh"
+                "scriptCmd": "audio.sh"
             },
              {
                 "name": "video",
-                "scriptPath": "video.sh"
+                "scriptCmd": "video.sh"
             },
              {
                 "name": "clavier",
-                "scriptPath": "clavier.sh"
+                "scriptCmd": "clavier.sh"
             }
         ]
     },
@@ -31,7 +31,7 @@
         "scripts": [
             {
                 "name": "réseau",
-                "scriptPath": "reseau.sh"
+                "scriptCmd": "reseau.sh"
             }
         ]
     },
@@ -41,15 +41,15 @@
         "scripts": [
             {
                 "name": "Shred | SSD",
-                "scriptPath": "WIPESSD.sh"
+                "scriptCmd": "WIPESSD.sh"
             },
             {
                 "name": "Shred | HDD",
-                "scriptPath": "SHREDHDD.sh"
+                "scriptCmd": "SHREDHDD.sh"
             },
             {
                 "name": "Shred | NVME",
-                "scriptPath": "SHREDHDD.sh"
+                "scriptCmd": "SHREDHDD.sh"
             }
         ]
     },
@@ -59,11 +59,11 @@
         "scripts": [
             {
                 "name": "Clone",
-                "scriptPath": "WIPESSD.sh"
+                "scriptCmd": "WIPESSD.sh"
             },
             {
                 "name": "Déploiement",
-                "scriptPath": "SHREDHDD.sh"
+                "scriptCmd": "SHREDHDD.sh"
             }
         ]
     }
