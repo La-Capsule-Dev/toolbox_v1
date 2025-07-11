@@ -7,11 +7,11 @@ DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
 source "$DIR_ROOT/lib/hardware/storage.sh"
 source "$DIR_ROOT/utils/echo_status.sh"
 
-#TODO: Improve
+#TODO: TODO LATER
 cloning_disk(){
 
     disque=$(disque_parser)
-    echo_status "            Listing des disques présents "
+    echo_status "Listing des disques présents "
     echo "$disque" && echo_status_ok
     echo_status " Veuillez choisir le disque ou la partition MASTER "
     echo -n "/dev/" && read -r premierChoix

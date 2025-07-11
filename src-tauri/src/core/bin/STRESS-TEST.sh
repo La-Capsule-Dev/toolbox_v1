@@ -7,6 +7,7 @@ source "$DIR_ROOT/lib/stress-test/init.sh"
 source "$DIR_ROOT/lib/utils/init.sh"
 source "$DIR_ROOT/etc/config/stress-pkgs.sh"
 
+#FIX: REFACTOR
 function stress_test {
     # Store menu options selected by the user
     INPUT=/tmp/menu.sh.$$
