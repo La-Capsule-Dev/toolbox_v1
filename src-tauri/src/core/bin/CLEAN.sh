@@ -4,25 +4,27 @@ set -euo pipefail
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${BIN_DIR%%/core*}/core"
 
-source "$DIR_ROOT/etc/config/pkgs.sh"
-source "$DIR_ROOT/lib/maintenance/loop-pkgs.sh"
+source "$DIR_ROOT/etc/config/pkgs-list.sh"
+source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
 source "$DIR_ROOT/lib/utils/init.sh"
 
 clean_up() {
+    local os_type
+    os_type="$(detect_os)"
     echo_status "Début du nettoyage intégral..."
     echo_status "Obtention des droits sur les fichiers verrouillés"
     echo_status "Veuillez entrer votre mot de passe administrateur"
 
     # Fixing permissions
-    fix_permissions && repare_pkgs && drop_memory_cache
+    fix_permissions $os_type && repare_pkgs_native $os_type && drop_memory_cache
 
     # Removing pkgs
     echo_status "Suppression de paquets spécifiques via remove_pkgs"
-    remove_pkgs "${PKGS[@]}" || echo_status_error "Échec remove_pkgs"
+    remove_pkgs_native "$os_type" "${PKGS[@]}"
 
     # Delete package boot-repair
     echo_status "Suppression du paquet boot-repair"
-    sudo apt remove -y boot-repair && echo_status_ok "Boot-repair supprimé"|| echo_status_error "Échec suppression boot-repair"
+    remove_one_pkg_native $os_type "boot-repair" && echo_status_ok "Boot-repair supprimé"|| echo_status_error "Échec suppression boot-repair"
 
     # Delete eggs
     delete_eggs
@@ -33,6 +35,7 @@ clean_up() {
 }
 
 delete_eggs(){
+    # FIX: Voir la plus tard
     # ❌ Correction : dpkg -r ne prend pas un .deb, mais un nom de paquet
     # Si tu veux supprimer le paquet installé par ce .deb, tu dois en extraire le nom
     # Exemple : sudo dpkg -r eggs

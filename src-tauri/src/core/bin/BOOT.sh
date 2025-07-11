@@ -1,30 +1,40 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${BIN_DIR%%/core*}/core"
 
 source "$DIR_ROOT/lib/utils/echo_status.sh"
+source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"    # <-- contient tes wrappers install/remove/update/etc
+source "$DIR_ROOT/lib/utils/detect_os.sh"
 
-booting_repair(){
+booting_repair() {
+    local os_type
+    os_type="$(detect_os)"
+
     echo_status "Vérification des prérequis"
-    if sudo apt update; then
+    if update_pkgs_native "$os_type"; then
         echo_status_ok "Update réussi"
     else
-        echo_status_error "Échec de l'update apt"
+        echo_status_error "Échec de la mise à jour des paquets"
     fi
 
     echo_status "Vérification du package boot-repair"
-    if ! dpkg -s boot-repair &>/dev/null; then
-        echo_status_warn "BOOTRepair non installé, installation en cours..."
-        # Ajoute le ppa seulement s'il n'est pas déjà là
-        if ! grep -h -R "yannubuntu/boot-repair" /etc/apt/sources.list /etc/apt/sources.list.d/* &>/dev/null; then
-            sudo add-apt-repository -y ppa:yannubuntu/boot-repair
+    # TODO: Condition demandé si désire install boot-repair
+    # -- Installation générique par nom "boot-repair" selon la logique mapping de pkgs-list.sh
+    if ! command -v boot-repair &>/dev/null && ! dpkg -s boot-repair &>/dev/null; then
+        echo_status_warn "BOOTRepair non installé, tentative d'installation..."
+
+        # Spécificité DEBIAN/UBUNTU : ajout du PPA si besoin (autodétection)
+        if [[ "$os_type" == "debian" ]]; then
+            if ! grep -h -R "yannubuntu/boot-repair" /etc/apt/sources.list /etc/apt/sources.list.d/* &>/dev/null; then
+                sudo add-apt-repository -y ppa:yannubuntu/boot-repair
+            fi
+            update_pkgs_native "$os_type"
         fi
-        sudo apt update
-        if sudo apt install -y boot-repair; then
-            echo_status_ok "Installation du package boot-repair réussie"
+
+        if install_one_pkg_native "$os_type" "boot-repair"; then
+            echo_status_ok "Installation de boot-repair réussie"
         else
             echo_status_error "Échec installation boot-repair"
         fi
@@ -33,7 +43,7 @@ booting_repair(){
     fi
 
     echo_status "Lancement de boot-repair"
-    if boot-repair; then
+    if command -v boot-repair &>/dev/null && boot-repair; then
         echo_status_ok "Boot-repair effectué"
     else
         echo_status_error "Erreur lors de l'exécution de boot-repair"
@@ -41,5 +51,3 @@ booting_repair(){
 }
 
 booting_repair
-
-
