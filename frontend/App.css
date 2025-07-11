@@ -21,6 +21,30 @@
     height: 100%;
     gap: 30px;
 
+    .temperatureContainer {
+        max-width: 15%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        h2 {
+            font-weight: 400;
+            font-size: 16px;
+            width: 100%;
+            border-bottom: 1px solid gray;
+        }
+
+        .temp {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        summary {
+            cursor: pointer;
+        }
+    }
+
     .ficheContainer {
         flex: 1;
         min-width: 50%;
