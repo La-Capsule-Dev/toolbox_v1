@@ -9,6 +9,7 @@ use utils::stress::launch_stress_test;
 
 #[tauri::command]
 fn get_cpu_temperature() -> Vec<(String, f32)> {
+
     let mut results = Vec::new();
     let zones = fs::read_dir("/sys/class/thermal").unwrap();
 
@@ -49,10 +50,12 @@ fn stress_test() -> Result<(), String> {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![print_checklist])
-        .invoke_handler(tauri::generate_handler![start_session])
-        .invoke_handler(tauri::generate_handler![stress_test])
-        .invoke_handler(tauri::generate_handler![get_cpu_temperature])
+        .invoke_handler(tauri::generate_handler![
+            print_checklist,
+            start_session,
+            stress_test,
+            get_cpu_temperature
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
