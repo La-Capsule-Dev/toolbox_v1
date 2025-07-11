@@ -7,6 +7,7 @@ DIR_ROOT="${SCRIPT_DIR%%/core*}/core"
 source "$DIR_ROOT/lib/hardware/storage.sh"
 source "$DIR_ROOT/utils/echo_status.sh"
 
+#TODO: Improve
 cloning_disk(){
 
     disque=$(disque_parser)

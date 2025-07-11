@@ -14,13 +14,7 @@ clean_up() {
     echo_status "Veuillez entrer votre mot de passe administrateur"
 
     # Fixing permissions
-    fix_permissions
-
-    # Repare pkgs
-    repare_pkgs
-
-    # Memory drops
-    drop_memory_cache
+    fix_permissions && repare_pkgs && drop_memory_cache
 
     # Removing pkgs
     echo_status "Suppression de paquets spécifiques via remove_pkgs"
@@ -28,16 +22,14 @@ clean_up() {
 
     # Delete package boot-repair
     echo_status "Suppression du paquet boot-repair"
-    sudo apt remove -y boot-repair && echo_status_ok || echo_status_error "Échec suppression boot-repair"
+    sudo apt remove -y boot-repair && echo_status_ok "Boot-repair supprimé"|| echo_status_error "Échec suppression boot-repair"
 
     # Delete eggs
     delete_eggs
 
     # Remove files
     echo_status "Nettoyage des fichiers inutiles"
-    remove_files
-
-    echo_status "✅ Nettoyage effectué avec succès"
+    remove_files && echo_status_ok "Nettoyage effectué avec succès"
 }
 
 delete_eggs(){
@@ -58,7 +50,7 @@ delete_eggs(){
 
 drop_memory_cache(){
     echo_status "Vidage du cache mémoire (drop_caches)"
-    sync && sudo sysctl vm.drop_caches=3 && echo_status_ok || echo_status_error "Échec drop_caches"
+    sync && sudo sysctl vm.drop_caches=3 && echo_status_ok "Cache mémoire vidé"|| echo_status_error "Échec drop_caches"
     echo_status "État de la mémoire :"
     swapon -s || echo_status_error "Échec swapon"
     free -m  || echo_status_error "Échec free"

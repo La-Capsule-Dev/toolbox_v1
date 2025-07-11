@@ -8,8 +8,8 @@ source "$DIR_ROOT/etc/template/entete-checklist.sh"
 source "$DIR_ROOT/etc/template/bloc-info-machine.sh"
 
 
-[[ "$(type -t afficher_entete_checklist)" == function ]] || { echo "Fonction manquante"; exit 1; }
-[[ "$(type -t afficher_bloc_info_machine)" == function ]] || { echo "Fonction manquante"; exit 1; }
+[[ "$(type -t afficher_entete_checklist)" == function ]] ||  echo_statut_error "Fonction manquante"
+[[ "$(type -t afficher_bloc_info_machine)" == function ]] || echo_status_error "Fonction manquante"
 
 resultat=$(
     afficher_entete_checklist
