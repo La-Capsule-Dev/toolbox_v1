@@ -3,17 +3,6 @@ set -euo pipefail
 
 # SSD.sh — Menu d’effacement sécurisé des disques NVMe (CLI Bash)
 #
-# Usage :
-#   ./SDD.sh
-#
-# Prérequis :
-#   - nvme-cli, lsblk, awk, sudo
-#   - shred_disk.sh dans le même dossier (source)
-#
-# Sécurité :
-#   - Affiche les disques détectés avant toute opération.
-#   - Aucune destruction réelle sans modification explicite (simulation par défaut).
-#
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -37,7 +26,7 @@ shred_nvme(){
     source "$DIR_ROOT/lib/shred/shred_disk.sh"
 
     # Commande d’effacement adaptée aux NVMe : (simulation, à activer explicitement)
-    #shred_disk "sudo nvme format -s2 /dev/%s && sudo blkdiscard /dev/%s" || echo_status_error "Échec du shred_disk HDD"
+    shred_disk "sudo nvme format -s2 /dev/%s && sudo blkdiscard /dev/%s" || echo_status_error "Échec du shred_disk HDD"
     echo_status_ok "Shred du HDD fini et réussi"
 }
 

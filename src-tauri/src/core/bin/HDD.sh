@@ -3,17 +3,6 @@ set -euo pipefail
 
 # HDD.sh — Utilitaire d’effacement sécurisé pour HDD/SATA classiques
 #
-# Usage :
-#   ./HDD.sh
-#
-# Prérequis :
-#   - lsblk, awk, sudo
-#   - shred_disk.sh disponible dans le même dossier
-#
-# Sécurité :
-#   - Affiche les disques connectés, aucune destruction sans confirmation.
-#   - Simulation par défaut (décommentez dans shred_disk.sh pour activer l’effacement réel)
-#
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
