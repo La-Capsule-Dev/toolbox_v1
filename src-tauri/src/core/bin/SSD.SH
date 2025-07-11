@@ -37,7 +37,7 @@ shred_nvme(){
     source "$DIR_ROOT/lib/shred/shred_disk.sh"
 
     # Commande d’effacement adaptée aux NVMe : (simulation, à activer explicitement)
-    shred_disk "sudo nvme format -s2 /dev/%s && sudo blkdiscard /dev/%s" || echo_status_error "Échec du shred_disk HDD"
+    #shred_disk "sudo nvme format -s2 /dev/%s && sudo blkdiscard /dev/%s" || echo_status_error "Échec du shred_disk HDD"
     echo_status_ok "Shred du HDD fini et réussi"
 }
 
