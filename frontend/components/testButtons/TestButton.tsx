@@ -1,9 +1,12 @@
 import { TestButtonProps } from "../../types/TesButtonProps";
 
 const TestButton = (props: TestButtonProps) => {
-    const { title, launchScript, color } = props;
+    const { title, launchScript, color, disabled } = props;
     return (
-        <button style={{ backgroundColor: color }} onClick={launchScript}>
+        <button
+            disabled={disabled}
+            style={{ backgroundColor: color }}
+            onClick={launchScript}>
             {title}
         </button>
     );

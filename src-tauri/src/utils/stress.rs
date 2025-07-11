@@ -1,5 +1,7 @@
+use std::process::{Command, Stdio};
+
 pub fn launch_stress_test() -> Result<(), String> {
-    use std::process::{Command, Stdio};
+    println!("🚀 Lancement du stress test (en tâche de fond)");
 
     Command::new("sudo")
         .arg("stress-ng")
@@ -16,8 +18,8 @@ pub fn launch_stress_test() -> Result<(), String> {
         ])
         .stdout(Stdio::null())
         .stderr(Stdio::null())
-        .spawn()
-        .map_err(|e| e.to_string())?;
+        .spawn() // ✅ ici on ne bloque pas le thread principal
+        .map_err(|e| format!("Erreur lors du lancement du stress test : {}", e))?;
 
     Ok(())
 }

@@ -1,5 +1,6 @@
 export type TestButtonProps = {
     title: string,
     launchScript: () => void,
-    color: string
+    color: string,
+    disabled?: boolean
 }
