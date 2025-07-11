@@ -1,44 +1,57 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DIR_ROOT="${BIN_DIR%%/core*}/core"
+source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
 source "$DIR_ROOT/lib/utils/echo_status.sh"
 
-remove_files(){
-    TRASH_PATH="$HOME/.local/share/Trash"
+remove_files() {
+    local os_type
+    os_type="$(detect_os)"   # Ex : renvoie "debian", "arch", etc.
+    local trash_path="$HOME/.local/share/Trash"
 
-    echo_status "Nettoyage du système de fichiers"
+    echo_status "Nettoyage des caches et fichiers temporaires"
 
-    echo_status "Nettoyage du cache apt (autoclean)"
-    sudo apt autoclean -y && echo_status_ok "Nettoyage du cache"|| echo_status_error "Échec de apt autoclean"
+    # Nettoyage des paquets obsolètes (OS-agnostique)
+    autoclean_pkgs_native "$os_type"
 
-    echo_status "Suppression automatique des paquets (autoremove)"
-    sudo apt autoremove -y && echo_status_ok "Suprression des paquets"|| echo_status_error "Échec de apt autoremove"
+    # Suppression des dépendances inutiles (OS-agnostique)
+    autoremove_pkgs_native "$os_type"
 
-    echo_status "Vidage du répertoire /tmp"
+    # Vidage de $HOME/tmp
     if [[ -d "$HOME/tmp" ]]; then
-        sudo find "$HOME/tmp" -mindepth 1 -delete && echo_status_ok "Vidage /tmp"|| echo_status_error "Échec suppression de $HOME/tmp"
+        sudo find "$HOME/tmp" -mindepth 1 -delete \
+            && echo_status_ok "Vidage $HOME/tmp" \
+            || echo_status_error "Échec suppression de $HOME/tmp"
     else
-        echo_status_error "Répertoire $HOME/tmp introuvable"
+        echo_status_warn "Répertoire $HOME/tmp introuvable"
     fi
 
-    echo_status "Purge du cache utilisateur"
+    # Purge du cache utilisateur (~/.cache)
     if [[ -d "$HOME/.cache" ]]; then
-        sudo find "$HOME/.cache" -mindepth 1 -delete && echo_status_ok "Purge du cache utilisateur"|| echo_status_error "Échec purge de $HOME/.cache"
+        sudo find "$HOME/.cache" -mindepth 1 -delete \
+            && echo_status_ok "Purge du cache utilisateur" \
+            || echo_status_error "Échec purge de $HOME/.cache"
     else
-        echo_status_error "Répertoire $HOME/.cache introuvable"
+        echo_status_warn "Répertoire $HOME/.cache introuvable"
     fi
 
-    echo_status "Vidage des fichiers dans la corbeille"
-    if [[ -d "$TRASH_PATH/files" ]]; then
-        sudo find "$TRASH_PATH/files" -mindepth 1 -delete && echo_status_ok "Corbeille vidé"|| echo_status_error "Échec vidage $TRASH_PATH/files"
+    # Vidage de la corbeille (fichiers)
+    if [[ -d "$trash_path/files" ]]; then
+        sudo find "$trash_path/files" -mindepth 1 -delete \
+            && echo_status_ok "Corbeille (fichiers) vidée" \
+            || echo_status_error "Échec vidage $trash_path/files"
     else
-        echo_status_error "Dossier $TRASH_PATH/files introuvable"
+        echo_status_warn "Dossier $trash_path/files introuvable"
     fi
 
-    echo_status "Vidage des infos de la corbeille"
-    if [[ -d "$TRASH_PATH/info" ]]; then
-        sudo find "$TRASH_PATH/info" -mindepth 1 -delete && echo_status_ok "Corbeille info vidé"|| echo_status_error "Échec vidage $TRASH_PATH/info"
+    # Vidage de la corbeille (info)
+    if [[ -d "$trash_path/info" ]]; then
+        sudo find "$trash_path/info" -mindepth 1 -delete \
+            && echo_status_ok "Corbeille (info) vidée" \
+            || echo_status_error "Échec vidage $trash_path/info"
     else
-        echo_status_error "Dossier $TRASH_PATH/info introuvable"
+        echo_status_warn "Dossier $trash_path/info introuvable"
     fi
 }
