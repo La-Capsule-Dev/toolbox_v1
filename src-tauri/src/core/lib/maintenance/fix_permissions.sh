@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$MAINTENANCE_DIR/echo_status.sh"
+source "$DIR_ROOT/lib/utils/echo_status.sh"
 
 fix_permissions() {
-    echo_status "Obtention des droits sur les fichiers verrouillés"
+    echo_status_warn "Obtention des droits sur les fichiers verrouillés"
 
     USER_ID="${SUDO_USER:-$USER}"
 
@@ -22,5 +22,5 @@ fix_permissions() {
         echo_status_error "Répertoire /var/cache/apt introuvable — apt probablement non installé"
     fi
 
-    echo_status_ok
+    echo_status_ok "Obtiention des droits réussi"
 }
