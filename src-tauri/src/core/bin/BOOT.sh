@@ -20,7 +20,7 @@ booting_repair() {
     fi
 
     echo_status "Vérification du package boot-repair"
-    # TODO: Condition demandé si désire install boot-repair
+    # HACK: Condition demandé si désire install boot-repair
     # -- Installation générique par nom "boot-repair" selon la logique mapping de pkgs-list.sh
     if ! command -v boot-repair &>/dev/null && ! dpkg -s boot-repair &>/dev/null; then
         echo_status_warn "BOOTRepair non installé, tentative d'installation..."
