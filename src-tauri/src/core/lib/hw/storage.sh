@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # HACK: Refactor
-source "$DIR_ROOT/lib/utils/logging.sh"
+source "$LIB_DIR/utils/logging.sh"
 # Stockage de masse
 
 cible_parser() {

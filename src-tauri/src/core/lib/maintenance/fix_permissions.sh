@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$DIR_ROOT/lib/utils/echo_status.sh"
+source "$LIB_DIR/utils/echo_status.sh"
 
 fix_permissions() {
     local os="$1"

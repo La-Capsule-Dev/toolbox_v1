@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${BIN_DIR%%/core*}/core"
 
-source "$DIR_ROOT/lib/ui/echo_status.sh"
-source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"    # <-- contient tes wrappers install/remove/update/etc
-source "$DIR_ROOT/lib/utils/detect_os.sh"
+source "$LIB_DIR/ui/echo_status.sh"
+source "$LIB_DIR/pkgmgr/wrapper.sh"    # <-- contient tes wrappers install/remove/update/etc
+source "$LIB_DIR/utils/detect_os.sh"
 
 booting_repair() {
     local os_type

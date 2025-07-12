@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HW_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${HW_DIR%%/core*}/core"
+HARDWARE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-for file in "$HW_DIR"/*.sh; do
-    [[ "$file" == "$HW_DIR/init.sh" ]] && continue
+for file in "$HARDWARE_DIR"/*.sh; do
+    [[ "$file" == "$HARDWARE_DIR/init.sh" ]] && continue
     source "$file"
 done

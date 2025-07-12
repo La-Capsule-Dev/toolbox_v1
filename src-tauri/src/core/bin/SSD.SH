@@ -5,9 +5,7 @@ set -euo pipefail
 #
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
-BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${BIN_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$LIB_DIR/ui/echo_status.sh"
 
 shred_nvme(){
     # -- Vérification des dépendances --

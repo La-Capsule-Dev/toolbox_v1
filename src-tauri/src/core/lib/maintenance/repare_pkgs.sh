@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$DIR_ROOT/lib/ui/echo_status.sh"
-source "$DIR_ROOT/lib/utils/detect_os.sh"
-source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
+source "$LIB_DIR/ui/echo_status.sh"
+source "$LIB_DIR/utils/detect_os.sh"
+source "$LIB_DIR/pkgmgr/wrapper.sh"
 
 repare_pkgs_native() {
     local os="$1"

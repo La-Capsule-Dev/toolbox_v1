@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 batterie=$(battery_parser)
 batmod=$(batmod_parser)

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-PROMPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$PROMPT_DIR/echo_status.sh"
+source "$LIB_DIR/ui/echo_status.sh"
 
 prompt_yes_no() {
     local question="$1"

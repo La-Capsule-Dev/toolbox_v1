@@ -2,10 +2,8 @@
 
 set -euo pipefail
 
-BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${BIN_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
-source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$LIB_DIR/pkgmgr/wrapper.sh"
+source "$LIB_DIR/ui/echo_status.sh"
 
 product_iso(){
     echo_status "Vérification des updates du système"

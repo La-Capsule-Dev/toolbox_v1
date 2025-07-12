@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${BIN_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/utils/init.sh"
-source "$DIR_ROOT/etc/template/entete-checklist.sh"
-source "$DIR_ROOT/etc/template/bloc-info-machine.sh"
+source "$LIB_DIR/utils/init.sh"
+source "$ETC_DIR/template/entete-checklist.sh"
+source "$ETC_DIR/template/bloc-info-machine.sh"
 
 [[ "$(type -t afficher_entete_checklist)" == function ]] ||  echo_status_error "Fonction manquante"
 [[ "$(type -t afficher_bloc_info_machine)" == function ]] || echo_status_error "Fonction manquante"

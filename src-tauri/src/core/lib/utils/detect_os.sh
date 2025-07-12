@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-DIR_ROOT="${PKGMGR_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$CORE_DIR/lib/ui/echo_status.sh"
 
 detect_os() {
     [[ -f /etc/os-release ]] || echo_status_error "OS introuvable, veuillez le signaler sur github pour qu'il soit ajouter"

@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${BIN_DIR%%/core*}/core"
-
-source "$DIR_ROOT/etc/config/pkgs-list.sh"
-source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
-source "$DIR_ROOT/lib/utils/init.sh"
+source "$ETC_DIR/config/pkgs-list.sh"
+source "$LIB_DIR/pkgmgr/wrapper.sh"
+source "$LIB_DIR/utils/init.sh"
 
 clean_up() {
     local os_type

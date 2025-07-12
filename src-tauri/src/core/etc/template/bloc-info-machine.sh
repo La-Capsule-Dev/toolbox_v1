@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TEMPLATE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${TEMPLATE_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/hw/init.sh"
+source "$LIB_DIR/hw/init.sh"
 
 afficher_bloc_info_machine() {
     cat <<EOF

@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PKGMGR_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${PKGMGR_DIR%%/core*}/core"
-source "$PKGMGR_DIR/pkg_op_native.sh"
-source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$LIB_DIR/pkgmgr/pkg_op_native.sh"
+source "$LIB_DIR/ui/echo_status.sh"
 
 
 install_pkgs_native()    { pkg_op_native "$1" install "${@:2}"; }
