@@ -4,8 +4,8 @@ set -euo pipefail
 # --- Facteur install UX : résumé, split, install, statuts ---
 INSTALLPKGS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${INSTALLPKGS_DIR%%/core*}/core"
-source "$INSTALLPKGS_DIR/echo_status.sh"
-source "$INSTALLPKGS_DIR/prompt_yes_no.sh"
+source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$DIR_ROOT/lib/ui/prompt_yes_no.sh"
 source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
 source "$DIR_ROOT/lib/pkgmgr/filter_pkgs.sh"
 

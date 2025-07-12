@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$DIR_ROOT/lib/utils/echo_status.sh"
+source "$DIR_ROOT/lib/ui/echo_status.sh"
 source "$DIR_ROOT/lib/utils/detect_os.sh"
 source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
 

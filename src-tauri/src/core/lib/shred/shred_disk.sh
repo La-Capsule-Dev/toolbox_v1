@@ -3,7 +3,7 @@ set -euo pipefail
 
 SHRED_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${SHRED_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/utils/echo_status.sh"
+source "$DIR_ROOT/lib/ui/echo_status.sh"
 
 # shred_disk.sh — Effacement sécurisé interactif de disque (CLI Bash)
 #

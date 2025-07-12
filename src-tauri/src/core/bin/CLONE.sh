@@ -4,7 +4,7 @@ set -euo pipefail
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${BIN_DIR%%/core*}/core"
 source "$DIR_ROOT/lib/hw/storage.sh"
-source "$DIR_ROOT/utils/echo_status.sh"
+source "$DIR_ROOT/ui/echo_status.sh"
 
 #TODO: TODO LATER
 cloning_disk(){

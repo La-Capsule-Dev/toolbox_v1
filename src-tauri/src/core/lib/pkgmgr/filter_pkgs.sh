@@ -3,7 +3,7 @@ set -euo pipefail
 
 PKGMGR_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DIR_ROOT="${PKGMGR_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/utils/echo_status.sh"
+source "$DIR_ROOT/lib/ui/echo_status.sh"
 
 filter_available_pkgs() {
     local os_type="$1"; shift

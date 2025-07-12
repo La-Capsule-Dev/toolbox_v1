@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-DETECTOS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$DETECTOS_DIR/echo_status.sh"
+DIR_ROOT="${PKGMGR_DIR%%/core*}/core"
+source "$DIR_ROOT/lib/ui/echo_status.sh"
 
 detect_os() {
     [[ -f /etc/os-release ]] || echo_status_error "OS introuvable, veuillez le signaler sur github pour qu'il soit ajouter"

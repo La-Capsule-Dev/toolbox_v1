@@ -5,7 +5,7 @@ DIR_ROOT="${BIN_DIR%%/core*}/core"
 
 source "$DIR_ROOT/etc/config/pkgs-list.sh"
 source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
-source "$DIR_ROOT/lib/pkgmgr/filter_pkgs.sh"
+source "$DIR_ROOT/lib/ui/init.sh"
 source "$DIR_ROOT/lib/utils/init.sh"
 
 install() {
