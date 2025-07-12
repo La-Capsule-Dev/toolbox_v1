@@ -2,12 +2,10 @@
 set -euo pipefail
 
 # --- Facteur install UX : résumé, split, install, statuts ---
-INSTALLPKGS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${INSTALLPKGS_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/ui/echo_status.sh"
-source "$DIR_ROOT/lib/ui/prompt_yes_no.sh"
-source "$DIR_ROOT/lib/pkgmgr/wrapper.sh"
-source "$DIR_ROOT/lib/pkgmgr/filter_pkgs.sh"
+source "$LIB_DIR/ui/echo_status.sh"
+source "$LIB_DIR/ui/prompt_yes_no.sh"
+source "$LIB_DIR/pkgmgr/wrapper.sh"
+source "$LIB_DIR/pkgmgr/filter_pkgs.sh"
 
 install_packages_ui() {
     local os_type="$1"
@@ -15,8 +13,7 @@ install_packages_ui() {
     local pkgs=( "$@" )
 
     # Filtrage : paquets réellement présents dans le dépôt
-    local pkgs_found
-    pkgs_found=( $(filter_available_pkgs "$os_type" "${pkgs[@]}") )
+    local pkgs_found=( $(filter_available_pkgs "$os_type" "${pkgs[@]}") )
 
     if ((${#pkgs_found[@]} == 0)); then
         echo_status_ok "Aucun paquet installable trouvé pour $os_type."
@@ -34,7 +31,7 @@ install_packages_ui() {
     done
 
     if ((${#already_installed[@]})); then
-        echo_status_ok "Déjà installés : ${already_installed[*]}"
+        echo_status_ok "Paquet(s) déjà installé(s) : ${already_installed[*]}"
     fi
 
 
@@ -42,15 +39,13 @@ install_packages_ui() {
         echo_status "À installer : ${to_install[*]}"
         echo_status_warn "NB: Les paquets manquants sont affichés ci-dessus si présents." # optionnel
         # Prompt robuste
-        prompt_yes_no "Voulez-vous les installer ?"
-
-        echo_status "Installation des paquets : ${to_install[*]}"
-        if ! install_pkgs_native "$os_type" "${to_install[@]}"; then
-            echo_status_error "L'installation a échoué."
+        #
+        if prompt_yes_no "Voulez-vous les installer ?"; then
+            echo_status "Installation des paquets : ${to_install[*]}"
+            if ! install_pkgs_native "$os_type" "${to_install[@]}"; then
+                echo_status_error "L'installation a échoué."
+            fi
+            echo_status_ok "Installation des dépendances réussie"
         fi
-
-        echo_status_ok "Installation des dépendances réussie"
-    else
-        echo_status_ok "Tous les paquets nécessaires sont déjà installés."
     fi
 }

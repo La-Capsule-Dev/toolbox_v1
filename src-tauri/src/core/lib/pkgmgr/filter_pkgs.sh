@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PKGMGR_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DIR_ROOT="${PKGMGR_DIR%%/core*}/core"
-source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$LIB_DIR/ui/echo_status.sh"
 
 filter_available_pkgs() {
     local os_type="$1"; shift
@@ -32,6 +30,11 @@ filter_available_pkgs() {
 
     if ((${#missing[@]})); then
         echo_status_warn "Paquets introuvables sur $os_type : ${missing[*]}"
+        echo_status_warn "Veuillez signaler que ces paquets ne sont plus disponible sur $os_type}"
+    fi
+    
+    if [[ ${#missing[@]} -eq 0 && ${#found[@]} -gt 0 ]]; then
+        echo_status_ok "Tous les paquets nécessaires sont déjà installés."
     fi
 
     # *** SEULEMENT la vraie liste pour stdout ***

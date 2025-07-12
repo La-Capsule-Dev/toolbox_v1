@@ -10,19 +10,20 @@ emj_warn=${NO_EMOJI:+""}
 
 if [[ $NO_EMOJI -eq 0 ]]; then
     emj_ok="✅"
-    emj_info="(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄"
-    emj_err="❌"
-    emj_warn="⚠️"
+    emj_info="$ "
+    emj_err="(⊙＿⊙')  "
+    emj_warn="⚠️ "
 fi
 
 echo_status() {
     local text="$1"
-    echo -e "\n\033[1;34m[ INFO ]\033[0m $emj_info $text\n"
+    # Un seul espace après le tag, pas de saut de ligne superflu
+    echo -e "\033[1;34m[ INFO ]\033[0m $emj_info $text"
 }
 
 echo_status_ok() {
     local text="$1"
-    echo -e "\n\033[1;32m[ OK ]\033[0m $emj_ok $text\n"
+    echo -e "\033[1;32m[ OK ]\033[0m $emj_ok $text"
 }
 
 echo_status_warn() {
@@ -35,3 +36,4 @@ echo_status_error() {
     echo -e "\n\033[1;31m[ ERREUR ]\033[0m $emj_err $text\n" >&2
     exit 1
 }
+

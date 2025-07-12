@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source "$DIR_ROOT/lib/ui/echo_status.sh"
+source "$LIB_DIR/ui/echo_status.sh"
 
 # 1. Résout la commande à lancer selon OS + opération (sans exécuter)
 resolve_pkgmgr_cmd() {
@@ -63,18 +63,18 @@ run_pkgmgr_cmd() {
             echo_status_warn "[SKIP] Aucun paquet fourni pour l'opération '$op' ($os)"
             return 0
         fi
-        echo_status "[ACTION] $op sur : ${pkgs[*]} ($os) ➔ $cmd"
+        echo_status "$op sur : ${pkgs[*]} ($os) ➔ $cmd"
         if eval "$cmd \"\${pkgs[@]}\""; then
-            echo_status_ok "[OK] $op réussi sur $os : ${pkgs[*]}"
+            echo_status_ok "$op réussi sur $os : ${pkgs[*]}"
         else
-            echo_status_error "[FAIL] $op échoué sur $os : ${pkgs[*]}"
+            echo_status_error "$op échoué sur $os : ${pkgs[*]}"
         fi
     else
-        echo_status "[ACTION] $op global sur $os ➔  $cmd"
+        echo_status "$op sur $os ➔  $cmd"
         if eval "$cmd"; then
-            echo_status_ok "[OK] $op global réussi sur $os"
+            echo_status_ok "$op réussi sur $os"
         else
-            echo_status_error "[FAIL] $op global échoué sur $os"
+            echo_status_error "$op échoué sur $os"
         fi
     fi
 }
