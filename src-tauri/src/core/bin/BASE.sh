@@ -2,6 +2,6 @@
 set -euo pipefail
 
 base(){
-    x-www-browser 'https://gest.goupil-ere.org'
+    xdg-open 'https://gest.goupil-ere.org'
 }
 base
