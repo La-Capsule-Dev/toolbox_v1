@@ -2,7 +2,6 @@
 set -euo pipefail
 
 export CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$CORE_DIR/etc/config/find_project_root.sh" || echo "Error sourcing"
 source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
 source "$LIB_DIR/ui/echo_status.sh"
 
