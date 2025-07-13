@@ -5,6 +5,7 @@ set -euo pipefail
 #
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
+source "$CORE_DIR/etc/config/path.env"
 source "$LIB_DIR/ui/echo_status.sh"
 
 shred_nvme(){

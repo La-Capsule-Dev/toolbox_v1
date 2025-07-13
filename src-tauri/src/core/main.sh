@@ -2,14 +2,9 @@
 set -euo pipefail
 
 export CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$CORE_DIR/etc/config/find_project_root.sh" || echo "Error sourcing"
 source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
+source "$LIB_DIR/ui/echo_status.sh"
 
-# Standard error
-fail() {
-    echo "ERROR: $*" >&2
-    exit 1
-}
 
 usage() {
     cat <<EOF
@@ -45,7 +40,7 @@ case "$ACTION" in
         elif [[ -f "$SCRIPT" ]]; then
             source "$SCRIPT" "$@"
         else
-            fail "Action inconnue ou script absent: $ACTION"
+            echo_status_error "Action inconnue ou script absent: $ACTION"
         fi
         ;;
 esac
