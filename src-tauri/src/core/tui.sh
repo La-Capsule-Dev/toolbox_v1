@@ -13,6 +13,7 @@ declare -A ACTION_DESC=(
     [PRINT]="Outils d'impression/rapport"
     [INSTALL_MAJ]="Install/Mise à jour système"
     [BOOT]="Réparation du boot"
+    [HARDINFO]="Informations détaillées du matériel (GUI"
     [STRESS-TEST]="Test de stress matériel v1"
     [STRESS]="Test de stress matériel v2"
     [CLONE]="Clonage de partitions/disques"
