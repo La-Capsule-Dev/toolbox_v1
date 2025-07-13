@@ -2,7 +2,6 @@
 set -euo pipefail
 
 # Chaque tableau = mapping de packages natifs par OS.
-# Tu importes SEULEMENT celui qui correspond à l’OS courant dans tes scripts.
 
 PKGS_DEBIAN=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-utils
