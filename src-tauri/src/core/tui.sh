@@ -6,6 +6,8 @@ source "$CORE_DIR/etc/config/find_project_root.sh" || echo "Error sourcing find_
 source "$CORE_DIR/etc/config/path.env"           || echo "Error sourcing path.env"
 source "$LIB_DIR/ui/echo_status.sh"             || echo "Error sourcing echo_status.sh"
 
+# HACK: IMPROVE DIALOG TUI
+
 # MAP actions/descriptions
 declare -A ACTION_DESC=(
     [PRINT]="Outils d'impression/rapport"

@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
+
+set -x
 set -euo pipefail
 
-# FIX:  3 - Battery dont work 
-# 6 - Santé Disk crash
+# FIX:  # 6 - Santé Disk crash
 # 7 - Info Smart disk crash
 # 10-11 Micro, Webcam
 # 13 test clavier crash
 
 
-#HACK: 8 - Stress CPU - à voir -> /tmp/post.txt
+#HACK:
+# 3 - Battery dont work ?? (Test sur pc portable)
+# 8 - Stress CPU - à voir -> /tmp/post.txt
 # 9 - Test USB  /tmp/usb_after.txt /tmp/usb_before.txt
 # 12 - Test son A tester
 # 14 - Test connexion marche ici -> ping.txt -> A voir
@@ -95,22 +98,22 @@ main_menu() {
     local choice
     while true; do
         choice=$(dialog --clear --title "Maintenance" \
-            --menu "Sélectionnez une action" 22 70 18 \
-            1 "Relevé RAM" \
-            2 "Relevé CPU" \
-            3 "Relevé batterie" \
-            4 "Info GPU" \
-            5 "Info réseau" \
-            6 "Santé disque" \
-            7 "Info SMART disque" \
-            8 "Stress test CPU" \
-            9 "Test USB (plug & play)" \
-           10 "Test micro (plug & play)" \
-           11 "Test webcam (plug & play)" \
-           12 "Test son" \
-           13 "Test clavier" \
-           14 "Test connexion internet" \
-           15 "Quitter" 3>&1 1>&2 2>&3) || break
+                --menu "Sélectionnez une action" 22 70 18 \
+                1 "Relevé RAM" \
+                2 "Relevé CPU" \
+                3 "Relevé batterie" \
+                4 "Info GPU" \
+                5 "Info réseau" \
+                6 "Santé disque" \
+                7 "Info SMART disque" \
+                8 "Stress test CPU" \
+                9 "Test USB (plug & play)" \
+                10 "Test micro (plug & play)" \
+                11 "Test webcam (plug & play)" \
+                12 "Test son" \
+                13 "Test clavier" \
+                14 "Test connexion internet" \
+            15 "Quitter" 3>&1 1>&2 2>&3) || break
 
         case $choice in
             1)  ram_report ;;
@@ -122,12 +125,12 @@ main_menu() {
             7)  disk_smart ;;
             8)  stress_cpu ;;
             9)  usb_test ;;
-           10)  mic_test ;;
-           11)  webcam_test ;;
-           12)  sound_test ;;
-           13)  keyboard_test ;;
-           14)  conn_test ;;
-           15)  break ;;
+            10)  mic_test ;;
+            11)  webcam_test ;;
+            12)  sound_test ;;
+            13)  keyboard_test ;;
+            14)  conn_test ;;
+            15)  break ;;
         esac
     done
 }
