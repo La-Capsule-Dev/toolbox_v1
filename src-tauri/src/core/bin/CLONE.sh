@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source "$CORE_DIR/etc/config/path.env"
 source "$LIB_DIR/hw/storage.sh"
 source "$LIB_DIR/ui/echo_status.sh"
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source "$CORE_DIR/etc/config/path.env"
 source "$LIB_DIR/utils/init.sh"
 source "$ETC_DIR/template/entete-checklist.sh"
 source "$ETC_DIR/template/bloc-info-machine.sh"

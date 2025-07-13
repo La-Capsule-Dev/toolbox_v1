@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-
+source "$CORE_DIR/etc/config/path.env"
 source "$LIB_DIR/ui/echo_status.sh"
 source "$LIB_DIR/pkgmgr/wrapper.sh"    # <-- contient tes wrappers install/remove/update/etc
 source "$LIB_DIR/utils/detect_os.sh"

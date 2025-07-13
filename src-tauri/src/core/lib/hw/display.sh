@@ -2,7 +2,10 @@
 
 set -euo pipefail
 
-TARGET_ROOT="$TAURI_ROOT/target/release/dimension"
+# PROJECT_ROOT
+source "$CORE_DIR/etc/config/path.env"
+source "$ETC_DIR/config/find_project_root.sh"
+
 
 ecran_parser(){
     sudo xrandr |
@@ -20,6 +23,9 @@ ecran_parser(){
 }
 
 taille_parser(){
+    local TAURI_ROOT=$(find_project_root)
+    local TARGET_ROOT="$TAURI_ROOT/target/release/dimension"
+
     sudo $TARGET_ROOT || echo "$Erreur"
 }
 
@@ -41,5 +47,4 @@ telecrante_parser(){
         -e "s/disconnected/déconnecté/" \
         -e "s/connected/connecté/" \
         -e "s/primary/principal/"
-
 }

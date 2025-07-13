@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+source "$CORE_DIR/etc/config/path.env"
 source "$ETC_DIR/config/pkgs-list.sh"
 source "$LIB_DIR/pkgmgr/wrapper.sh"
 source "$LIB_DIR/ui/init.sh"
