@@ -48,7 +48,7 @@ install() {
 cancel_purge() {
     echo_status_warn "LE NETTOYAGE DU CACHE VA COMMENCER !"
     echo_status_warn "Appuyer sur les touches Ctrl+C pour annuler la purge, sinon votre cache sera perdu (╯°□°）╯︵ ┻━┻"
-    for i in 10 9 8 7 6 5 4 3 2 1; do
+    for i in 6 5 4 3 2 1; do
         echo "$i"
         sleep 1
     done
