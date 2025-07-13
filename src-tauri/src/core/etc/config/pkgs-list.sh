@@ -7,35 +7,35 @@ set -euo pipefail
 PKGS_DEBIAN=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-utils
     hardinfo htop inxi libatasmart-bin nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower x11-xserver-utils mplayer
+    stress stress-ng s-tui upower mplayer
 )
 PKGS_ARCH=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-demos
     hardinfo htop inxi libatasmart nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower xorg-xdpyinfo mplayer
+    stress stress-ng s-tui upower mplayer
 )
 PKGS_FEDORA=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-demos
     hardinfo2 htop inxi libatasmart nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower xorg-x11-server-utils xorg-x11-apps mplayer
+    stress stress-ng s-tui upower mplayer
 )
 PKGS_ALPINE=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-demos
     hardinfo htop inxi libatasmart nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower xorg-xdpyinfo mplayer
+    stress stress-ng s-tui upower mplayer
 )
 PKGS_VOID=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-demos
     hardinfo htop inxi libatasmart nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower xorg-xdpyinfo mplayer
+    stress stress-ng s-tui upower mplayer
 )
 PKGS_GENTOO=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 mesa-progs
     hardinfo htop inxi libatasmart nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower xdpyinfo mplayer
+    stress stress-ng s-tui upower mplayer
 )
 PKGS_OPENSUSE=(
     acpi alsa-utils cheese curl dialog dmidecode enscript ffmpeg glmark2 Mesa-demo-x
     hardinfo htop inxi libatasmart nmon ghostscript sed smartmontools
-    stress stress-ng s-tui upower xorg-x11-utils mplayer
+    stress stress-ng s-tui upower mplayer
 )
