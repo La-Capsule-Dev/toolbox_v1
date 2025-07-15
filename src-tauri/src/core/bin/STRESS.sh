@@ -8,6 +8,7 @@ source "$LIB_DIR/stresstest/init.sh"
 TMPDIR=$(mktemp -d /tmp/toolbox.XXXXXXXX) || exit 1
 trap 'rm -rf "$TMPDIR"' EXIT
 
+# Descriptions et fonctions associées
 declare -A ACTION_DESC=(
     [1]="Afficher l’état de la RAM"
     [2]="Afficher infos détaillées CPU"
@@ -50,16 +51,19 @@ main_menu() {
         menu_items+=("$i" "${ACTION_DESC[$i]}")
     done
 
-    local choice
-    while true; do
-        choice=$(dialog --clear --title "Maintenance" \
-                --menu "Sélectionnez une action" 22 70 18 \
-            "${menu_items[@]}" 3>&1 1>&2 2>&3) || break
+    while :; do
+        CHOICE=$(whiptail --clear \
+                --title "🔧 Maintenance Toolbox" \
+                --menu "Sélectionnez une action :" 22 70 15 \
+                "${menu_items[@]}" \
+            3>&1 1>&2 2>&3) || break
 
-        if [[ "${ACTION_FUNC[$choice]}" == "break" ]]; then
+        if [[ "${ACTION_FUNC[$CHOICE]}" == "break" ]]; then
             break
         else
-            ${ACTION_FUNC[$choice]}
+            "${ACTION_FUNC[$CHOICE]}"
+            whiptail --title "✔️ Action terminée" \
+                --msgbox "Action $CHOICE : ${ACTION_DESC[$CHOICE]} terminée." 6 60
         fi
     done
 }

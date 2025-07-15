@@ -2,6 +2,7 @@
 set -euo pipefail
 source "$LIB_DIR/stresstest/ui_stress_tui.sh"
 
+# TODO: Voir nvme cli + datasata pour HDD
 disk_smart() {
     local DISK
     DISK=$(lsblk -dn -o NAME | grep -E '^sd|^nvme' | head -n1)
@@ -29,7 +30,7 @@ disk_health() {
     fi
 
     local DISK
-    DISK=$(dialog --clear --title "Disque" --menu "Choisissez le disque" 20 60 10 "${disks[@]}" 3>&1 1>&2 2>&3) || return
+    DISK=$(whiptail --clear --title "Disque" --menu "Choisissez le disque" 20 60 10 "${disks[@]}" 3>&1 1>&2 2>&3) || return
 
     local devtype
     if [[ "$DISK" =~ ^nvme ]]; then
