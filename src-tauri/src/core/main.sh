@@ -5,6 +5,7 @@ export CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
 source "$LIB_DIR/ui/echo_status.sh"
 
+# TODO: Shellcheck - A voir
 
 usage() {
     cat <<EOF

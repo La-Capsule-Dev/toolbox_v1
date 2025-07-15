@@ -7,7 +7,6 @@ source "$LIB_DIR/ui/echo_status.sh"
 #
 # Auteur : binary-grunt — github.com/Binary-grunt - 25/07/05
 
-
 # TODO: ADD test profond testdisk add LSCSI
 
 select_disk() {
@@ -45,7 +44,8 @@ run_disk_action() {
     return $ret
 }
 
-
+# HACK: PARTED - testdisk CGSecurity (logiciel)
+# smart marche pour tous les supports interface data, à voir sur les nvme car elles ne passent pas
 verify_disk() {
     local disk="$1"
     local dev_path="/dev/$disk"
