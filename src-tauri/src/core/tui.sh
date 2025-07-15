@@ -10,16 +10,15 @@ source "$LIB_DIR/ui/echo_status.sh"             || echo "Error sourcing echo_sta
 #
 
 # MAP actions/descriptions
+# HACK: Renvoyer erreur action_desc si il y a des déclarations en trop
 declare -A ACTION_DESC=(
     [PRINT]="Outils d'impression/rapport"
     [INSTALL_MAJ]="Install/Mise à jour système"
     [BOOT]="Réparation du boot"
     [HARDINFO]="Informations détaillées du matériel (GUI"
-    [STRESS-TEST]="Test de stress matériel v1"
     [STRESS]="Test de stress matériel v2"
     [CLONE]="Clonage de partitions/disques"
-    [HDD]="Shred disque dur - HDD"
-    [SSD]="Shred disque dur - SSD"
+    [SHRED]="Shred disque dur"
     [CLEAN]="Nettoyage des fichiers inutiles"
     [ISO]="Création d'une image ISO"
     [BASE]="Voir le site de la Goupil"
