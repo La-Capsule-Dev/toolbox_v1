@@ -2,26 +2,30 @@
     {
         "category": "tests",
         "color": "#3B82F6",
-        "scripts" : [
+        "scripts": [
             {
                 "name": "stress",
                 "scriptCmd": "stress_test"
             },
-             {
+            {
                 "name": "ports",
-                "scriptCmd": "ports.sh"
+                "scriptCmd": ""
             },
-             {
-                "name": "audio",
-                "scriptCmd": "audio.sh"
-            },
-             {
-                "name": "video",
-                "scriptCmd": "video.sh"
-            },
-             {
+            {
                 "name": "clavier",
-                "scriptCmd": "clavier.sh"
+                "scriptCmd": ""
+            },
+            {
+                "name": "audio",
+                "scriptCmd": "play_audio"
+            },
+            {
+                "name": "micro",
+                "scriptCmd": ""
+            },
+            {
+                "name": "video",
+                "scriptCmd": ""
             }
         ]
     },
@@ -31,7 +35,7 @@
         "scripts": [
             {
                 "name": "réseau",
-                "scriptCmd": "reseau.sh"
+                "scriptCmd": ""
             }
         ]
     },
@@ -41,15 +45,15 @@
         "scripts": [
             {
                 "name": "Shred | SSD",
-                "scriptCmd": "WIPESSD.sh"
+                "scriptCmd": ""
             },
             {
                 "name": "Shred | HDD",
-                "scriptCmd": "SHREDHDD.sh"
+                "scriptCmd": ""
             },
             {
                 "name": "Shred | NVME",
-                "scriptCmd": "SHREDHDD.sh"
+                "scriptCmd": ""
             }
         ]
     },
@@ -59,11 +63,11 @@
         "scripts": [
             {
                 "name": "Clone",
-                "scriptCmd": "WIPESSD.sh"
+                "scriptCmd": ""
             },
             {
                 "name": "Déploiement",
-                "scriptCmd": "SHREDHDD.sh"
+                "scriptCmd": ""
             }
         ]
     }

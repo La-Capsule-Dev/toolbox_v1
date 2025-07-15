@@ -3,10 +3,13 @@
 
 mod utils;
 use std::fs;
-use utils::print_shell::call_print_checklist;
-use utils::start_session::start_sudo_session;
-use utils::stress::launch_stress_test;
 use base64::{engine::general_purpose, Engine as _};
+use utils::{
+    print_shell::call_print_checklist,
+    start_session::start_sudo_session,
+    stress::launch_stress_test,
+    test_audio::{play_audio_test, play_during_stress},
+};
 
 #[tauri::command]
 fn get_cpu_temperature() -> Vec<(String, f32)> {
@@ -57,7 +60,15 @@ fn get_pdf_base64() -> Result<String, String> {
     Ok(format!("data:application/pdf;base64,{}", b64))
 }
 
+#[tauri::command]
+fn play_audio() -> Result<(), String> {
+    play_audio_test()
+}
 
+#[tauri::command]
+fn play_stress_sound() -> Result<(), String> {
+    play_during_stress()
+}
 
 fn main() {
     tauri::Builder::default()
@@ -66,7 +77,9 @@ fn main() {
             start_session,
             stress_test,
             get_cpu_temperature,
-            get_pdf_base64
+            get_pdf_base64,
+            play_audio,
+            play_stress_sound
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
