@@ -8,15 +8,12 @@ source "$LIB_DIR/ui/echo_status.sh"             || echo "Error sourcing echo_sta
 
 declare -A ACTION_DESC=(
     [PRINT]="Outils d'impression/rapport"
-    [INSTALL_MAJ]="Install/Mise à jour système"
-    [BOOT]="Réparation du boot"
+    [MAJ]="Install/Mise à jour système"
     [HARDINFO]="Informations détaillées du matériel (GUI)"
     [STRESS]="Test de stress matériel v2"
     [CLONE]="Clonage de partitions/disques"
     [SHRED]="Shred disque dur"
     [CLEAN]="Nettoyage des fichiers inutiles"
-    [ISO]="Création d'une image ISO"
-    [BASE]="Voir le site de la Goupil"
 )
 
 list_actions() {

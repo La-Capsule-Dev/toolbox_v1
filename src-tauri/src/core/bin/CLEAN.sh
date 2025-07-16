@@ -5,6 +5,7 @@ source "$CORE_DIR/etc/config/path.env"
 source "$ETC_DIR/config/pkgs-list.sh"
 source "$LIB_DIR/pkgmgr/wrapper.sh"
 source "$LIB_DIR/utils/init.sh"
+source "$LIB_DIR/maintenance/init.sh"
 
 clean_up() {
     local os_type
@@ -14,39 +15,16 @@ clean_up() {
     echo_status "Veuillez entrer votre mot de passe administrateur"
 
     # Fixing permissions
-    fix_permissions $os_type && repare_pkgs_native $os_type && drop_memory_cache
+    fix_permissions $os_type && repare_pkgs_native $os_type
+    drop_memory_cache
 
     # Removing pkgs
     echo_status "Suppression de paquets spécifiques via remove_pkgs"
-    remove_pkgs_native "$os_type" "${PKGS[@]}"
-
-    # Delete package boot-repair
-    echo_status "Suppression du paquet boot-repair"
-    remove_one_pkg_native $os_type "boot-repair" && echo_status_ok "Boot-repair supprimé"|| echo_status_error "Échec suppression boot-repair"
-
-    # Delete eggs
-    delete_eggs
+    autoremove_pkgs_native "$os_type" "${PKGS_[@]}"
 
     # Remove files
     echo_status "Nettoyage des fichiers inutiles"
     remove_files && echo_status_ok "Nettoyage effectué avec succès"
-}
-
-delete_eggs(){
-    # FIX: Voir la plus tard
-    # ❌ Correction : dpkg -r ne prend pas un .deb, mais un nom de paquet
-    # Si tu veux supprimer le paquet installé par ce .deb, tu dois en extraire le nom
-    # Exemple : sudo dpkg -r eggs
-    # Tu peux automatiser cela avec dpkg -I :
-    #   pkg_name=$(dpkg-deb -f MULTITOOL/eggs_9.6.8_amd64.deb Package)
-
-    if [[ -f "MULTITOOL/eggs_9.6.8_amd64.deb" ]]; then
-        pkg_name=$(dpkg-deb -f MULTITOOL/eggs_9.6.8_amd64.deb Package)
-        echo_status "Suppression du paquet installé depuis eggs_9.6.8"
-        sudo dpkg -r "$pkg_name" && echo_status_ok || echo_status_error "Échec suppression $pkg_name"
-    else
-        echo_status_error "Fichier MULTITOOL/eggs_9.6.8_amd64.deb introuvable"
-    fi
 }
 
 drop_memory_cache(){

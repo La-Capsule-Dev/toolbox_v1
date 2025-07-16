@@ -3,6 +3,7 @@ set -euo pipefail
 source "$LIB_DIR/stresstest/ui_stress_tui.sh"
 
 # TODO: Voir nvme cli + datasata pour HDD
+# REFACTORISE EN UNE SEULE FONCTION
 disk_smart() {
     local DISK
     DISK=$(lsblk -dn -o NAME | grep -E '^sd|^nvme' | head -n1)
@@ -16,7 +17,6 @@ disk_smart() {
     show_output "SMART $DISK" "$TMPDIR/smart.txt"
 }
 
-# HACK: A voir Mardi
 disk_health() {
     local -a disks=()
     while read -r name; do

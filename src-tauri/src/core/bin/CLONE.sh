@@ -5,7 +5,7 @@ source "$CORE_DIR/etc/config/path.env"
 source "$LIB_DIR/hw/storage.sh"
 source "$LIB_DIR/ui/echo_status.sh"
 
-# TODO: IMPROVE
+# TODO: A voir avec Baptiste, jeudi 17
 cloning_disk() {
     echo_status "📋 Liste des disques/partitions disponibles (disque_parser) :"
     disque=$(disque_parser)
