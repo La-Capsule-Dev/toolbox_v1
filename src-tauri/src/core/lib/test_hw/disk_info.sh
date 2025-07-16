@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "$LIB_DIR/stresstest/ui_stress_tui.sh"
+source "$LIB_DIR/ui/stress_tui.sh"
 
 # TODO: Voir nvme cli + datasata pour HDD
 # REFACTORISE EN UNE SEULE FONCTION

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 source "$CORE_DIR/etc/config/path.env"
-source "$LIB_DIR/stresstest/init.sh"
+source "$LIB_DIR/test_hw/init.sh"
 
 # ---- INIT ----
 TMPDIR=$(mktemp -d /tmp/toolbox.XXXXXXXX) || exit 1
@@ -25,7 +25,7 @@ declare -A ACTION_DESC=(
 )
 
 declare -A ACTION_FUNC=(
-    [1]=stress_cpu
+    [1]=cpu_report
     [2]=usb_test
     [3]=mic_test
     [4]=webcam_test
@@ -37,7 +37,7 @@ declare -A ACTION_FUNC=(
 
 main_menu() {
     local menu_items=()
-    for i in {1..15}; do
+    for i in {1..8}; do
         menu_items+=("$i" "${ACTION_DESC[$i]}")
     done
 

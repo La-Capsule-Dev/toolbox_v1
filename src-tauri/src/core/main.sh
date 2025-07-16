@@ -4,7 +4,7 @@ set -euo pipefail
 CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 export CORE_DIR
 source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
-source "$LIB_DIR/ui/echo_status.sh"
+source "$CORE_DIR/lib/ui/echo_status.sh"             || echo "Error sourcing echo_status.sh"
 
 # TODO: Shellcheck - A voir
 
@@ -13,16 +13,13 @@ usage() {
 Usage: $0 <ACTION> [ARGS...]
 
 Actions disponibles :
-$(list_actions | xargs -n1 echo "  -")
+$(ls "$BIN_DIR" | grep -E '\.sh$' | sed 's/\.sh$//' | xargs -n1 echo "  -")
 Exemple: $0 PRINT
 EOF
 }
 
 list_actions() {
-    for script in "$BIN_DIR"/*.sh; do
-        [ -e "$script" ] || continue
-        echo "  - $(basename "$script" .sh)"
-    done
+    ls "$BIN_DIR" | grep -E '\.sh$' | sed 's/\.sh$//'
 }
 
 # Entrypoint

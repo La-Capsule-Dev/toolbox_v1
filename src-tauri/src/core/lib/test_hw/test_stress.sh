@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source "$LIB_DIR/ui/stress_tui.sh"
 
-source "$LIB_DIR/stresstest/ui_stress_tui.sh"
+cpu_report()    { safe_cmd inxi sudo inxi -C > "$TMPDIR/cpu.txt" && show_output "Relevé CPU" "$TMPDIR/cpu.txt"; }
 
 usb_test() {
     safe_cmd lsusb lsusb > "$TMPDIR/usb_before.txt"
