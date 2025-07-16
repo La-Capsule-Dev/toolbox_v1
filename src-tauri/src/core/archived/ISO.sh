@@ -34,3 +34,19 @@ product_iso(){
 
 product_iso
 
+
+delete_eggs(){
+    # ❌ Correction : dpkg -r ne prend pas un .deb, mais un nom de paquet
+    # Si tu veux supprimer le paquet installé par ce .deb, tu dois en extraire le nom
+    # Exemple : sudo dpkg -r eggs
+    # Tu peux automatiser cela avec dpkg -I :
+    #   pkg_name=$(dpkg-deb -f MULTITOOL/eggs_9.6.8_amd64.deb Package)
+
+    if [[ -f "MULTITOOL/eggs_9.6.8_amd64.deb" ]]; then
+        pkg_name=$(dpkg-deb -f MULTITOOL/eggs_9.6.8_amd64.deb Package)
+        echo_status "Suppression du paquet installé depuis eggs_9.6.8"
+        sudo dpkg -r "$pkg_name" && echo_status_ok || echo_status_error "Échec suppression $pkg_name"
+    else
+        echo_status_error "Fichier MULTITOOL/eggs_9.6.8_amd64.deb introuvable"
+    fi
+}

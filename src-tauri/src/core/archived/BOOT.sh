@@ -7,6 +7,7 @@ source "$LIB_DIR/ui/prompt_yes_no.sh"
 source "$LIB_DIR/pkgmgr/wrapper.sh"    # <-- contient tes wrappers install/remove/update/etc
 source "$LIB_DIR/utils/detect_os.sh"
 
+# HACK: boot-repair ne marche que sur Debian/Ubuntu
 booting_repair() {
     local os_type
     os_type="$(detect_os)"
@@ -18,7 +19,6 @@ booting_repair() {
         echo_status_error "Échec de la mise à jour des paquets"
     fi
 
-    # FIX: boot-repair ne marche que sur Debian/Ubuntu
     echo_status "Vérification du package boot-repair"
     if ! command -v boot-repair &>/dev/null && ! dpkg -s boot-repair &>/dev/null; then
         install_bootrepair
