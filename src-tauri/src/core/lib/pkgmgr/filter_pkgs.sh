@@ -7,7 +7,8 @@ filter_available_pkgs() {
     local os_type="$1"; shift
     local found=() missing=()
 
-    for pkg in "$@"; do
+    pkg_exists() {
+        local pkg="$1"
         case "$os_type" in
             fedora)    dnf list --available "$pkg" &>/dev/null ;;
             debian|ubuntu) apt-cache show "$pkg" &>/dev/null ;;
@@ -16,12 +17,12 @@ filter_available_pkgs() {
             void)      xbps-query -Rs "$pkg" &>/dev/null ;;
             opensuse)  zypper info "$pkg" &>/dev/null ;;
             gentoo)    equery list "$pkg" &>/dev/null 2>&1 || emerge -s "$pkg" | grep -q "^$pkg" ;;
-            *)
-                echo_status_error "[WARN] OS non supporté pour le filtrage packages: $os_type" >&2
-                continue
-                ;;
+            *)         return 2 ;;
         esac
-        if [[ $? -eq 0 ]]; then
+    }
+
+    for pkg in "$@"; do
+        if pkg_exists "$pkg"; then
             found+=("$pkg")
         else
             missing+=("$pkg")
@@ -30,14 +31,13 @@ filter_available_pkgs() {
 
     if ((${#missing[@]})); then
         echo_status_warn "Paquets introuvables sur $os_type : ${missing[*]}"
-        echo_status_warn "Veuillez signaler que ces paquets ne sont plus disponible sur $os_type}"
+        echo_status_warn "Veuillez signaler que ces paquets ne sont plus disponibles sur $os_type"
     fi
-    
+
     if [[ ${#missing[@]} -eq 0 && ${#found[@]} -gt 0 ]]; then
         echo_status_ok "Tous les paquets nécessaires sont déjà installés."
     fi
 
-    # *** SEULEMENT la vraie liste pour stdout ***
     printf '%s\n' "${found[@]}"
 }
 

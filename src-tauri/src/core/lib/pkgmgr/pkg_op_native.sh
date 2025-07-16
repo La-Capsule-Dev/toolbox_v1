@@ -31,7 +31,7 @@ resolve_pkgmgr_cmd() {
         update:void)      echo "sudo xbps-install -Syu" ;;
         update:opensuse)  echo "sudo zypper refresh && sudo zypper update -y" ;;
 
-        autoremove:arch)   echo 'pkgs=$(pacman -Qdtq); [[ -n "$pkgs" ]] && sudo pacman -Rns --noconfirm $pkgs' ;;
+        autoremove:arch) echo "pkgs=\$(pacman -Qdtq); [[ -n \"\$pkgs\" ]] && sudo pacman -Rns --noconfirm \$pkgs" ;;
         autoremove:debian) echo "sudo apt autoremove -y" ;;
         autoremove:fedora) echo "sudo dnf autoremove -y" ;;
         autoremove:opensuse) echo 'echo_status_warn "Zypper: autoremove non automatisé"' ;;

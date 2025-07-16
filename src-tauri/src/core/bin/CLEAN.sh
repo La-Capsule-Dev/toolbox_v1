@@ -15,7 +15,7 @@ clean_up() {
     echo_status "Veuillez entrer votre mot de passe administrateur"
 
     # Fixing permissions
-    fix_permissions $os_type && repare_pkgs_native $os_type
+    fix_permissions "$os_type" && repare_pkgs_native "$os_type"
     drop_memory_cache
 
     # Removing pkgs
@@ -29,7 +29,9 @@ clean_up() {
 
 drop_memory_cache(){
     echo_status "Vidage du cache mémoire (drop_caches)"
-    sync && sudo sysctl vm.drop_caches=3 && echo_status_ok "Cache mémoire vidé"|| echo_status_error "Échec drop_caches"
+    sync
+    sudo sysctl vm.drop_caches=3 || echo_status_error "Échec drop_caches"
+    echo_status_ok "Cache mémoire vidé"
     echo_status "État de la mémoire :"
     swapon -s || echo_status_error "Échec swapon"
     free -m  || echo_status_error "Échec free"

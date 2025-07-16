@@ -13,7 +13,8 @@ install_packages_ui() {
     local pkgs=( "$@" )
 
     # Filtrage : paquets réellement présents dans le dépôt
-    local pkgs_found=( $(filter_available_pkgs "$os_type" "${pkgs[@]}") )
+    local pkgs_found=()
+    mapfile -t pkgs_found < <(filter_available_pkgs "$os_type" "${pkgs[@]}")
 
     if ((${#pkgs_found[@]} == 0)); then
         echo_status_ok "Aucun paquet installable trouvé pour $os_type."

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+export CORE_DIR
 source "$CORE_DIR/etc/config/find_project_root.sh" || echo "Error sourcing find_project_root.sh"
 source "$CORE_DIR/etc/config/path.env"           || echo "Error sourcing path.env"
 source "$LIB_DIR/ui/echo_status.sh"             || echo "Error sourcing echo_status.sh"
@@ -17,7 +18,10 @@ declare -A ACTION_DESC=(
 )
 
 list_actions() {
-    ls "$BIN_DIR"/*.sh 2>/dev/null | xargs -n1 basename | sed 's/\.sh$//'
+    for script in "$BIN_DIR"/*.sh; do
+        [ -e "$script" ] || continue
+        echo "  - $(basename "$script" .sh)"
+    done
 }
 
 build_menu_items() {

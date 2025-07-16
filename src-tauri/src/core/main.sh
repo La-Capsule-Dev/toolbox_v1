@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+CORE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+export CORE_DIR
 source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
 source "$LIB_DIR/ui/echo_status.sh"
 
@@ -12,13 +13,16 @@ usage() {
 Usage: $0 <ACTION> [ARGS...]
 
 Actions disponibles :
-$(ls "$BIN_DIR" | grep -E '\.sh$' | sed 's/\.sh$//' | xargs -n1 echo "  -")
+$(list_actions | xargs -n1 echo "  -")
 Exemple: $0 PRINT
 EOF
 }
 
 list_actions() {
-    ls "$BIN_DIR" | grep -E '\.sh$' | sed 's/\.sh$//'
+    for script in "$BIN_DIR"/*.sh; do
+        [ -e "$script" ] || continue
+        echo "  - $(basename "$script" .sh)"
+    done
 }
 
 # Entrypoint

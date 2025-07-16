@@ -19,5 +19,5 @@ serial_get(){
 }
 
 cpu_parser(){
-    cat /proc/cpuinfo | sed "s/model name/Modèle   /" | sed -n 5p
+    cmd /proc/cpuinfo | sed "s/model name/Modèle   /" | sed -n 5p
 }

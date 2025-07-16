@@ -23,10 +23,12 @@ ecran_parser(){
 }
 
 taille_parser(){
-    local TAURI_ROOT=$(find_project_root)
-    local TARGET_ROOT="$TAURI_ROOT/target/release/dimension"
+    local TAURI_ROOT
+    TAURI_ROOT=$(find_project_root)
+    local TARGET_ROOT
+    TARGET_ROOT="$TAURI_ROOT/target/release/dimension"
 
-    sudo $TARGET_ROOT || echo "$Erreur"
+    sudo "$TARGET_ROOT" || echo "$Erreur"
 }
 
 telecrante_parser(){

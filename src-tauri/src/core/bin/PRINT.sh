@@ -29,7 +29,7 @@ pdf_print(){
         | iconv -f utf-8 -t iso-8859-1 \
         | enscript --header="$header" --title='Sortie PDF' -X 88591 -o - \
         | ps2pdf - "$outpdf" \
-        |  xdg-open $outpdf
+        |  xdg-open "$outpdf"
 }
 
 pdf_print

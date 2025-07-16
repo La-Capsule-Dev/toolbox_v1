@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 display_output_file() {

@@ -9,8 +9,10 @@ source "$LIB_DIR/ui/init.sh"
 source "$LIB_DIR/utils/init.sh"
 
 install() {
-    local os_type="$(detect_os)"
-    local pkgs_var="PKGS_${os_type^^}"
+    local os_type
+    os_type="$(detect_os)"
+    local pkgs_var
+    pkgs_var="PKGS_${os_type^^}"
     declare -n pkgs="$pkgs_var"
 
     echo_status "Initialisation de l'installation sur votre linux favori : $os_type ᕦ( ͡° ͜ʖ ͡°)ᕤ"
@@ -26,10 +28,8 @@ install() {
 
     if prompt_yes_no "Désirez-vous mettre à jour votre système ?"; then
         echo_status "Mise à niveau du système"
-        update_pkgs_native "$os_type" && \
-            echo_status_ok "Mise à jour réussie" || \
-            echo_status_error "Échec upgrade"
-
+        update_pkgs_native "$os_type" || echo_status_error "Échec upgrade"
+        echo_status_ok "Mise à jour réussie"
         # 5. Purge optionnelle
         if prompt_yes_no "Désirez-vous un nettoyage du cache de votre système ?"; then
             cancel_purge
