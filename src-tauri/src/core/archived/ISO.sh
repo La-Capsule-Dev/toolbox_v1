@@ -6,6 +6,8 @@ source "$CORE_DIR/etc/config/path.env"
 source "$LIB_DIR/pkgmgr/wrapper.sh"
 source "$LIB_DIR/ui/echo_status.sh"
 
+# NOTE: Archivé -> Car pinguins ne supporte pas toutes les distrib Linux
+# Mais à voir d'un pour objectif pédagogique
 product_iso(){
     echo_status "Vérification des updates du système"
     sudo apt update && echo_status_ok "Update réussi" || echo_status_error "Update non réussi"
