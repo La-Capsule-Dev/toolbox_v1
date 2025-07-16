@@ -8,41 +8,31 @@ source "$LIB_DIR/stresstest/init.sh"
 TMPDIR=$(mktemp -d /tmp/toolbox.XXXXXXXX) || exit 1
 trap 'rm -rf "$TMPDIR"' EXIT
 
+# TODO: Modifier stress et template
+# Test machine : heure -> A voir pour vérifier la pile
+# Nettoyage intérieur à la fin
+
 # Descriptions et fonctions associées
 declare -A ACTION_DESC=(
-    [1]="Afficher l’état de la RAM"
-    [2]="Afficher infos détaillées CPU"
-    [3]="État et charge de la batterie"
-    [4]="Afficher infos carte graphique"
-    [5]="Afficher interfaces réseau"
-    [6]="Diagnostic santé du disque"
-    [7]="État SMART du disque"
-    [8]="Stress-test du processeur"
-    [9]="Détecter port USB (plug)"
-    [10]="Tester micro"
-    [11]="Tester la webcam"
-    [12]="Tester la sortie audio"
-    [13]="Tester le clavier (web)"
-    [14]="Test de connexion Internet"
-    [15]="Quitter la Toolbox"
+    [1]="Test du processeur"
+    [2]="Test port USB (plug)"
+    [3]="Tester micro"
+    [4]="Tester la webcam"
+    [5]="Tester la sortie audio"
+    [6]="Tester le clavier (web)"
+    [7]="Test de connexion Internet"
+    [8]="Quitter la Toolbox"
 )
 
 declare -A ACTION_FUNC=(
-    [1]=ram_report
-    [2]=cpu_report
-    [3]=battery_report
-    [4]=gpu_report
-    [5]=net_report
-    [6]=disk_health
-    [7]=disk_smart
-    [8]=stress_cpu
-    [9]=usb_test
-    [10]=mic_test
-    [11]=webcam_test
-    [12]=sound_test
-    [13]=keyboard_test
-    [14]=conn_test
-    [15]=break
+    [1]=stress_cpu
+    [2]=usb_test
+    [3]=mic_test
+    [4]=webcam_test
+    [5]=sound_test
+    [6]=keyboard_test
+    [7]=conn_test
+    [8]=break
 )
 
 main_menu() {
