@@ -4,6 +4,20 @@ set -euo pipefail
 source "$LIB_DIR/pkgmgr/wrapper.sh"
 source "$LIB_DIR/ui/echo_status.sh"
 
+safe_clean_dir() {
+    local dir="$1" ok_msg="$2" err_msg="$3" notfound_msg="$4"
+    if [[ -d "$dir" ]]; then
+        if sudo find "$dir" -mindepth 1 -delete; then
+            echo_status_ok "$ok_msg"
+        else
+            echo_status_error "$err_msg"
+        fi
+    else
+        echo_status_warn "$notfound_msg"
+    fi
+}
+
+
 remove_files() {
     local os_type
     os_type="$(detect_os)"   # Ex : renvoie "debian", "arch", etc.
@@ -18,38 +32,30 @@ remove_files() {
     autoremove_pkgs_native "$os_type"
 
     # Vidage de $HOME/tmp
-    if [[ -d "$HOME/tmp" ]]; then
-        sudo find "$HOME/tmp" -mindepth 1 -delete \
-            && echo_status_ok "Vidage $HOME/tmp" \
-            || echo_status_error "Échec suppression de $HOME/tmp"
-    else
-        echo_status_warn "Répertoire $HOME/tmp introuvable"
-    fi
+    safe_clean_dir \
+        "$HOME/tmp" \
+        "Vidage $HOME/tmp" \
+        "Échec suppression de $HOME/tmp" \
+        "Répertoire $HOME/tmp introuvable"
 
     # Purge du cache utilisateur (~/.cache)
-    if [[ -d "$HOME/.cache" ]]; then
-        sudo find "$HOME/.cache" -mindepth 1 -delete \
-            && echo_status_ok "Purge du cache utilisateur" \
-            || echo_status_error "Échec purge de $HOME/.cache"
-    else
-        echo_status_warn "Répertoire $HOME/.cache introuvable"
-    fi
+    safe_clean_dir \
+        "$HOME/.cache" \
+        "Purge du cache utilisateur" \
+        "Échec purge de $HOME/.cache" \
+        "Répertoire $HOME/.cache introuvable"
 
     # Vidage de la corbeille (fichiers)
-    if [[ -d "$trash_path/files" ]]; then
-        sudo find "$trash_path/files" -mindepth 1 -delete \
-            && echo_status_ok "Corbeille (fichiers) vidée" \
-            || echo_status_error "Échec vidage $trash_path/files"
-    else
-        echo_status_warn "Dossier $trash_path/files introuvable"
-    fi
+    safe_clean_dir \
+        "$trash_path/files" \
+        "Corbeille (fichiers) vidée" \
+        "Échec vidage $trash_path/files" \
+        "Dossier $trash_path/files introuvable"
 
     # Vidage de la corbeille (info)
-    if [[ -d "$trash_path/info" ]]; then
-        sudo find "$trash_path/info" -mindepth 1 -delete \
-            && echo_status_ok "Corbeille (info) vidée" \
-            || echo_status_error "Échec vidage $trash_path/info"
-    else
-        echo_status_warn "Dossier $trash_path/info introuvable"
-    fi
+    safe_clean_dir \
+        "$trash_path/info" \
+        "Corbeille (info) vidée" \
+        "Échec vidage $trash_path/info" \
+        "Dossier $trash_path/info introuvable"
 }
