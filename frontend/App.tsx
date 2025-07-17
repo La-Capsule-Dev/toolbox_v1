@@ -71,10 +71,6 @@ function App() {
         return () => clearInterval(interval);
     }, [running, timeLeft]);
 
-    const close = () => {
-        setVisibility("hidden");
-    };
-
     // Récupération de la fiche
     useEffect(() => {
         startSudoSession();
