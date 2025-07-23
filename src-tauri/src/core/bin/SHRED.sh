@@ -3,6 +3,8 @@ set -euo pipefail
 
 source "$LIB_DIR/ui/echo_status.sh"
 
+# NOTE: Voir implémentation fio
+
 # -- Affichage contextuel de l'état des disques --
 show_header() {
     echo -e "Référence des disques NVMe connectés :"

@@ -30,6 +30,7 @@ cloning_disk() {
     # Bande passante ajustable
     local bs="4M"
 
+    # TODO: Pas exec dd sur un disque monté -> Vérification
     # Utilisation de dd avec status=progress si disponible, sinon fallback pv
     if dd --help | grep -q 'status=progress'; then
         # dd moderne
