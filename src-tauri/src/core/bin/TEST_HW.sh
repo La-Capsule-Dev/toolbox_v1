@@ -15,29 +15,33 @@ trap 'rm -rf "$TMPDIR"' EXIT
 # Descriptions et fonctions associées
 declare -A ACTION_DESC=(
     [1]="Test du processeur"
-    [2]="Test port USB (plug)"
-    [3]="Tester micro"
-    [4]="Tester la webcam"
-    [5]="Tester la sortie audio"
-    [6]="Tester le clavier (web)"
-    [7]="Test de connexion Internet"
-    [8]="Quitter la Toolbox"
+    [2]="Test disque dur"
+    [3]="Test port USB (plug)"
+    [4]="Tester micro"
+    [5]="Tester la webcam"
+    [6]="Tester la sortie audio"
+    [7]="Tester le clavier (web)"
+    [8]="Test de connexion Internet"
+    [9]="Vérifier la pile RTC/CMOS"
+    [10]="Quitter la Toolbox"
 )
 
 declare -A ACTION_FUNC=(
     [1]=cpu_report
-    [2]=usb_test
-    [3]=mic_test
-    [4]=webcam_test
-    [5]=sound_test
-    [6]=keyboard_test
-    [7]=conn_test
-    [8]=break
+    [2]=stress_disk
+    [3]=usb_test
+    [4]=mic_test
+    [5]=webcam_test
+    [6]=sound_test
+    [7]=keyboard_test
+    [8]=conn_test
+    [9]="check_cmos_battery"
+    [10]=break
 )
 
 main_menu() {
     local menu_items=()
-    for i in {1..8}; do
+    for i in {1..10}; do
         menu_items+=("$i" "${ACTION_DESC[$i]}")
     done
 
