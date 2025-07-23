@@ -88,26 +88,18 @@ secure_erase_disk() {
     case "$type" in
         nvme)
             echo_status "Type NVMe SSD détecté, format secure erase."
-
-            echo_status "sudo nvm $dev"
-            #sudo nvme format -s1 "$dev"
+            sudo nvme format -s1 "$dev"
             ;;
         sata)
             echo_status "SATA SSD/HDD détecté, exécution de hdparm secure-erase."
-
-            echo_status "sudo sata ssd $dev"
-            # sudo hdparm --user-master u --security-set-pass p "$dev"
-            # sudo hdparm --user-master u --security-erase p "$dev"
+            sudo hdparm --user-master u --security-set-pass p "$dev"
+            sudo hdparm --user-master u --security-erase p "$dev"
             ;;
         *)
             echo_status "HDD détecté, utilisation de shred (1 passe + zero)."
-            echo_status "sudo HDD $dev"
-            #sudo shred -v -n1 -z "$dev"
+            sudo shred -v -n1 -z "$dev"
             ;;
     esac
-
-    echo "Secure function end"
-
     verify_disk "$disk"
 }
 
