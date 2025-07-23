@@ -6,8 +6,6 @@ export CORE_DIR
 source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
 source "$CORE_DIR/lib/ui/echo_status.sh"             || echo "Error sourcing echo_status.sh"
 
-# TODO: Shellcheck - A voir
-
 usage() {
     cat <<EOF
 Usage: $0 <ACTION> [ARGS...]
@@ -20,7 +18,11 @@ EOF
 
 list_actions() {
     local folder="bin"
-    find "$folder" -type f -name "*.sh" | sed 's/\.sh$//' | xargs -n1 basename
+    while IFS= read -r -d '' file; do
+        name="${file##*/}"      # basename
+        name="${name%.sh}"      # retire la dernière occurrence de .sh
+        printf '%s\n' "$name"
+    done < <(find "$folder" -type f -name "*.sh" -print0)
 }
 
 # Entrypoint

@@ -18,7 +18,12 @@ declare -A ACTION_DESC=(
 )
 
 list_actions() {
-    ls "$BIN_DIR"/*.sh 2>/dev/null | xargs -n1 basename | sed 's/\.sh$//'
+    local folder="bin"
+    while IFS= read -r -d '' file; do
+        name="${file##*/}"      # basename
+        name="${name%.sh}"      # retire la dernière occurrence de .sh
+        printf '%s\n' "$name"
+    done < <(find "$folder" -type f -name "*.sh" -print0)
 }
 
 build_menu_items() {
