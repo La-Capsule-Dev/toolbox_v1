@@ -52,7 +52,6 @@ menu_tui() {
 
         if ! [[ "$ACTION" =~ ^[A-Za-z0-9_-]+$ ]]; then
             echo_status_error "Action invalide : $ACTION"
-            exit 1
         fi
 
         [[ "$ACTION" == QUITTER ]] && exit 0
