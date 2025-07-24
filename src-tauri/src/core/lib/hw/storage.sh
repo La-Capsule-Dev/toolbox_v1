@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# HACK: Refactor
 source "$LIB_DIR/utils/logging.sh"
 # Stockage de masse
 

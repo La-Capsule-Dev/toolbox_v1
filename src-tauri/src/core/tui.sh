@@ -10,7 +10,6 @@ source "$CORE_DIR/lib/ui/echo_status.sh"             || echo "Error sourcing ech
 declare -A ACTION_DESC=(
     [PRINT]="Outils d'impression/rapport"
     [MAJ]="Install/Mise à jour système"
-    [HARDINFO]="Informations détaillées du matériel (GUI)"
     [TEST_HW]="Test de matériel v2"
     [CLONE]="Clonage de partitions/disques"
     [SHRED]="Shred disque dur"

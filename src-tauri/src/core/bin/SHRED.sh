@@ -26,7 +26,7 @@ _mount_mnt(){
     fi
 }
 
-# TODO: VOIR HDD SAS
+
 _detect_disk_type() {
     local dev="/dev/$1"
 
@@ -107,7 +107,7 @@ secure_erase_disk() {
     fi
 }
 
-
+# TODO: Add testdisk tools (CG Security)
 # # -- Vérification post-effacement (par défaut : 10MiB) --
 verify_disk_erased() {
     local disk="$1"

@@ -18,6 +18,7 @@ resultat=$(
 [[ -n "$resultat" ]] || echo_status_error "Aucune donnée produite"
 
 
+# TODO:  Nettoyage intérieur à la fin
 pdf_print(){
     date="$(date '+%d-%m-%Y')"
     hour="$(date '+%H:%M:%S')"

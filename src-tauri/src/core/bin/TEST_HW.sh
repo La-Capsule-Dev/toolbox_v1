@@ -8,9 +8,6 @@ source "$LIB_DIR/test_hw/init.sh"
 TMPDIR=$(mktemp -d /tmp/toolbox.XXXXXXXX) || exit 1
 trap 'rm -rf "$TMPDIR"' EXIT
 
-# TODO: Modifier stress et template
-# Test machine : heure -> A voir pour vérifier la pile
-# Nettoyage intérieur à la fin
 
 # Descriptions et fonctions associées
 declare -A ACTION_DESC=(
