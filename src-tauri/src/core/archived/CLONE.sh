@@ -5,7 +5,7 @@
 # source "$LIB_DIR/hw/storage.sh"
 # source "$LIB_DIR/ui/echo_status.sh"
 #
-# HACK: REPLACED BY CLONEZILLA PXE
+# NOTE: REPLACED BY CLONEZILLA PXE
 #
 # cloning_disk() {
 #     echo_status "📋 Liste des disques/partitions disponibles (disque_parser) :"
