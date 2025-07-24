@@ -3,14 +3,20 @@ set -euo pipefail
 
 source "$LIB_DIR/ui/stress_tui.sh"
 
-cpu_report()    { safe_cmd inxi sudo inxi -C > "$TMPDIR/cpu.txt" && show_output "Relevé CPU" "$TMPDIR/cpu.txt"; }
 
 usb_test() {
-    safe_cmd lsusb lsusb > "$TMPDIR/usb_before.txt"
-    msg "Insérez un périphérique USB et validez."
-    safe_cmd lsusb lsusb > "$TMPDIR/usb_after.txt"
-    diffout=$(diff "$TMPDIR/usb_before.txt" "$TMPDIR/usb_after.txt" | grep "ID" || true)
-    [[ -z "$diffout" ]] && msg "Aucun périphérique détecté." || msg "Nouveau périphérique : $diffout"
+    TMPDIR=$(mktemp -d)
+    lsusb > "$TMPDIR/usb_before.txt"
+    msg "Insérez un périphérique USB puis appuyez sur Entrée."
+    read -r
+    lsusb > "$TMPDIR/usb_after.txt"
+    diffout=$(diff "$TMPDIR/usb_before.txt" "$TMPDIR/usb_after.txt" | awk '/^>/{print substr($0,3)}')
+    if [[ -z "$diffout" ]]; then
+        msg "Aucun périphérique détecté."
+    else
+        msg "Nouveau périphérique détecté :"
+        msg "$diffout"
+    fi
 }
 
 mic_test() {
@@ -50,6 +56,20 @@ keyboard_test() {
 }
 
 conn_test() {
-    safe_cmd ping ping -c 2 www.google.fr -q > "$TMPDIR/ping.txt" || { msg "Pas de réseau."; return; }
-    safe_cmd curl curl -s -I www.google.fr | grep -q OK && msg "Connexion OK." || msg "Curl NOK."
+    TMPDIR=$(mktemp -d)
+    # Test ping réseau (connectivité IP)
+    if ping -c 2 -W 2 www.google.fr -q > "$TMPDIR/ping.txt"; then
+        # Si ping OK, tester HTTP en clair
+        if curl -s -I --max-time 4 www.google.fr | grep -q "HTTP/1.1 200 OK"; then
+            msg "Connexion réseau : OK (ping et HTTP)."
+        else
+            msg "Réseau IP OK, mais HTTP NOK (curl ne voit pas HTTP 200)."
+            msg "Détail curl :"
+            curl -s -I --max-time 4 www.google.fr | head -5
+        fi
+    else
+        msg "Pas de réseau IP (ping échoué)."
+        msg "Détail ping :"
+        cat "$TMPDIR/ping.txt"
+    fi
 }
