@@ -1,0 +1,14 @@
+capability,debian,arch,fedora,alpine,void,gentoo,opensuse
+power_mgmt,acpi,acpi,acpi,acpi,acpi,acpi,acpi
+audio,alsa-utils,alsa-utils,alsa-utils,alsa-utils,alsa-utils,alsa-utils,alsa-utils
+pdf_printer,enscript,enscript,enscript,enscript,enscript,enscript,enscript
+gpu_bench,glmark2,glmark2,glmark2,glmark2,glmark2,glmark2,glmark2
+3d_demo,mesa-utils,mesa-demos,mesa-demos,mesa-demos,mesa-demos,mesa-progs,Mesa-demo-x
+system_info,inxi,inxi,inxi,inxi,inxi,inxi,inxi
+monitor_htop,htop,htop,htop,htop,htop,htop,htop
+multimedia,ffmpeg,ffmpeg,ffmpeg,ffmpeg,ffmpeg,ffmpeg,ffmpeg
+disk_smart,smartmontools,smartmontools,smartmontools,smartmontools,smartmontools,smartmontools,smartmontools
+stress,stress,stress,stress,stress,stress,stress,stress
+tui,stress-ng,stress-ng,stress-ng,stress-ng,stress-ng,stress-ng,stress-ng
+upower,upower,upower,upower,upower,upower,upower
+video_player,mplayer,mplayer,mplayer,mplayer,mplayer,mplayer,mplayer
