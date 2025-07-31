@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+
 ################################################################################
 # Simple, maintainable CPU stress-test + live temperature monitoring in Bash.
 # - Only dependencies: inxi, stress-ng, awk, bc
@@ -83,6 +84,7 @@ cpu_report() {
     cpu_data="$(inxi -C)"
     temp_start="$(get_cpu_temp)"
 
+    printf '\n'
     print_boxed_title "TEST STRESS CPU & TEMP LIVE" 46
     printf "${CYN}Température avant traitement :${RESET} %s°C\n" "$temp_start"
     print_cpu_info "$cpu_data"
