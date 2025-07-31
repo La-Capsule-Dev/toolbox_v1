@@ -15,6 +15,9 @@ _mount_mnt(){
 
     if [[ "$mnt" != "-" ]]; then
         echo_status_warn "ATTENTION : /dev/$dname est monté sur $mnt !" >&2
+        if prompt_yes_no "Voulez-vous démonter avant de continuer ?"; then
+            sudo umount "$mnt" || echo_status_warn "Échec du démontage."
+        fi
         while true; do
             read -rp "Continuer quand même ? [o/N] " really
             case "$really" in
@@ -32,6 +35,22 @@ _detect_disk_type() {
 
     if command -v nvme &>/dev/null && nvme list | grep -qw "$dev"; then
         echo "nvme"
+    elif [[ -e "/sys/block/$1/device" ]]; then
+        local type
+        type=$(<"/sys/block/$1/device/type")
+        if [[ "$type" == "0" ]]; then
+            # SCSI direct access block device (disk)
+            # Vérifie si c'est SAS, SCSI, USB
+            if udevadm info --query=all --name="$dev" 2>/dev/null | grep -q "ID_BUS=sas"; then
+                echo "sas"
+            elif udevadm info --query=all --name="$dev" 2>/dev/null | grep -q "ID_BUS=scsi"; then
+                echo "scsi"
+            elif udevadm info --query=all --name="$dev" 2>/dev/null | grep -q "ID_BUS=usb"; then
+                echo "usb"
+            else
+                echo "sata"
+            fi
+        fi
     elif hdparm -I "$dev" 2>/dev/null | grep -qi 'not frozen'; then
         echo "sata"
     else
@@ -88,12 +107,20 @@ secure_erase_disk() {
     case "$type" in
         nvme)
             echo_status_warn "✴️  Effacement NVMe : envoi de la commande format (secure erase)."
-            #sudo nvme format -s1 "$dev"
+            # sudo nvme format -s1 "$dev"
+            ;;
+        sas|scsi)
+            echo_status_warn "✴️  Effacement SAS/SCSI avec sg_format (secure erase)."
+            # sudo sg_format --format --fmtpinfo=0 "$dev"
             ;;
         sata)
             echo_status_warn "✴️  Effacement SATA avec hdparm secure erase (2 étapes)."
             # sudo hdparm --user-master u --security-set-pass p "$dev"
             # sudo hdparm --user-master u --security-erase p "$dev"
+            ;;
+        usb)
+            echo_status_warn "✴️  Disque USB : effacement avec shred recommandé."
+            # sudo shred -v -n1 -z "$dev"
             ;;
         *)
             echo_status_warn "✴️  Disque classique (HDD ?), effacement avec shred (1 passe + zero)."
@@ -107,14 +134,19 @@ secure_erase_disk() {
     fi
 }
 
-# TODO: Add testdisk tools (CG Security)
-# # -- Vérification post-effacement (par défaut : 10MiB) --
+# -- Vérification post-effacement (par défaut : 10MiB) --
 verify_disk_erased() {
     local disk="$1"
     local dev="/dev/$disk"
     local tmpfile
 
     echo_status "🧪 Vérification de l'effacement de $dev..."
+
+    if command -v testdisk &>/dev/null; then
+        if prompt_yes_no "Lancer testdisk pour analyse post-effacement ?"; then
+            sudo testdisk "$dev"
+        fi
+    fi
 
     # 1. Vérifie qu'aucune signature de FS ou partition n'est présente
     if sudo wipefs --noheadings "$dev" | grep -q .; then
