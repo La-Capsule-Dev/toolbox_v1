@@ -3,7 +3,7 @@ set -euo pipefail
 
 source "$LIB_DIR/ui/echo_status.sh"
 
-repare_pkgs_native() {
+full_pkg_maintenance() {
     local os="$1"
 
     # 1. Update
