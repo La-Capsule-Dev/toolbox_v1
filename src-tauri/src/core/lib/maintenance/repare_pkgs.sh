@@ -2,7 +2,6 @@
 set -euo pipefail
 
 source "$LIB_DIR/ui/echo_status.sh"
-source "$LIB_DIR/utils/detect_os.sh"
 
 repare_pkgs_native() {
     local os="$1"
