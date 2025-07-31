@@ -6,26 +6,23 @@ source "$LIB_DIR/utils/init.sh"
 source "$LIB_DIR/maintenance/init.sh"
 source "$LIB_DIR/pkgmgr/remove_pkgs_csv.sh"
 
-autoremove_pkgs() {
-    local os_id
-    os_id="$(detect_os_id)"
-    local cmd
-    case "$os_id" in
-        debian|ubuntu) cmd="sudo apt-get autoremove -y" ;;
-        fedora)        cmd="sudo dnf autoremove -y" ;;
-        arch)          cmd='pkgs=$(pacman -Qdtq); [[ -n "$pkgs" ]] && sudo pacman -Rns --noconfirm $pkgs' ;;
-        alpine)        cmd='echo_status_warn "Autoremove non supporté sur Alpine."' ;;
-        gentoo)        cmd='echo_status_warn "Autoremove non supporté sur Gentoo."' ;;
-        void)          cmd="sudo xbps-remove -O" ;;
-        opensuse)      cmd='echo_status_warn "Zypper: autoremove non automatisé."' ;;
-        *)             echo_status_error "OS non supporté : $os_id" ; return 1 ;;
-    esac
-    echo_status "Suppression des paquets orphelins (autoremove)..."
-    if eval "$cmd"; then
-        echo_status_ok "Autoremove terminé avec succès."
-    else
-        echo_status_warn "Aucun orphelin à supprimer ou commande non supportée."
-    fi
+# Étapes unitaires
+repair_orphans() {
+    repare_pkgs_native "$1"
+}
+
+drop_cache() {
+    drop_memory_cache
+}
+
+remove_installed() {
+    remove_pkgs_csv
+    echo_status_ok "Suppression réussie"
+}
+
+remove_junk() {
+    remove_files
+    echo_status_ok "Nettoyage effectué avec succès"
 }
 
 clean_up() {
@@ -35,26 +32,36 @@ clean_up() {
     echo_status "Obtention des droits sur les fichiers verrouillés"
     echo_status "Veuillez entrer votre mot de passe administrateur"
 
-    # Fixing permissions
-    # fix_permissions "$os_type"
-    # repare_pkgs_native "$os_type"
-    drop_memory_cache
+    fix_permissions "$os_type"
 
-    # Suppression paquets CSV
-    echo_status "Suppression de paquets spécifiques installés"
-    remove_pkgs_csv
+    # Tableau des étapes
+    steps=("repair_orphans" "drop_cache" "remove_installed" "remove_junk")
+    steps_msg=(
+        "Réparation et suppressions des paquets orphelins"
+        "Vidage du cache mémoire (drop_caches)"
+        "Suppression des paquets spécifiques installés"
+        "Nettoyage des fichiers inutiles"
+    )
 
-    # Suppression des orphelins
-    autoremove_pkgs
-    # Remove files
-    # echo_status "Nettoyage des fichiers inutiles"
-    # remove_files && echo_status_ok "Nettoyage effectué avec succès"
+    if prompt_yes_no "Désirez-vous passer en mode manuel ?"; then
+        for i in "${!steps[@]}"; do
+            if prompt_yes_no "Désirez-vous lancer : ${steps_msg[$i]} ?"; then
+                echo_status "${steps_msg[$i]}"
+                "${steps[$i]}" "$os_type"
+            fi
+        done
+    else
+        for i in "${!steps[@]}"; do
+            echo_status "${steps_msg[$i]}"
+            "${steps[$i]}" "$os_type"
+        done
+    fi
+
+    echo_status_ok "ヽ( •_)ᕗ Nettoyage de votre machine réussi"
 }
-
 drop_memory_cache(){
-    echo_status "Vidage du cache mémoire (drop_caches)"
-    # sync
-    # sudo sysctl vm.drop_caches=3 || echo_status_error "Échec drop_caches"
+    sync
+    sudo sysctl vm.drop_caches=3 || echo_status_error "Échec drop_caches"
     echo_status_ok "Cache mémoire vidé"
     echo_status "État de la mémoire :"
     swapon -s || echo_status_error "Échec swapon"
