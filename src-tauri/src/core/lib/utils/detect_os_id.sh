@@ -2,7 +2,7 @@
 
 source "$CORE_DIR/lib/ui/echo_status.sh"
 
-detect_os() {
+detect_os_id() {
     [[ -f /etc/os-release ]] || echo_status_error "OS introuvable, veuillez le signaler sur github pour qu'il soit ajouter"
     . /etc/os-release
     case "$ID" in
