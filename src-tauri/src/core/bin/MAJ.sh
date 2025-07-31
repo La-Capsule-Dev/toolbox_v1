@@ -11,18 +11,10 @@ install() {
     os_id="$(detect_os_id)"
     echo_status "Initialisation de l'installation sur : $(detect_os_id) ᕦ( ͡° ͜ʖ ͡°)ᕤ"
     install_all_from_csv
-    echo_status "Mise à niveau du système"
-    case "$os_id" in
-        debian|ubuntu) sudo apt-get update -qq && sudo apt-get upgrade -y ;;
-        fedora)        sudo dnf upgrade --refresh -y ;;
-        arch)          sudo pacman -Syu --noconfirm ;;
-        alpine)        sudo apk update && sudo apk upgrade ;;
-        gentoo)        sudo emerge --sync && sudo emerge --update --deep --newuse @world ;;
-        void)          sudo xbps-install -Syu ;;
-        opensuse)      sudo zypper refresh && sudo zypper update -y ;;
-        *)             echo_status_error "OS non supporté : $os_id" ;;
-    esac
-    echo_status_ok "Mise à jour réussie"
+
+    echo_status "Maintenance système complète : mise à jour, nettoyage, autoremove, etc."
+    update_pkgs "$os_id"
+    echo_status_ok "Maintenance réussie"
 
     if prompt_yes_no "Désirez-vous un nettoyage du cache de votre système ?"; then
         echo_status_warn "LE NETTOYAGE DU CACHE VA COMMENCER !"
