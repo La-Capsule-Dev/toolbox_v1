@@ -8,7 +8,7 @@ detect_os_id() {
     case "$ID" in
         arch|manjaro|endeavouros|cachyos) echo "arch" ;;
         fedora|nobara|rhel|rocky|alma)    echo "fedora" ;;
-        ubuntu|debian|mint|kali)          echo "debian" ;;
+        ubuntu|debian|mint|kali|linuxmint)          echo "debian" ;;
         alpine)                           echo "alpine" ;;
         gentoo)                           echo "gentoo" ;;
         void)                             echo "void" ;;

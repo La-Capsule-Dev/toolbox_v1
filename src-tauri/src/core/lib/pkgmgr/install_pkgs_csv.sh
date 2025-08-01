@@ -35,7 +35,7 @@ install_all_from_csv() {
     for pkg in "${pkgs[@]}"; do
         case "$os_id" in
             fedora)    ! rpm -q "$pkg" &>/dev/null ;;
-            debian|ubuntu) ! dpkg -s "$pkg" &>/dev/null ;;
+            debian|ubuntu|linuxmint) ! dpkg -s "$pkg" &>/dev/null ;;
             arch)      ! pacman -Qi "$pkg" &>/dev/null ;;
             alpine)    ! apk info -e "$pkg" &>/dev/null ;;
             gentoo)    ! equery list "$pkg" &>/dev/null 2>&1 ;;
@@ -59,7 +59,7 @@ install_all_from_csv() {
 
     local cmd
     case "$os_id" in
-        debian|ubuntu) cmd="sudo apt-get update -qq && sudo apt-get install -y" ;;
+        debian|ubuntu|linuxmint) cmd="sudo apt-get update -qq && sudo apt-get install -y" ;;
         fedora)        cmd="sudo dnf install -y" ;;
         arch)          cmd="sudo pacman -Sy --noconfirm" ;;
         alpine)        cmd="sudo apk add" ;;

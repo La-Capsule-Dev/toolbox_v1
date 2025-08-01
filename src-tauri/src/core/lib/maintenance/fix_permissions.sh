@@ -18,7 +18,7 @@ fix_permissions() {
     local user_id="${SUDO_USER:-$USER}"
 
     case "$os" in
-        debian)
+        debian|ubuntu|linuxmint)
             fix_and_warn /var/lib/dpkg "$user_id"
             fix_and_warn /var/cache/apt "$user_id"
             ;;

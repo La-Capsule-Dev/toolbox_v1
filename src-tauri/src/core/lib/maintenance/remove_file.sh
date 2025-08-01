@@ -62,7 +62,7 @@ remove_files() {
                 echo_status_error "Échec purge cache DNF"
             fi
             ;;
-        debian|ubuntu)
+        debian|ubuntu|linuxmint)
             if sudo apt-get autoclean -y && sudo apt-get clean; then
                 echo_status_ok "Cache APT vidé"
             else

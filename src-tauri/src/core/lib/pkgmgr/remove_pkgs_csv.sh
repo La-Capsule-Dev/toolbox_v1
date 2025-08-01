@@ -18,7 +18,7 @@ remove_pkgs_csv() {
     for pkg in "${pkgs[@]}"; do
         case "$os_id" in
             fedora)    rpm -q "$pkg" &>/dev/null ;;
-            debian|ubuntu) dpkg -s "$pkg" &>/dev/null ;;
+            debian|ubuntu|linuxmint) dpkg -s "$pkg" &>/dev/null ;;
             arch)      pacman -Qi "$pkg" &>/dev/null ;;
             alpine)    apk info -e "$pkg" &>/dev/null ;;
             gentoo)    equery list "$pkg" &>/dev/null 2>&1 ;;
@@ -35,7 +35,7 @@ remove_pkgs_csv() {
 
     local cmd
     case "$os_id" in
-        debian|ubuntu) cmd="sudo apt-get remove -y" ;;
+        debian|ubuntu|linuxmint) cmd="sudo apt-get remove -y" ;;
         fedora)        cmd="sudo dnf remove -y" ;;
         arch)          cmd="sudo pacman -Rns --noconfirm" ;;
         alpine)        cmd="sudo apk del" ;;

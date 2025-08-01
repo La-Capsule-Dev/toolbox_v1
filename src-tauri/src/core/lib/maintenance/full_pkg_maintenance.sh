@@ -9,7 +9,7 @@ full_pkg_maintenance() {
     # 1. Update
     echo_status "Mise à jour des paquets"
     case "$os" in
-        debian|ubuntu)
+        debian|ubuntu|linuxmint)
             if sudo apt-get update -qq && sudo apt-get upgrade -y; then
                 echo_status_ok "Mise à jour réussie"
             else
@@ -64,7 +64,7 @@ full_pkg_maintenance() {
     esac
 
     # 2. Fix broken (Debian/Ubuntu only)
-    if [[ "$os" == "debian" || "$os" == "ubuntu" ]]; then
+    if [[ "$os" == "debian" || "$os" == "ubuntu" || "$os" == "linuxmint"]]; then
         echo_status "Réparation des paquets cassés"
         if sudo apt --fix-broken install -y; then
             echo_status_ok "Réparation des paquets cassés réussie"
@@ -129,7 +129,7 @@ full_pkg_maintenance() {
     # 4. Autoremove
     echo_status "Suppression des dépendances inutiles"
     case "$os" in
-        debian|ubuntu)
+        debian|ubuntu|linuxmint)
             if sudo apt-get autoremove -y; then
                 echo_status_ok "Suppression des dépendances inutiles réussie"
             else

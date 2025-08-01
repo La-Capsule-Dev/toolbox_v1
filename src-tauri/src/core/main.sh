@@ -7,7 +7,6 @@ source "$CORE_DIR/etc/config/path.env" || echo "Error sourcing"
 source "$CORE_DIR/lib/ui/echo_status.sh"             || echo "Error sourcing echo_status.sh"
 
 
-
 usage() {
     cat <<EOF
 Usage: $0 <ACTION> [ARGS...]
