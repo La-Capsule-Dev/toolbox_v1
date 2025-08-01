@@ -64,7 +64,7 @@ full_pkg_maintenance() {
     esac
 
     # 2. Fix broken (Debian/Ubuntu only)
-    if [[ "$os" == "debian" || "$os" == "ubuntu" || "$os" == "linuxmint"]]; then
+    if [[ "$os" == "debian" || "$os" == "ubuntu" || "$os" == "linuxmint" ]]; then
         echo_status "Réparation des paquets cassés"
         if sudo apt --fix-broken install -y; then
             echo_status_ok "Réparation des paquets cassés réussie"
