@@ -23,14 +23,13 @@ pdf_print(){
     date="$(date '+%d-%m-%Y')"
     hour="$(date '+%H:%M:%S')"
     header="Fait le $date        Reconditionnement fait par :  _______________________________"
-    outpdf="$HOME/resultat-$date-$hour.pdf"
+    outpdf="$HOME/resultat.pdf"
 
 
     echo "$resultat" \
         | iconv -f utf-8 -t iso-8859-1 \
         | enscript --header="$header" --title='Sortie PDF' -X 88591 -o - \
-        | ps2pdf - "$outpdf" \
-        |  xdg-open "$outpdf"
+        | ps2pdf - "$outpdf"
 }
 
 pdf_print

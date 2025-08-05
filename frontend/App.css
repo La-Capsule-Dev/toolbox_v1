@@ -169,20 +169,60 @@
 
         .popup {
             width: fit-content;
+            max-width: 90%;
             padding: 30px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #252422;
+            gap: 15px;
+            color: #fffcf2;
             border-radius: 10px;
             box-shadow: 0 0 20px #00000050;
+            background: #252422;
+
+            .wrapper {
+                width: 100%;
+                border-radius: 5px;
+                overflow: hidden;
+                border: 1px solid #fffcf225;
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+
+                    th,
+                    td {
+                        padding: 5px 10px;
+                        text-align: left;
+                    }
+
+                    th {
+                        background: #10b981;
+                        text-align: left;
+                        font-weight: 600;
+                    }
+
+                    td {
+                        font-weight: lighter;
+                    }
+
+                    tbody tr:nth-child(odd) {
+                        background-color: transparent;
+                    }
+
+                    tbody tr:nth-child(even) {
+                        background-color: #10b98125;
+                    }
+                }
+            }
 
             button {
                 all: unset;
-                padding: 15px 30px;
+                width: 100%;
+                padding: 15px 0;
                 border-radius: 10px;
-                background-color: #252422;
+                background-color: #fffcf215;
                 color: #fffcf2;
                 text-transform: uppercase;
                 cursor: pointer;

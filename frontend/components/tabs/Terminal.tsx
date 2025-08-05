@@ -1,3 +1,5 @@
+import React from "react";
+
 const Terminal = ({ script_output }) => {
     return (
         <textarea name="terminal" id="terminal">

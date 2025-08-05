@@ -9,7 +9,7 @@ pub fn play_audio_test() -> Result<(), String> {
         .parent()
         .ok_or("Pas de parent pour current_exe")?
         .join("resources")
-        .join("frequency.wav");
+        .join("waw.wav");
 
     if !resource_path.exists() {
         return Err(format!("Fichier introuvable à : {:?}", resource_path));

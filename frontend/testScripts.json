@@ -9,7 +9,7 @@
             },
             {
                 "name": "ports",
-                "scriptCmd": ""
+                "scriptCmd": "test_usb_ports_command"
             },
             {
                 "name": "clavier",

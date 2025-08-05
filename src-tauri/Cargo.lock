@@ -4127,9 +4127,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-utils"
-version = "2.5.0"
+version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41743bbbeb96c3a100d234e5a0b60a46d5aa068f266160862c7afdbf828ca02e"
+checksum = "9330c15cabfe1d9f213478c9e8ec2b0c76dab26bb6f314b8ad1c8a568c1d186e"
 dependencies = [
  "anyhow",
  "brotli",
@@ -4376,11 +4376,13 @@ version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "dirs",
+ "javascriptcore-rs-sys",
  "regex",
  "rodio",
  "rusb",
  "serde",
  "serde_json",
+ "soup3-sys",
  "tauri",
  "tauri-build",
  "tauri-plugin-opener",

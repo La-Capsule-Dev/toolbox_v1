@@ -18,7 +18,7 @@ pub fn launch_stress_test() -> Result<(), String> {
         ])
         .stdout(Stdio::null())
         .stderr(Stdio::null())
-        .spawn() 
+        .spawn()
         .map_err(|e| format!("Erreur lors du lancement du stress test : {}", e))?;
 
     Ok(())

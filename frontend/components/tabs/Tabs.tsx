@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 type TabsProps = { tabs: { label: string; content: any }[] };
 

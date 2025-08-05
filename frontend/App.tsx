@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import PDFViewer from "./components/tabs/PdfViewer";
 import Tabs from "./components/tabs/Tabs";
@@ -7,12 +7,11 @@ import TestButton from "./components/testButtons/TestButton";
 import testScripts from "./testScripts.json";
 import { invoke } from "@tauri-apps/api/core";
 import CPUTemperature from "./components/CPUTemperature";
-import Popup from "./components/Popup";
 import Feedback from "./components/Feedback";
 
 function App() {
     const [feedbackType, setFeedbackType] = useState<
-        "stress" | "micro" | "custom" | null
+        "stress" | "micro" | "custom" | "ports" | null
     >(null);
     const [micVolume, setMicVolume] = useState(0);
     const [PdfUrl, setPdfUrl] = useState<string>("");
@@ -23,19 +22,35 @@ function App() {
     );
     const [message, setMessage] = useState<string>("");
     const [color, setColor] = useState<"#F97316" | "#10b981">("#F97316");
+    const [loading, setLoading] = useState<boolean>(false);
+    const [reportLines, setReportLines] = useState<string[]>([]);
 
     // Création de la session sudo (pkexec et sudo)
     const startSudoSession = async () => {
         try {
             await invoke("start_session");
+            await invoke("print_checklist");
         } catch (error) {
             console.log(error);
         }
     };
 
     // Lancement des scripts Rust
-    const rust_script = (script: string) => {
-        invoke(script);
+    const rust_script = async (script: string) => {
+        try {
+            if (script === "test_usb_ports_command") {
+                await invoke(script).then((res: any) => {
+                    setReportLines(res);
+                });
+            } else {
+                await invoke(script);
+            }
+            setFeedbackType("ports");
+            setColor("#10b981");
+            setVisibility("visible");
+        } catch (e) {
+            console.error("Erreur script :", e);
+        }
     };
 
     // Lancement du stress test
@@ -74,11 +89,18 @@ function App() {
     // Récupération de la fiche
     useEffect(() => {
         startSudoSession();
-        invoke<string>("get_pdf_base64")
+        setLoading(true);
+        invoke("print_checklist")
+            .then(() => {
+                return invoke<string>("get_pdf_base64");
+            })
             .then((dataUri) => {
                 setPdfUrl(dataUri);
             })
-            .catch(console.error);
+            .catch(console.error)
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     return (
@@ -86,9 +108,10 @@ function App() {
             <Feedback
                 type={feedbackType}
                 visible={visibility === "visible"}
-                message={message}
+                message={message ? message : "Test en cours..."}
                 color={color}
                 volume={micVolume}
+                reportLines={reportLines}
                 onClose={() => {
                     setVisibility("hidden");
                     setFeedbackType(null);
@@ -101,7 +124,9 @@ function App() {
                     tabs={[
                         {
                             label: "Fiche PDF",
-                            content: <PDFViewer file={PdfUrl} />,
+                            content: (
+                                <PDFViewer loading={loading} file={PdfUrl} />
+                            ),
                         },
                         {
                             label: "Terminal",
