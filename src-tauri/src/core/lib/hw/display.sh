@@ -4,11 +4,11 @@ set -euo pipefail
 
 # PROJECT_ROOT
 source "$CORE_DIR/etc/config/path.env"
-source "$ETC_DIR/config/find_project_root.sh"
+source "$CORE_DIR/etc/config/find_project_root.sh"
 
 
 ecran_parser(){
-    sudo xrandr |
+    xrandr |
     awk '/connected/' |
     sed -e "s/(.*$//" \
         -e "s/DVI-I/DVI/" \
@@ -26,13 +26,13 @@ taille_parser(){
     local TAURI_ROOT
     TAURI_ROOT=$(find_project_root)
     local TARGET_ROOT
-    TARGET_ROOT="$TAURI_ROOT/target/release/dimension"
+    TARGET_ROOT="$TAURI_ROOT/target/debug/dimension"
 
-    sudo "$TARGET_ROOT" || echo "$Erreur"
+    sudo "$TARGET_ROOT"
 }
 
 telecrante_parser(){
-    sudo xrandr |
+    xrandr |
     awk '/connected/' |
     sed -e "s/(.*$//" \
         -e "s/VGA-1/Port VGA 1      :/" \
