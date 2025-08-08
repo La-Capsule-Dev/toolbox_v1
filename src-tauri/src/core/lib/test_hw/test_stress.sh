@@ -3,19 +3,52 @@ set -euo pipefail
 
 source "$LIB_DIR/ui/stress_tui.sh"
 
+# Validation des périphériques
+validate_device() {
+    local device="$1"
+    [[ -e "$device" && -r "$device" ]]
+}
 
+#TODO: LE tester
 usb_test() {
-    TMPDIR=$(mktemp -d)
-    lsusb > "$TMPDIR/usb_before.txt"
+    local tmpdir before_file after_file
+    tmpdir=$(mktemp -d) || return 1
+    before_file="$tmpdir/usb_before.txt"
+    after_file="$tmpdir/usb_after.txt"
+
+    # Nettoyage automatique
+    trap 'rm -rf "$tmpdir"' RETURN
+
+    # Capture de l'état initial
+    if ! lsusb > "$before_file" 2>/dev/null; then
+        msg "Erreur: impossible de lister les périphériques USB"
+        return 1
+    fi
+
     msg "Insérez un périphérique USB puis appuyez sur Entrée."
     read -r
-    lsusb > "$TMPDIR/usb_after.txt"
-    diffout=$(diff "$TMPDIR/usb_before.txt" "$TMPDIR/usb_after.txt" | awk '/^>/{print substr($0,3)}')
+
+    # Capture après insertion
+    if ! lsusb > "$after_file" 2>/dev/null; then
+        msg "Erreur: impossible de relister les périphériques USB"
+        return 1
+    fi
+
+    # Analyse des différences
+    local diffout
+    diffout=$(diff "$before_file" "$after_file" | awk '/^>/{print substr($0,3)}')
+
     if [[ -z "$diffout" ]]; then
-        msg "Aucun périphérique détecté."
+        msg "Aucun nouveau périphérique détecté."
+        return 1
     else
         msg "Nouveau périphérique détecté :"
         msg "$diffout"
+
+        # Validation optionnelle du montage
+        if mount | grep -q usb; then
+            msg "Périphérique monté avec succès."
+        fi
     fi
 }
 
@@ -55,21 +88,40 @@ keyboard_test() {
     fi
 }
 
+#TODO: Améliorer
+# Test connexion réseau robuste
 conn_test() {
-    TMPDIR=$(mktemp -d)
-    # Test ping réseau (connectivité IP)
-    if ping -c 2 -W 2 www.google.fr -q > "$TMPDIR/ping.txt"; then
-        # Si ping OK, tester HTTP en clair
-        if curl -s -I --max-time 4 www.google.fr | grep -q "HTTP/1.1 200 OK"; then
-            msg "Connexion réseau : OK (ping et HTTP)."
+    local tmpdir ping_file
+    tmpdir=$(mktemp -d) || return 1
+    ping_file="$tmpdir/ping.txt"
+
+    trap 'rm -rf "$tmpdir"' RETURN
+
+    msg "Test de connectivité réseau en cours..."
+
+    # Test ping avec timeout
+    if timeout 10 ping -c 3 -W 2 8.8.8.8 > "$ping_file" 2>&1; then
+        # Test HTTP/HTTPS
+        if curl -s -I --connect-timeout 5 --max-time 10 https://www.google.com | grep -q "HTTP.*200"; then
+            msg "Connexion réseau : ✅ OK (ping et HTTPS)"
+
+            # Test de résolution DNS
+            if nslookup google.com >/dev/null 2>&1; then
+                msg "Résolution DNS : ✅ OK"
+            else
+                msg "Résolution DNS : ⚠️ Problème détecté"
+            fi
         else
-            msg "Réseau IP OK, mais HTTP NOK (curl ne voit pas HTTP 200)."
-            msg "Détail curl :"
-            curl -s -I --max-time 4 www.google.fr | head -5
+            msg "Réseau IP OK, mais accès web limité"
+            msg "Détails ping :"
+            tail -3 "$ping_file"
         fi
     else
-        msg "Pas de réseau IP (ping échoué)."
-        msg "Détail ping :"
-        cat "$TMPDIR/ping.txt"
+        msg "❌ Pas de connectivité réseau"
+        if [[ -s "$ping_file" ]]; then
+            msg "Détails :"
+            tail -3 "$ping_file"
+        fi
+        return 1
     fi
 }
