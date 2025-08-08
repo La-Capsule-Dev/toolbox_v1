@@ -7,7 +7,7 @@ source "$LIB_DIR/utils/init.sh"
 source "$LIB_DIR/pkgmgr/install_pkgs_csv.sh"
 
 
-CSV="$ETC_DIR/config/pkgs-mapping.csv"
+readonly CSV="$ETC_DIR/config/pkgs-mapping.csv"
 
 remove_pkgs_csv() {
     local os_id
